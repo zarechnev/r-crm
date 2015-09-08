@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% block users %}
+<center><h4>Управление пользователями</h4></center>
+<p>
+<div id="users_content">
+    {% include 'users_only_table.html' %}
+</div>
+<p>
+<p>
+    <input type="button" class="button tiny" value="Добавить пользователя" onclick="show_add_edit_user_dialog();"/>
+
+	<div id="dialog_edit_users" title="Добавить/редактировать пользователя">
+                <p><label for="add_edit_user_login">Логин</label>      <input id="add_edit_user_login" maxlength="20" name="login" type="text" onkeyup="check_unique_login();" />
+                    <div id="check_login_out"></div>
+                <p>
+                <p><label for="add_edit_user_fname">Имя</label>        <input id="add_edit_user_fname" maxlength="30" name="fname" type="text" /></p>
+                <p><label for="add_edit_user_lname">Фамилия</label>    <input id="add_edit_user_lname" maxlength="30" name="lname" type="text" /></p>
+                <p><label for="add_edit_user_mail">E-mail</label>      <input id="add_edit_user_mail" maxlength="30" name="mail" type="text" /></p>
+                <p><label for="add_edit_user_pass">Пароль</label>      <input id="add_edit_user_pass" maxlength="30" name="pass" type="password" /></p>
+	</div>
+{% endblock %}

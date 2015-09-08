@@ -1,0 +1,146 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+ <head>
+     <title>R-CRM</title>
+     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+     <link rel="icon" href="{% static "static/favicon.ico" %}"  type="image/x-icon"/>
+     <link rel="stylesheet" type="text/css" href="{% static "static/css/foundation.css" %}"/>
+     <link rel="stylesheet" type="text/css" href="{% static "static/css/normalize.css" %}"/>
+     <link rel="stylesheet" type="text/css" href="{% static "static/css/my.css" %}"/>
+     <link rel="stylesheet" type="text/css" href="{% static "static/jquery-ui/jquery-ui.css" %}"/>
+     <link rel="stylesheet" type="text/css" href="{% static "static/jquery-ui/jquery-ui.theme.css" %}"/>
+     <link rel="stylesheet" type="text/css" href="{% static "static/jquery-ui/jquery-ui.structure.css" %}"/>
+     <script src="{% static "static/js/vendor/jquery.js" %}"></script>
+     <script src="{% static "static/jquery-ui/jquery-ui.js" %}"></script>
+     <script src="{% static "static/js/rcrm_functions.js" %}"></script>
+
+<!--для работы jQuery-UI BEGIN-->
+	<script>
+	$(function() {
+
+		// Hover states on the static widgets
+		$( "#dialog-link, #icons li" ).hover(
+			function() {
+				$( this ).addClass( "ui-state-hover" );
+			},
+			function() {
+				$( this ).removeClass( "ui-state-hover" );
+			}
+		);
+	});
+	</script>
+
+    <!--для уменьшения размеров кнопок и заголовков диалогов BEGIN-->
+	<style>
+		.ui-button-text { font-size:11px; }
+		.ui-dialog-title { font-size:13px; }
+		.ui-dialog-content { font-size:10px; }
+	 </style>
+    <!--для уменьшения размеров кнопок и заголовков диалогов END-->
+
+	<style>
+	.demoHeaders {
+		margin-top: 2em;
+	}
+	#dialog-link {
+		padding: .4em 1em .4em 20px;
+		text-decoration: none;
+		position: relative;
+	}
+	#dialog-link span.ui-icon {
+		margin: 0 5px 0 0;
+		position: absolute;
+		left: .2em;
+		top: 50%;
+		margin-top: -8px;
+	}
+	#icons {
+		margin: 0;
+		padding: 0;
+	}
+	#icons li {
+		margin: 2px;
+		position: relative;
+		padding: 4px 0;
+		cursor: pointer;
+		float: left;
+		list-style: none;
+	}
+	#icons span.ui-icon {
+		float: left;
+		margin: 0 4px;
+	}
+	</style>
+<!--для работы jQuery-UI END-->
+
+ </head>
+ <body>
+ <nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="/">R-C<font color=#66CCFF>R</font>M</a></h1>
+    </li>
+  </ul>
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li><a href="/statistic">Статистика</a></li>
+	 {% if username %}
+	     <li class="active"><a href="/auth/logout/">Выйти ({{ username }})</a></li>
+	{% else %}
+	     <li class="active"><a href="/auth/login/">Войти</a></li>
+	{% endif %}
+      <li class="has-dropdown">
+        <a href="#">Помощь</a>
+        <ul class="dropdown">
+          <li><a href="#">Справка</a></li>
+          <li><a href="#">Сайт R-C<font color=#66CCFF>R</font>M</a></li>
+        </ul>
+      </li>
+    </ul>
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="/crm">Задания</a></li>
+      <li><a href="/users">Пользователи</a></li>
+      <li><a href="/clients">Клиенты</a></li>
+    </ul>
+  </section>
+</nav>
+<div class="row" style="margin-top:20px">
+      <div class="large-3 columns">
+          {% if username %}
+                <script>
+                    get_chat();
+                    $(document).ready(function(){setInterval("get_chat()",10*TimeInt)});
+                </script>
+                <div>
+                    Групповой чат
+                    <p><div id="chat_content"></div></p>
+                    <label for="id_message">Сообщение</label>     <input id="id_message" maxlength="50" name="comment" type="text" />
+                    <input type="button" class="button tiny" value="Отправить сообщение" onclick="add_message();"/>
+                </div>
+          {% endif %}
+      </div>
+  <div class="large-9 columns main_background">
+    {% block main-page %}{% endblock %}
+    {% block statistic %}{% endblock %}
+    {% block clients %}{% endblock %}
+    {% block users %}{% endblock %}
+    {% block crm %}{% endblock %}
+    {% block login %}{% endblock %}
+  </div>
+</div>
+<div class="row">
+    <div class="large-12 columns">
+        <hr>
+        <p>© Заречнев Руслан. 2015.</p>
+    </div>
+</div>
+ <script src="{% static "static/js/foundation.min.js" %}"></script>
+ <script src="{% static "static/js/vendor/modernizr.js" %}"></script>
+  <script>
+   $(document).foundation();
+ </script>
+</body>
+</html>

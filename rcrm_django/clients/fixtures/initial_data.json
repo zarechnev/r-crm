@@ -1,0 +1,50 @@
+[
+  {
+    "model": "clients.Client",
+    "pk": 1,
+    "fields": {
+      "name": "Закрытое акционерное общество 'Рога и копыта'",
+      "sname": "ЗАО 'Рога и копыта'",
+      "inn": "34534345345",
+      "address": "Барнаул",
+      "phone": "+7(925)614-55-66",
+      "email": "rr@tt.tt",
+      "priority": 100,
+      "create_date": "2015-01-01 19:53:42",
+      "is_enabled": "True",
+      "is_deleted": "False"
+    }
+  },
+  {
+    "model": "clients.Client",
+    "pk": 2,
+    "fields": {
+      "name": "Закрытое акционерное общество 'Пупсик'",
+      "sname": "ЗАО 'Пупсик'",
+      "inn": "6786785345",
+      "address": "Барнаул",
+      "phone": "+7(925)614-54-88",
+      "email": "234@tt.dd",
+      "priority": 100,
+      "create_date": "2015-02-01 19:53:42",
+      "is_enabled": "True",
+      "is_deleted": "False"
+    }
+  },
+  {
+    "model": "clients.Client",
+    "pk": 3,
+    "fields": {
+      "name": "Индивидуальный предприниматель 'Кискин'",
+      "sname": "ИП 'Кискин'",
+      "inn": "5678678678",
+      "address": "Барнаул",
+      "phone": "+6(925)222-54-44",
+      "email": "wwww@tt.yy",
+      "priority": 100,
+      "create_date": "2014-02-01 19:53:42",
+      "is_enabled": "True",
+      "is_deleted": "False"
+    }
+  }
+]

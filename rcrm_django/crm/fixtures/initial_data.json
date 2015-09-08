@@ -1,0 +1,32 @@
+[
+  {
+    "model": "crm.Task",
+    "pk": 1,
+    "fields": {
+      "create_user": 1,
+      "client": 1,
+      "create_date": "2015-01-01 19:53:42",
+      "create_comment": "Всё плохо."
+    }
+  },
+  {
+    "model": "crm.Task",
+    "pk": 2,
+    "fields": {
+      "create_user": 1,
+      "client": 2,
+      "create_date": "2014-01-01 19:53:42",
+      "create_comment": "Всё очень плохо."
+    }
+  },
+  {
+    "model": "crm.Task",
+    "pk": 3,
+    "fields": {
+      "create_user": 1,
+      "client": 3,
+      "create_date": "2014-05-01 19:53:42",
+      "create_comment": "Всё не плохо."
+    }
+  }
+]

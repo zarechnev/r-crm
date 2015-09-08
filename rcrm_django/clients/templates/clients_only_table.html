@@ -1,0 +1,29 @@
+<table>
+    <thead>
+      <tr>
+          <th>Краткое название организации</th>
+          <th>ИНН</th>
+          <th>Номер телефона организации</th>
+          <th>Приоритет клиента</th>
+          <th>Обслуживается</th>
+          <th>Опции</th>
+      </tr>
+    </thead>
+{% for client in clients %}
+    {% if not client.is_deleted %}
+        <tr>
+            <td>{{ client.sname }}</td>
+            <td>{{ client.inn }}</td>
+            <td>{{ client.phone }}</td>
+            <td>{{ client.priority }}</td>
+            <td><input title="Вкл./Выкл." type="checkbox" {% if client.is_enabled %} checked="checked" {% endif %}/></td>
+            <td>
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li title="Удалить" onclick="rem_client({{ client.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
+                    <li title="Править" onclick="show_add_edit_client_dialog({{ client.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+                </ul>
+            </td>
+        </tr>
+    {% endif %}
+{% endfor %}
+</table>

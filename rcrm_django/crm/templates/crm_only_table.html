@@ -1,0 +1,31 @@
+<table>
+    <thead>
+      <tr>
+          <th>Автор заявки</th>
+          <th>Закрыл(а)</th>
+          <th>Клиент</th>
+          <th>Дата создания заявки</th>
+          <th>Дата закрытия заявки</th>
+          <th>Коментарий</th>
+          <th>Опции</th>
+      </tr>
+    </thead>
+{% for task in tasks %}
+    {% if not task.is_removed %}
+        <tr>
+            <td>{{ task.create_user.username }}</td>
+            <td>{{ task.closed_user.username }}</td>
+            <td>{{ task.client.sname }}</td>
+            <td>{{ task.create_date }}</td>
+            <td>{{ task.closed_date }}</td>
+            <td>{{ task.create_comment }}</td>
+            <td>
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    <li title="Удалить заявку" onclick="rem_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
+                    <li title="Править заявку" onclick="edit_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+                </ul>
+            </td>
+        </tr>
+    {% endif %}
+{% endfor %}
+</table>

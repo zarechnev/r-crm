@@ -1,0 +1,33 @@
+<table>
+    <thead>
+      <tr>
+          <th>Логин</th>
+          <th>Имя</th>
+          <th>Фамилия</th>
+          <th>Адрес почты</th>
+          <th>Супер-пользователь</th>
+          <th>Дата последнего входа</th>
+          <th>Опции</th>
+      </tr>
+    </thead>
+{% for user in list_users %}
+    {% if user.is_active %}
+        <tr>
+            <td id="user_{{ user.id }}_login">{{ user.username }}</td>
+            <td id="user_{{ user.id }}_fname">{{ user.first_name }}</td>
+            <td id="user_{{ user.id }}_lname">{{ user.last_name }}</td>
+            <td id="user_{{ user.id }}_mail">{{ user.email }}</td>
+            <td><input type="checkbox" {% if user.is_superuser %} checked="checked" {% endif %}/></td>
+            <td>{{ user.last_login }}</td>
+            <td>
+                <ul id="icons" class="ui-widget ui-helper-clearfix">
+                    {% if user.id != 1 %}
+                        <li title="Удалить пользователя" onclick="rem_user({{ user.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
+                    {% endif %}
+                    <li title="Править пользователя" onclick="show_add_edit_user_dialog({{ user.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+                </ul>
+            </td>
+        </tr>
+    {% endif %}
+{% endfor %}
+</table>
