@@ -98,20 +98,18 @@ function show_add_edit_client_dialog(id)
     {
         var url = "/clients/get_client_info/" + id;
 
-        $.getJSON(  url,
-                    function(data) {
-                        var obj = JSON.parse(data);
-                        $("#add_edit_client_sname").html(obj.fields.sname);
-                        $("#add_edit_client_fname").val(obj.fields.name).html();
-                        $("#dialog_edit_client").dialog("open");
-                    });
+        $.getJSON( url, {
+            format: "json"
+          })
 
-        var jqxhr = $.getJSON(url);
+        .done(function( data ) {
+            $.each( data.items, function( i, item ) {
+                alert(items);
+            })
 
+            alert("Yeee");
+        })
 
-        var obj = $.parseJSON(jqxhr);
-
-        jqxhr.complete(function() {alert(obj.fields.sname)});
     }
 
 $(function()
