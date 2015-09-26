@@ -14,29 +14,54 @@ def list_users(request):
     return render_to_response('users.html', args)
 
 @login_required(login_url='/auth/login')
-def add_user(request):
+def edit_user(request):
+    ans = "Нет данных в запросе"
     if request.method == 'POST':
         login = request.POST['login']
         fname = request.POST['fname']
         lname = request.POST['lname']
         mail = request.POST['mail']
         passwd = request.POST['pass']
-        new_user = auth.models.User.objects.create_user(username=login, email=mail, first_name=fname, last_name=lname, password=passwd)
-        q = new_user.save()
-        ans = "Request was completed with the code %s." % (q)
-        return HttpResponse(ans)
-    return HttpResponse("No data in request.")
+        user_to_edit = auth.models.User.objects.get(username=login)
+        try:
+            user_to_edit.email = mail
+            user_to_edit.first_name = fname
+            user_to_edit.last_name = lname
+            user_to_edit.set_password(passwd)
+            ans = str(user_to_edit.save())
+        except BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)
+
+@login_required(login_url='/auth/login')
+def add_user(request):
+    ans = "Нет данных в запросе"
+    if request.method == 'POST':
+        login = request.POST['login']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        mail = request.POST['mail']
+        passwd = request.POST['pass']
+        try:
+            new_user = auth.models.User.objects.create_user(username=login, email=mail, first_name=fname, last_name=lname)
+            new_user.set_password(passwd)
+            ans = str(new_user.save())
+        except BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)
 
 @login_required(login_url='/auth/login')
 def rem_user(request):
+    ans = "Нет данных в запросе"
     if request.method == 'POST':
         user_id = request.POST['id']
-        user_to_remove = auth.models.User.objects.get(id=user_id)
-        user_to_remove.is_active = False
-        q = user_to_remove.save()
-        ans = "Request was completed with the code %s." % (q)
-        return HttpResponse(ans)
-    return HttpResponse("No data in request.")
+        try:
+            user_to_remove = auth.models.User.objects.get(id=user_id)
+            user_to_remove.is_active = False
+            ans = str(user_to_remove.save())
+        except BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)
 
 @login_required(login_url='/auth/login')
 def check_login(request):

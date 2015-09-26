@@ -5,8 +5,7 @@
           <th>Имя</th>
           <th>Фамилия</th>
           <th>Адрес почты</th>
-          <th>Супер-пользователь</th>
-          <th>Дата последнего входа</th>
+          <th>Дата создания/последнего входа</th>
           <th>Опции</th>
       </tr>
     </thead>
@@ -17,7 +16,6 @@
             <td id="user_{{ user.id }}_fname">{{ user.first_name }}</td>
             <td id="user_{{ user.id }}_lname">{{ user.last_name }}</td>
             <td id="user_{{ user.id }}_mail">{{ user.email }}</td>
-            <td><input type="checkbox" {% if user.is_superuser %} checked="checked" {% endif %}/></td>
             <td>{{ user.last_login }}</td>
             <td>
                 <ul id="icons" class="ui-widget ui-helper-clearfix">

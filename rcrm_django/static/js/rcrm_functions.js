@@ -1,4 +1,14 @@
-var TimeInt = 20000;
+var TimeInt = 200;
+
+function error_notify(data)
+    {
+        Lobibox.notify( 'error', { size: 'mini', sound: false,  msg: "Запрос завершился с ошибкой: '"+data+"'.", delay: false });
+    }
+
+function success_notify(message)
+    {
+        Lobibox.notify( 'success', { size: 'mini', sound: false,  msg: message, delay: 2000, });
+    }
 
 function show_crm()
     {
@@ -67,17 +77,36 @@ function rem_client(id)
 
 function rem_user(id)
     {
-    	jQuery.post('/users/rem_user',{'id':id},setTimeout("show_users()",TimeInt));
+    	jQuery.post('/users/rem_user',{'id':id},
+                                  function( data ) {
+                                    if (data == "None")
+                                        success_notify("Пользователь удалён.");
+                                    else
+                                        error_notify(data);
+                                  }
+    	            );
+    	setTimeout("show_users()",TimeInt)
     }
 
 function show_add_edit_user_dialog(id)
     {
-        if (id != "")
+        if (id)
             {
+                $("#check_login_out").remove();
                 $("#add_edit_user_login").val($("#user_"+id+"_login").html());
                 $("#add_edit_user_fname").val($("#user_"+id+"_fname").html());
                 $("#add_edit_user_lname").val($("#user_"+id+"_lname").html());
                 $("#add_edit_user_mail").val($("#user_"+id+"_mail").html());
+                $("#is_new").val("no");
+            }
+
+        if (!id)
+            {
+                $("#add_edit_user_login").val("");
+                $("#add_edit_user_fname").val("");
+                $("#add_edit_user_lname").val("");
+                $("#add_edit_user_mail").val("");
+                $("#is_new").val("yes");
             }
 
         $("#dialog_edit_users").dialog("open");
@@ -96,20 +125,31 @@ function check_unique_login()
 
 function show_add_edit_client_dialog(id)
     {
+        if (!id) {
+                $("#add_edit_client_sname").val("");
+                $("#add_edit_client_fname").val("");
+                $("#add_edit_client_inn").val("");
+                $("#add_edit_client_address").val("");
+                $("#add_edit_client_phone").val("");
+                $("#add_edit_client_mail").val("");
+                $("#add_edit_client_priority").val("");
+
+                $("#dialog_edit_client").dialog("open");
+
+                return;
+        }
+
         var url = "/clients/get_client_info/" + id;
 
-        $.getJSON( url, {
-            format: "json"
-          })
+        jQuery.post(url,{'field':'sname'},function(data){$("#add_edit_client_sname").val(data);});
+        jQuery.post(url,{'field':'name'},function(data){$("#add_edit_client_fname").val(data);});
+        jQuery.post(url,{'field':'inn'},function(data){$("#add_edit_client_inn").val(data);});
+        jQuery.post(url,{'field':'address'},function(data){$("#add_edit_client_address").val(data);});
+        jQuery.post(url,{'field':'phone'},function(data){$("#add_edit_client_phone").val(data);});
+        jQuery.post(url,{'field':'email'},function(data){$("#add_edit_client_mail").val(data);});
+        jQuery.post(url,{'field':'priority'},function(data){$("#add_edit_client_priority").val(data);});
 
-        .done(function( data ) {
-            $.each( data.items, function( i, item ) {
-                alert(items);
-            })
-
-            alert("Yeee");
-        })
-
+        $("#dialog_edit_client").dialog("open");
     }
 
 $(function()
@@ -172,19 +212,46 @@ $(function()
                                         lname = $("#add_edit_user_lname").val();
                                         mail = $("#add_edit_user_mail").val();
                                         pass = $("#add_edit_user_pass").val();
+                                        is_new = $("#is_new").val();
 
-                                        jQuery.post('/users/add_user',{ 'login':login,
-                                                                        'fname':fname,
-                                                                        'lname':lname,
-                                                                        'mail':mail,
-                                                                        'pass':pass});
+                                        if (is_new == "yes"){
+                                            jQuery.post('/users/add_user',{ 'login':login,
+                                                                            'fname':fname,
+                                                                            'lname':lname,
+                                                                            'mail':mail,
+                                                                            'pass':pass },
+                                                                            function( data ) {
+                                                                                if (data == "None")
+                                                                                    success_notify("Пользователь создан.");
+                                                                                else
+                                                                                    error_notify(data);
+                                                                            });
+                                        }
+
+                                        if (is_new == "no"){
+                                            jQuery.post('/users/edit_user',{ 'login':login,
+                                                                            'fname':fname,
+                                                                            'lname':lname,
+                                                                            'mail':mail,
+                                                                            'pass':pass },
+                                                                            function( data ) {
+                                                                                if (data == "None")
+                                                                                    success_notify("Пользователь изменён.");
+                                                                                else
+                                                                                    error_notify(data);
+                                                                            });
+                                        }
 
                                         setTimeout("show_users()",TimeInt);
+
+                                        $("#is_new").val("yes");
 
                                         $(this).dialog("close");
                                     },
                             "Отмена": function()
                                     {
+                                        $("#is_new").val("yes");
+
                                         $(this).dialog("close");
                                     }
                         }

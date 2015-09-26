@@ -21,8 +21,23 @@ def hello(request):
 @login_required(login_url='/auth/login')
 def get_client_info(request, id):
     obj = Client.objects.get(id=id)
-    data = serializers.serialize('json', [obj,])
-    return HttpResponse(data, mimetype='application/json')
+    field = request.POST['field']
+    ans = ""
+    if field == "name":
+        ans = obj.name
+    elif field == "sname":
+        ans = obj.sname
+    elif field == "inn":
+        ans = obj.inn
+    elif field == "address":
+        ans = obj.address
+    elif field == "phone":
+        ans = obj.phone
+    elif field == "email":
+        ans = obj.email
+    elif field == "priority":
+        ans = obj.priority
+    return HttpResponse(ans)
 
 @login_required(login_url='/auth/login')
 def add_client(request):
