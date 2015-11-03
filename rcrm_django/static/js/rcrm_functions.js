@@ -7,7 +7,7 @@ function error_notify(data)
 
 function success_notify(message)
     {
-        Lobibox.notify( 'success', { size: 'mini', sound: false,  msg: message, delay: 2000, });
+        Lobibox.notify( 'success', { size: 'mini', sound: false,  msg: message, delay: 2000 });
     }
 
 function show_crm()
@@ -53,7 +53,15 @@ function add_task()
 					{
 						jQuery("#id_inn").val('');
 						jQuery("#id_comment").val('');
-						jQuery.post('/crm/add_task',{'inn':inn, 'comment':comment},setTimeout("show_crm()",TimeInt));
+						jQuery.post('/crm/add_task',{'inn':inn, 'comment':comment},
+                                  function( data ) {
+                                    if (data == "None")
+                                        success_notify("Заявка создана.");
+                                    else
+                                        error_notify(data);
+                                  }
+    	                           );
+						setTimeout("show_crm()",TimeInt);
 					}
 			}
 	}
@@ -67,7 +75,15 @@ function get_chat()
 
 function rem_task(id)
 	{
-	    jQuery.post('/crm/rem_task',{'id':id},setTimeout("show_crm()",TimeInt));
+	    jQuery.post('/crm/rem_task',{'id':id},
+                                  function( data ) {
+                                    if (data == "None")
+                                        success_notify("Задание удалёно.");
+                                    else
+                                        error_notify(data);
+                                  }
+                   );
+	    setTimeout("show_crm()",TimeInt);
 	}
 
 function rem_client(id)
@@ -92,7 +108,9 @@ function show_add_edit_user_dialog(id)
     {
         if (id)
             {
-                $("#check_login_out").remove();
+                $('#add_edit_user_login').prop('disabled', true);
+                $("#check_login_out").html("");
+                $("#add_edit_user_pass").val("").html();
                 $("#add_edit_user_login").val($("#user_"+id+"_login").html());
                 $("#add_edit_user_fname").val($("#user_"+id+"_fname").html());
                 $("#add_edit_user_lname").val($("#user_"+id+"_lname").html());
@@ -102,6 +120,9 @@ function show_add_edit_user_dialog(id)
 
         if (!id)
             {
+                $('#add_edit_user_login').prop('disabled', false);
+                $("#check_login_out").html("");
+                $("#add_edit_user_pass").val("").html();
                 $("#add_edit_user_login").val("");
                 $("#add_edit_user_fname").val("");
                 $("#add_edit_user_lname").val("");
@@ -192,7 +213,6 @@ $(function()
                         }
                 });
     });
-
 
 $(function()
     {

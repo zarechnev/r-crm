@@ -20,29 +20,33 @@ def hello(request):
 
 @login_required(login_url='/auth/login')
 def add_task(request):
+    ans = "Нет данных в запросе"
     if request.method == 'POST':
         current_user = auth.get_user(request)
         request_inn = request.POST['inn']
         comment = request.POST['comment']
-        finded_client = Client.objects.get(inn=request_inn)
-        new_task = Task(create_user=current_user, client=finded_client, create_date=datetime.now(), create_comment=comment)
-        q = new_task.save()
-        ans = "Request was completed with the code %s." % (q)
-        return HttpResponse(ans)
-    return HttpResponse("No data in request.")
+        try:
+            finded_client = Client.objects.get(inn=request_inn)
+            new_task = Task(create_user=current_user, client=finded_client, create_date=datetime.now(), create_comment=comment)
+            ans = new_task.save()
+        except BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)
 
 @login_required(login_url='/auth/login')
 def rem_task(request):
+    ans = "Нет данных в запросе"
     if request.method == 'POST':
         id_task = request.POST['id']
         task_to_rem = Task.objects.get(id=id_task)
         task_to_rem.date_of_removal = datetime.now()
-        task_to_rem.is_removed = True
-        task_to_rem.remove_user = auth.get_user(request)
-        q = task_to_rem.save()
-        ans = "Request was completed with the code %s." % (q)
-        return HttpResponse(ans)
-    return HttpResponse("No data in request.")
+        try:
+            task_to_rem.is_removed = True
+            task_to_rem.remove_user = auth.get_user(request)
+            ans = task_to_rem.save()
+        except BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)
 
 @login_required(login_url='/auth/login')
 def auto_complite_inn(request):
