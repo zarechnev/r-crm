@@ -3,7 +3,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import auth
-from django.utils import simplejson
+import simplejson
 from crm.models import Task
 from clients.models import Client
 
