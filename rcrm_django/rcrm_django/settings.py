@@ -1,15 +1,13 @@
 # Django settings for rcrm_django project.
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEBUG = True
-TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('ruslan a. zarechnev', 'zarechnev.r@yandex.ru')
+    ('ruslan a. zarechnev', 'zarechnev.r@yandex.ru'),
 )
 
 MANAGERS = ADMINS
@@ -17,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'rcrm_django.sqlite3')
+        'NAME': os.path.join(BASE_DIR, 'rcrm_django.sqlite3'),
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         # 'NAME': 'rcrm_django', # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
@@ -79,7 +77,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    ('static', '/mnt/data/programming/django/rcrm_django/rcrm_django/static'),
+    ('static', os.path.join(BASE_DIR, 'static')),
 )
 
 # List of finder classes that know how to find static files in
@@ -93,14 +91,8 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'fsevcr%f&m#x)x4qddur^ktt(=u3%++@@8)tivd_n26t8hop&p'
 
-# List of callables that know how to import templates from various sources.
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
-)
-
 MIDDLEWARE_CLASSES = (
+    'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # 'django.middleware.csrf.CsrfViewMiddleware',
@@ -114,19 +106,6 @@ ROOT_URLCONF = 'rcrm_django.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'rcrm_django.wsgi.application'
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    '/mnt/data/programming/django/rcrm_django/rcrm_django/templates',
-    '/mnt/data/programming/django/rcrm_django/rcrm_django/crm/templates',
-    '/mnt/data/programming/django/rcrm_django/rcrm_django/clients/templates',
-    '/mnt/data/programming/django/rcrm_django/rcrm_django/loginsys/templates',
-    '/mnt/data/programming/django/rcrm_django/rcrm_django/statistic/templates',
-    '/mnt/data/programming/django/rcrm_django/rcrm_django/chat/templates',
-    '/mnt/data/programming/django/rcrm_django/rcrm_django/users/templates'
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -146,6 +125,30 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+                    os.path.join(BASE_DIR, 'templates'),
+                    os.path.join(BASE_DIR, '/crm/templates'),
+                    os.path.join(BASE_DIR, '/clients/templates'),
+                    os.path.join(BASE_DIR, '/loginsys/templates'),
+                    os.path.join(BASE_DIR, '/statistic/templates'),
+                    os.path.join(BASE_DIR, '/chat/templates'),
+                    os.path.join(BASE_DIR, '/users/templates'),
+                ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
