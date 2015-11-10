@@ -9,7 +9,7 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('ruslan a. zarechnev', 'your_email@example.com')
+    ('ruslan a. zarechnev', 'zarechnev.r@yandex.ru')
 )
 
 MANAGERS = ADMINS
@@ -17,7 +17,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'rcrm_django.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'rcrm_django.sqlite3')
         # 'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         # 'NAME': 'rcrm_django', # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
