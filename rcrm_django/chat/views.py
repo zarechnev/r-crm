@@ -1,5 +1,6 @@
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.contrib import auth
 from datetime import datetime
 from chat.models import Chat
