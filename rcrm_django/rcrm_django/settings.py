@@ -119,7 +119,7 @@ INSTALLED_APPS = (
     'clients',
     'statistic',
     'chat',
-    'users'
+    'users',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
