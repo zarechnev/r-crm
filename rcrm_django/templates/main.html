@@ -109,8 +109,8 @@
   </section>
 </nav>
 <div class="row" style="margin-top:20px">
+    {% if username %}
       <div class="large-3 columns">
-          {% if username %}
                 <script>
                     get_chat();
                     $(document).ready(function(){setInterval("get_chat()",10*TimeInt)});
@@ -121,16 +121,17 @@
                     <label for="id_message">Сообщение</label>     <input id="id_message" maxlength="50" name="comment" type="text" />
                     <input type="button" class="button tiny" value="Отправить сообщение" onclick="add_message();"/>
                 </div>
-          {% endif %}
       </div>
-  <div class="large-9 columns main_background">
-    {% block main-page %}{% endblock %}
-    {% block statistic %}{% endblock %}
-    {% block clients %}{% endblock %}
-    {% block users %}{% endblock %}
-    {% block crm %}{% endblock %}
+      <div class="large-9 columns main_background">
+        {% block main-page %}{% endblock %}
+        {% block statistic %}{% endblock %}
+        {% block clients %}{% endblock %}
+        {% block users %}{% endblock %}
+        {% block crm %}{% endblock %}
+      </div>
+    {% else %}
     {% block login %}{% endblock %}
-  </div>
+    {% endif %}
 </div>
 <div class="row">
     <div class="large-12 columns">
