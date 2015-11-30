@@ -40,6 +40,7 @@ def get_client_info(request, id):
 
 @login_required(login_url='/auth/login')
 def add_client(request):
+    ans = "Нет данных в запросе"
     if request.method == 'POST':
         sname = request.POST['sname']
         fname = request.POST['fname']
@@ -48,11 +49,12 @@ def add_client(request):
         phone = request.POST['phone']
         priority = request.POST['priority']
         mail = request.POST['mail']
-        new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, is_enabled=True, create_date=datetime.now())
-        q = new_client.save()
-        ans = "Request was completed with the code %s." % (q)
-        return HttpResponse(ans)
-    return HttpResponse("No data in request.")
+        try:
+            new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, is_enabled=True, create_date=datetime.now())
+            ans = new_client.save()
+        except BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)
 
 @login_required(login_url='/auth/login')
 def rem_client(request):

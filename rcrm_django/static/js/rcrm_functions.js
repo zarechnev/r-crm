@@ -200,7 +200,13 @@ $(function()
                                                                         'phone':phone,
                                                                         'priority':priority,
                                                                         'address':address,
-                                                                        'mail':mail});
+                                                                        'mail':mail},
+                                                                        function( data ) {
+                                                                            if (data == "None")
+                                                                                success_notify("Клиент создан.");
+                                                                            else
+                                                                                error_notify(data);
+                                                                        });
 
                                         setTimeout("show_clients()",TimeInt);
 
