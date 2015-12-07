@@ -1,4 +1,4 @@
-var TimeInt = 200;
+var TimeInt = 2000;
 
 function error_notify(data)
     {
@@ -7,7 +7,7 @@ function error_notify(data)
 
 function success_notify(message)
     {
-        Lobibox.notify( 'success', { size: 'mini', sound: false,  msg: message, delay: 2000 });
+        Lobibox.notify( 'success', { size: 'mini', sound: false,  msg: "Запрос выполнен успешно.", delay: 2000 });
     }
 
 function show_crm()
@@ -56,7 +56,7 @@ function add_task()
 						jQuery.post('/crm/add_task',{'inn':inn, 'comment':comment},
                                   function( data ) {
                                     if (data == "None")
-                                        success_notify("Заявка создана.");
+                                        success_notify("Заявка добавлена.");
                                     else
                                         error_notify(data);
                                   }
@@ -78,7 +78,7 @@ function rem_task(id)
 	    jQuery.post('/crm/rem_task',{'id':id},
                                   function( data ) {
                                     if (data == "None")
-                                        success_notify("Задание удалёно.");
+                                        success_notify("Задание удалено.");
                                     else
                                         error_notify(data);
                                   }
@@ -88,7 +88,15 @@ function rem_task(id)
 
 function rem_client(id)
     {
-    	jQuery.post('/clients/rem_client',{'id':id},setTimeout("show_clients()",TimeInt));
+    	jQuery.post('/clients/rem_client',{'id':id},
+    	                           function( data ) {
+                                    if (data == "None")
+                                        success_notify("Клиент удалён.");
+                                    else
+                                        error_notify(data);
+                                  }
+                   );
+        setTimeout("show_clients()",TimeInt);
     }
 
 function rem_user(id)
@@ -155,6 +163,8 @@ function show_add_edit_client_dialog(id)
                 $("#add_edit_client_mail").val("");
                 $("#add_edit_client_priority").val("");
 
+                $("#add_edit_client_sname").prop('disabled', false);
+
                 $("#dialog_edit_client").dialog("open");
 
                 return;
@@ -170,6 +180,8 @@ function show_add_edit_client_dialog(id)
         jQuery.post(url,{'field':'email'},function(data){$("#add_edit_client_mail").val(data);});
         jQuery.post(url,{'field':'priority'},function(data){$("#add_edit_client_priority").val(data);});
 
+        $("#add_edit_client_sname").prop('disabled', true);
+
         $("#dialog_edit_client").dialog("open");
     }
 
@@ -180,7 +192,7 @@ $(function()
                     autoOpen: false,
                     resizable: true,
                     height: "auto",
-                    width: "auto",
+                    width: 500,
                     modal: true,
                     buttons:
                         {
@@ -194,7 +206,7 @@ $(function()
                                         address = $("#add_edit_client_address").val();
                                         priority = $("#add_edit_client_priority").val();
 
-                                        jQuery.post('/clients/add_client',{ 'sname':sname,
+                                        jQuery.post('/clients/add_edit_client',{ 'sname':sname,
                                                                         'fname':fname,
                                                                         'inn':inn,
                                                                         'phone':phone,
@@ -203,7 +215,7 @@ $(function()
                                                                         'mail':mail},
                                                                         function( data ) {
                                                                             if (data == "None")
-                                                                                success_notify("Клиент создан.");
+                                                                                success_notify("Клиент создан/исправлен.");
                                                                             else
                                                                                 error_notify(data);
                                                                         });
@@ -227,7 +239,7 @@ $(function()
                     autoOpen: false,
                     resizable: true,
                     height: "auto",
-                    width: "auto",
+                    width: 450,
                     modal: true,
                     buttons:
                         {

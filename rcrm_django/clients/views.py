@@ -39,7 +39,7 @@ def get_client_info(request, id):
     return HttpResponse(ans)
 
 @login_required(login_url='/auth/login')
-def add_client(request):
+def add_edit_client(request):
     ans = "Нет данных в запросе"
     if request.method == 'POST':
         sname = request.POST['sname']
@@ -50,19 +50,37 @@ def add_client(request):
         priority = request.POST['priority']
         mail = request.POST['mail']
         try:
-            new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, is_enabled=True, create_date=datetime.now())
-            ans = new_client.save()
-        except BaseException as e:
-            ans = str(e)
+            existing_client = Client.objects.get(sname=sname)
+        except:
+            existing_client = 0
+        if existing_client:
+            try:
+                existing_client.name = fname
+                existing_client.inn = inn
+                existing_client.phone = phone
+                existing_client.address = address
+                existing_client.priority = priority
+                existing_client.email = mail
+                ans = existing_client.save()
+            except BaseException as e:
+                ans = str(e)
+        else:
+            try:
+                new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, is_enabled=True, create_date=datetime.now())
+                ans = new_client.save()
+            except BaseException as e:
+                ans = str(e)
     return HttpResponse(ans)
 
 @login_required(login_url='/auth/login')
 def rem_client(request):
+    ans = "Нет данных в запросе"
     if request.method == 'POST':
-        client_id = request.POST['id']
-        client_to_remove = Client.objects.get(id=client_id)
-        client_to_remove.is_deleted = True
-        q = client_to_remove.save()
-        ans = "Request was completed with the code %s." % (q)
-        return HttpResponse(ans)
-    return HttpResponse("No data in request.")
+        try:
+            client_id = request.POST['id']
+            client_to_remove = Client.objects.get(id=client_id)
+            client_to_remove.is_deleted = True
+            ans = client_to_remove.save()
+        except  BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)

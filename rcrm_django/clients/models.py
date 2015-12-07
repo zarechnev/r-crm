@@ -8,8 +8,8 @@ class Client(models.Model):
         ('400', 'Средний'),
         ('500', 'Низкий'),
     )
-    name = models.CharField(max_length=100, unique=True, blank=False, null=False, verbose_name="Полное название организации")
-    sname = models.CharField(max_length=50, unique=True, blank=False, null=False, verbose_name="Краткое название организации")
+    name = models.CharField(max_length=200, unique=True, blank=False, null=False, verbose_name="Полное название организации")
+    sname = models.CharField(max_length=100, unique=True, blank=False, null=False, verbose_name="Краткое название организации")
     inn = models.CharField(max_length=15, unique=True, blank=False, null=False, verbose_name="ИНН")
     address = models.CharField(max_length=300, blank=False, null=False, verbose_name="Адрес организации")
     phone = models.CharField(max_length=50, blank=False, null=False, verbose_name="Номер телефона организации")
