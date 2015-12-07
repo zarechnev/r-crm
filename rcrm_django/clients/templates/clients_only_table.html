@@ -16,7 +16,12 @@
             <td>{{ client.inn }}</td>
             <td>{{ client.phone }}</td>
             <td>{{ client.priority }}</td>
-            <td><input title="Вкл./Выкл." type="checkbox" {% if client.is_enabled %} checked="checked" {% endif %}/></td>
+            <td>
+                <div class="cl_radio_btns">
+                    <input type="radio" id="radio1_{{ client.id }}" name="radio_{{ client.id }}" {% if client.is_enabled %} checked="checked" {% endif %}><label for="radio1_{{ client.id }}">Вкл.</label>
+                    <input type="radio" id="radio0_{{ client.id }}" name="radio_{{ client.id }}" {% if not client.is_enabled %} checked="checked" {% endif %}><label for="radio0_{{ client.id }}">Выкл.</label>
+                </div>
+            </td>
             <td>
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li title="Удалить" onclick="rem_client({{ client.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
