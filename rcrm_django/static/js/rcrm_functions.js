@@ -29,7 +29,11 @@ function show_clients()
             type: "POST",
             data: data,
             cache: false,
-            success:function(html){$("#clients_content").html(html);}});
+            success:function(html){
+                $("#clients_content").html(html);
+                $(function() {$( ".cl_radio_btns" ).buttonset();});
+            }
+        });
     }
 
 function show_users()
