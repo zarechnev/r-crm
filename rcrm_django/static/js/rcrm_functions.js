@@ -1,5 +1,5 @@
 var TimeInt = 200;
-var TimeInt_for_Chat = 10000;
+var TimeInt_for_Chat = 90000;
 
 function error_notify(data)
     {
@@ -114,7 +114,6 @@ function client_switch_status(id, status)
                                         error_notify(data);
                                   }
                    );
-        setTimeout("show_clients()",TimeInt);
     }
 
 function rem_user(id)

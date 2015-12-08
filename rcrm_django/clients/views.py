@@ -96,7 +96,10 @@ def client_switch_status(request):
             client_id = request.POST['id']
             client_status = request.POST['status']
             client_to_switch_status = Client.objects.get(id=client_id)
-            client_to_switch_status.is_enabled = client_status
+            if client_status == '1':
+                client_to_switch_status.is_enabled = True
+            else:
+                client_to_switch_status.is_enabled = False
             ans = client_to_switch_status.save()
         except  BaseException as e:
             ans = str(e)
