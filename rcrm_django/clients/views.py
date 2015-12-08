@@ -17,6 +17,7 @@ def hello(request):
     args['username'] = auth.get_user(request).username
     return render_to_response('clients.html', args)
 
+#TODO: Заменить эту порнографию на передачу json-объекта.
 @login_required(login_url='/auth/login')
 def get_client_info(request, id):
     obj = Client.objects.get(id=id)
@@ -54,6 +55,7 @@ def add_edit_client(request):
         except:
             existing_client = 0
         if existing_client:
+            # Пользователь существует
             try:
                 existing_client.name = fname
                 existing_client.inn = inn
@@ -65,6 +67,7 @@ def add_edit_client(request):
             except BaseException as e:
                 ans = str(e)
         else:
+            # Пользователь не существует
             try:
                 new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, is_enabled=True, create_date=datetime.now())
                 ans = new_client.save()
