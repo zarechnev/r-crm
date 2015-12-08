@@ -1,8 +1,9 @@
-var TimeInt = 2000;
+var TimeInt = 200;
+var TimeInt_for_Chat = 10000;
 
 function error_notify(data)
     {
-        Lobibox.notify( 'error', { size: 'mini', sound: false,  msg: "Запрос завершился с ошибкой: '"+data+"'.", delay: false });
+        Lobibox.notify( 'error', { size: 'mini', sound: false,  msg: "Запрос завершился с ошибкой: '"+data+"'.", delay: 10000 });
     }
 
 function success_notify(message)
@@ -96,6 +97,19 @@ function rem_client(id)
     	                           function( data ) {
                                     if (data == "None")
                                         success_notify("Клиент удалён.");
+                                    else
+                                        error_notify(data);
+                                  }
+                   );
+        setTimeout("show_clients()",TimeInt);
+    }
+
+function client_switch_status(id, status)
+    {
+    	jQuery.post('/clients/client_switch_status',{'id':id, 'status':status},
+    	                           function( data ) {
+                                    if (data == "None")
+                                        success_notify("Клиент изменён.");
                                     else
                                         error_notify(data);
                                   }

@@ -87,3 +87,17 @@ def rem_client(request):
         except  BaseException as e:
             ans = str(e)
     return HttpResponse(ans)
+
+@login_required(login_url='/auth/login')
+def client_switch_status(request):
+    ans = "Нет данных в запросе"
+    if request.method == 'POST':
+        try:
+            client_id = request.POST['id']
+            client_status = request.POST['status']
+            client_to_switch_status = Client.objects.get(id=client_id)
+            client_to_switch_status.is_enabled = client_status
+            ans = client_to_switch_status.save()
+        except  BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)

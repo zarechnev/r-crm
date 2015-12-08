@@ -16,5 +16,5 @@ class Client(models.Model):
     email = models.EmailField(unique=True, blank=False, null=False, verbose_name="Электронная почта организации")
     priority = models.IntegerField(choices=PRIORITY_VALUES, verbose_name="Приоритет клиента")
     create_date = models.DateTimeField(verbose_name="Дата регистрации организации")
-    is_enabled = models.BooleanField(default=True, verbose_name="Обслуживается")
+    is_enabled = models.BooleanField(default=True, blank=False, verbose_name="Обслуживается")
     is_deleted = models.BooleanField(default=False, verbose_name="Удален")
