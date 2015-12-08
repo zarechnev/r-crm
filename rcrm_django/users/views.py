@@ -27,7 +27,8 @@ def edit_user(request):
             user_to_edit.email = mail
             user_to_edit.first_name = fname
             user_to_edit.last_name = lname
-            user_to_edit.set_password(passwd)
+            if (passwd):
+                user_to_edit.set_password(passwd)
             ans = str(user_to_edit.save())
         except BaseException as e:
             ans = str(e)
