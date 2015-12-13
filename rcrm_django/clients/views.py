@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from datetime import datetime
@@ -10,10 +11,21 @@ from clients.models import Client
 @login_required(login_url='/auth/login')
 def hello(request):
     args = {}
-    args['clients'] = Client.objects.all
+    clients_list = Client.objects.all()
+    objects_on_list = 30
+    paginator = Paginator(clients_list, objects_on_list)
+    page = request.GET.get('page')
+    try:
+        clients = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        clients = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        clients = paginator.page(paginator.num_pages)
+    args['clients'] = clients
     if "only_table" in request.POST and request.POST['only_table'] == "true":
         return render_to_response('clients_only_table.html', args)
-
     args['username'] = auth.get_user(request).username
     return render_to_response('clients.html', args)
 

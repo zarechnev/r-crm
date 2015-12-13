@@ -17,4 +17,16 @@
                 <p><label for="add_edit_client_mail">E-mail</label>                 <input id="add_edit_client_mail" maxlength="30" name="mail" type="text" /></p>
                 <p><label for="add_edit_client_priority">Приоритет</label>          <input id="add_edit_client_priority" maxlength="30" name="mail" type="text" /></p>
 	</div>
+
+<div class="small-3 large-centered columns">
+<ul class="pagination">
+  {% if clients.has_previous %}
+    <li class="arrow"><a href="?page={{ clients.previous_page_number }}">&laquo;</a></li>
+  {% endif %}
+  <li>Страница {{ clients.number }} из {{ clients.paginator.num_pages }}</li>
+  {% if clients.has_next %}
+    <li class="arrow"><a href="?page={{ clients.next_page_number }}">&raquo;</a></li>
+  {% endif %}
+</ul>
+</div>
 {% endblock %}
