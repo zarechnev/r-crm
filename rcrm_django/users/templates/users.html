@@ -19,4 +19,16 @@
                 <p><label for="add_edit_user_pass">Пароль</label>      <input id="add_edit_user_pass" maxlength="30" name="pass" type="password" /></p>
                 <p><input id="is_new" name="is_new_option" hidden="true" value="yes"/></p>
 	</div>
+
+<div class="small-3 large-centered columns">
+<ul class="pagination">
+  {% if users.has_previous %}
+    <li class="arrow"><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
+  {% endif %}
+  <li>Страница {{ users.number }} из {{ users.paginator.num_pages }}</li>
+  {% if users.has_next %}
+    <li class="arrow"><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
+  {% endif %}
+</ul>
+</div>
 {% endblock %}

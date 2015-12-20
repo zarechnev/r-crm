@@ -10,7 +10,7 @@
           <th>Опции</th>
       </tr>
     </thead>
-{% for user in list_users %}
+{% for user in users %}
     <tr>
         <td id="user_{{ user.id }}_login">{{ user.username }}</td>
         <td id="user_{{ user.id }}_fname">{{ user.first_name }}</td>
@@ -18,18 +18,17 @@
         <td id="user_{{ user.id }}_mail">{{ user.email }}</td>
         <td>{{ user.last_login }}</td>
         <td>
-            <div class="cl_radio_btns">
-                <input type="radio" id="radio1_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 1 )" name="radio_{{ user.id }}" {% if user.is_active %} checked {% endif %}>
-                    <label for="radio1_{{ user.id }}">Вкл.</label>
-                <input type="radio" id="radio0_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 0 )" name="radio_{{ user.id }}" {% if not user.is_active %} checked {% endif %}>
-                    <label for="radio0_{{ user.id }}">Выкл.</label>
-            </div>
+            {% if user.id != 1 %}
+                <div class="cl_radio_btns">
+                    <input type="radio" id="radio1_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 1 )" name="radio_{{ user.id }}" {% if user.is_active %} checked {% endif %}>
+                        <label for="radio1_{{ user.id }}">Вкл.</label>
+                    <input type="radio" id="radio0_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 0 )" name="radio_{{ user.id }}" {% if not user.is_active %} checked {% endif %}>
+                        <label for="radio0_{{ user.id }}">Выкл.</label>
+                </div>
+            {% endif %}
         </td>
         <td>
             <ul id="icons" class="ui-widget ui-helper-clearfix">
-                {% if user.id != 1 %}
-                    <li title="Удалить пользователя" onclick="rem_user({{ user.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
-                {% endif %}
                 <li title="Редактировать пользователя" onclick="show_add_edit_user_dialog({{ user.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
             </ul>
         </td>

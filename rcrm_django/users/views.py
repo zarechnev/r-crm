@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
@@ -8,7 +9,19 @@ import logging
 @login_required(login_url='/auth/login')
 def list_users(request):
     args = {}
-    args['list_users'] = auth.models.User.objects.all().order_by('id')
+    users_list = auth.models.User.objects.all().order_by('-is_active', 'id')
+    objects_on_list = 20
+    paginator = Paginator(users_list, objects_on_list)
+    page = request.GET.get('page')
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        users = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        users = paginator.page(paginator.num_pages)
+    args['users'] = users
     if "only_table" in request.POST and request.POST['only_table'] == "true":
         return render_to_response('users_only_table.html', args)
     args['username'] = auth.get_user(request).username
@@ -48,19 +61,6 @@ def add_user(request):
             new_user = auth.models.User.objects.create_user(username=login, email=mail, first_name=fname, last_name=lname)
             new_user.set_password(passwd)
             ans = str(new_user.save())
-        except BaseException as e:
-            ans = str(e)
-    return HttpResponse(ans)
-
-@login_required(login_url='/auth/login')
-def rem_user(request):
-    ans = "Нет данных в запросе"
-    if request.method == 'POST':
-        user_id = request.POST['id']
-        try:
-            user_to_remove = auth.models.User.objects.get(id=user_id)
-            user_to_remove.is_active = False
-            ans = str(user_to_remove.save())
         except BaseException as e:
             ans = str(e)
     return HttpResponse(ans)

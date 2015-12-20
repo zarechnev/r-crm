@@ -11,7 +11,7 @@ from clients.models import Client
 @login_required(login_url='/auth/login')
 def hello(request):
     args = {}
-    clients_list = Client.objects.all()
+    clients_list = Client.objects.all().order_by('-is_active', 'id')
     objects_on_list = 30
     paginator = Paginator(clients_list, objects_on_list)
     page = request.GET.get('page')

@@ -132,19 +132,6 @@ function obj_switch_status( obj, id, status )
                    );
     }
 
-function rem_user(id)
-    {
-    	jQuery.post('/users/rem_user',{'id':id},
-                                  function( data ) {
-                                    if (data == "None")
-                                        success_notify("Пользователь удалён.");
-                                    else
-                                        error_notify(data);
-                                  }
-    	            );
-    	setTimeout("show_users()",TimeInt)
-    }
-
 function show_add_edit_user_dialog(id)
     {
         if (id)
