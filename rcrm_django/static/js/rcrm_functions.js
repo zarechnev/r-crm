@@ -45,7 +45,11 @@ function show_users()
             type: "POST",
             data: data,
             cache: false,
-            success:function(html){$("#users_content").html(html);}});
+            success:function(html){
+                $("#users_content").html(html);
+                $(function() {$( ".cl_radio_btns" ).buttonset();});
+            }
+        });
     }
 
 function add_task()
@@ -104,12 +108,24 @@ function rem_client(id)
         setTimeout("show_clients()",TimeInt);
     }
 
-function client_switch_status(id, status)
+function obj_switch_status( obj, id, status )
     {
-    	jQuery.post('/clients/client_switch_status',{'id':id, 'status':status},
+        var url = "";
+        var url_user = "/users/user_switch_status";
+        var url_client = "/clients/client_switch_status";
+
+        if ( obj == "user" ) {
+                url = url_user;
+        }
+
+        if ( obj == "client" ) {
+                url = url_client;
+        }
+
+    	jQuery.post( url , {'id':id, 'status':status},
     	                           function( data ) {
                                     if (data == "None")
-                                        success_notify("Клиент изменён.");
+                                        success_notify("Объект изменён.");
                                     else
                                         error_notify(data);
                                   }

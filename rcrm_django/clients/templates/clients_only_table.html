@@ -18,9 +18,9 @@
             <td>{{ client.priority }}</td>
             <td>
                 <div class="cl_radio_btns">
-                    <input type="radio" id="radio1_{{ client.id }}" onchange="client_switch_status({{ client.id }}, 1)" name="radio_{{ client.id }}" {% if client.is_enabled %} checked {% endif %}>
+                    <input type="radio" id="radio1_{{ client.id }}" onchange='obj_switch_status( "client", {{ client.id }}, 1 )' name="radio_{{ client.id }}" {% if client.is_active %} checked {% endif %}>
                         <label for="radio1_{{ client.id }}">Вкл.</label>
-                    <input type="radio" id="radio0_{{ client.id }}" onchange="client_switch_status({{ client.id }}, 0)" name="radio_{{ client.id }}" {% if not client.is_enabled %} checked {% endif %}>
+                    <input type="radio" id="radio0_{{ client.id }}" onchange='obj_switch_status( "client", {{ client.id }}, 0 )' name="radio_{{ client.id }}" {% if not client.is_active %} checked {% endif %}>
                         <label for="radio0_{{ client.id }}">Выкл.</label>
                 </div>
             </td>

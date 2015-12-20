@@ -7,7 +7,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
 ADMINS = (
-    ('ruslan a. zarechnev', 'zarechnev.r@yandex.ru'),
+    ('Ruslan A. Zarechnev', 'zarechnev.r@yandex.ru'),
 )
 
 MANAGERS = ADMINS

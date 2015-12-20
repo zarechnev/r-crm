@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.http import HttpResponse
+import logging
 
 
 @login_required(login_url='/auth/login')
@@ -76,3 +77,23 @@ def check_login(request):
         if user:
             return HttpResponse("Имя занято!!!")
     return HttpResponse("Имя свободно")
+
+@login_required(login_url='/auth/login')
+def user_switch_status(request):
+    ans = "Нет данных в запросе"
+    if request.method == 'POST':
+        try:
+            user_id = request.POST['id']
+            user_status = request.POST['status']
+            user_to_switch_status = auth.models.User.objects.get( id = user_id )
+            if user_status == '1':
+                user_to_switch_status.is_active = 1
+            elif user_status == '0':
+                user_to_switch_status.is_active = 0
+            else:
+                ans = "Статус не определён"
+                return HttpResponse( ans )
+            ans = user_to_switch_status.save()
+        except  BaseException as e:
+            ans = str( e )
+    return HttpResponse( ans )

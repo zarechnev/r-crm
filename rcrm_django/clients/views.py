@@ -107,12 +107,15 @@ def client_switch_status(request):
         try:
             client_id = request.POST['id']
             client_status = request.POST['status']
-            client_to_switch_status = Client.objects.get(id=client_id)
-            if client_status == '1':
-                client_to_switch_status.is_enabled = True
+            client_to_switch_status = Client.objects.get( id = client_id )
+            if client_status == "1":
+                client_to_switch_status.is_active = 1
+            elif client_status == "0":
+                client_to_switch_status.is_active = 0
             else:
-                client_to_switch_status.is_enabled = False
+                ans = "Статус не определён"
+                return HttpResponse( ans )
             ans = client_to_switch_status.save()
         except  BaseException as e:
-            ans = str(e)
-    return HttpResponse(ans)
+            ans = str( e )
+    return HttpResponse( ans )
