@@ -1,5 +1,5 @@
 var TimeInt = 200;
-var TimeInt_for_Chat = 90000;
+var TimeInt_for_Chat = 9000;
 
 function error_notify(data)
     {
@@ -19,7 +19,20 @@ function show_crm()
             type: "POST",
             data: data,
             cache: false,
-            success:function(html){$("#crm_content").html(html);}});
+            success:function(html){
+                $("#crm_content").html(html);
+                $(function() {
+                    $( "#dialog-link, #icons li" ).hover(
+                        function() {
+                            $( this ).addClass( "ui-state-hover" );
+                        },
+                        function() {
+                            $( this ).removeClass( "ui-state-hover" );
+                        }
+                    );
+                });
+            }
+        });
     }
 
 function show_clients()
