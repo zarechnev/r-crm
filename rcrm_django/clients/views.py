@@ -81,7 +81,7 @@ def add_edit_client(request):
         else:
             # Пользователь не существует
             try:
-                new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, is_enabled=True, create_date=datetime.now())
+                new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, create_date=datetime.now())
                 ans = new_client.save()
             except BaseException as e:
                 ans = str(e)
