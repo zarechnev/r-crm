@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from datetime import datetime
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import auth
@@ -27,7 +27,7 @@ def add_task(request):
         comment = request.POST['comment']
         try:
             finded_client = Client.objects.get(inn=request_inn)
-            new_task = Task(create_user=current_user, client=finded_client, create_date=datetime.now(), create_comment=comment)
+            new_task = Task(create_user=current_user, client=finded_client, create_date=timezone.now(), create_comment=comment)
             ans = new_task.save()
         except BaseException as e:
             ans = str(e)
@@ -39,7 +39,7 @@ def rem_task(request):
     if request.method == 'POST':
         id_task = request.POST['id']
         task_to_rem = Task.objects.get(id=id_task)
-        task_to_rem.date_of_removal = datetime.now()
+        task_to_rem.date_of_removal = timezone.now()
         try:
             task_to_rem.is_removed = True
             task_to_rem.remove_user = auth.get_user(request)

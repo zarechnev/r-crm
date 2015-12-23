@@ -4,13 +4,24 @@ from django.contrib import auth
 
 
 class Task(models.Model):
-    create_user = models.ForeignKey(auth.models.User, related_name='create_user', verbose_name="Автор заявки")
-    closed_user = models.ForeignKey(auth.models.User, null=True, blank=True, related_name='closed_user', verbose_name="Закрыл заявку")
-    remove_user = models.ForeignKey(auth.models.User, null=True, blank=True, related_name='remove_user', verbose_name="Удалил заявку")
-    status = models.CharField(blank=False, null=False, max_length=100, default="new", verbose_name="Статус заявки")
-    client = models.ForeignKey(Client, verbose_name="Организция/Клиент")
-    create_date = models.DateTimeField(verbose_name="Дата регистрации заявки")
-    closed_date = models.DateTimeField(blank=True, null=True, verbose_name="Дата закрытия заявки")
-    create_comment = models.CharField(blank=True, null=True, max_length=100, verbose_name="Комментарий")
-    is_removed = models.BooleanField(default=False, verbose_name="Удалённая заявка")
-    date_of_removal = models.DateTimeField(blank=True, null=True, verbose_name="Дата удаления заявки")
+    STATUS_OF_TASK = (
+        ('NEW', 'Новая'),
+        ('PRG', 'Решается'),
+        ('SLD', 'Решена'),
+        ('RMD', 'Удалена'),
+    )
+
+    status = models.CharField(blank=False, null=False, max_length=3, choices=STATUS_OF_TASK, default='NEW', verbose_name="Статус заявки")
+    create_comment = models.CharField(blank=False, null=False, max_length=100, verbose_name="Комментарий")
+    is_removed = models.BooleanField(default=False, blank=False, verbose_name="Удалённая заявка")
+    change_status_datetime = models.DateTimeField(null=True, default=0, blank=False, verbose_name="Дата последнего изменения статуса")
+
+    create_user = models.ForeignKey(auth.models.User, null=False, blank=False, related_name='create_user', verbose_name="Автор заявки")
+    user_solved = models.ForeignKey(auth.models.User, null=True, blank=False, default=0, related_name='closed_user', verbose_name="Закрыл заявку")
+    remove_user = models.ForeignKey(auth.models.User, null=True, blank=False, default=0, related_name='remove_user', verbose_name="Удалил заявку")
+
+    client = models.ForeignKey(Client, null=False, blank=False, verbose_name="Клиент")
+
+    create_date = models.DateTimeField(null=False, blank=False, verbose_name="Дата регистрации заявки")
+    closed_date = models.DateTimeField(blank=False, null=False, default=0, verbose_name="Дата закрытия заявки")
+    date_of_removal = models.DateTimeField(default=0, blank=False, null=False, verbose_name="Дата удаления заявки")

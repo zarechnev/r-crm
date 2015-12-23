@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
-from datetime import datetime
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.core import serializers
 from django.contrib import auth
@@ -81,7 +81,7 @@ def add_edit_client(request):
         else:
             # Пользователь не существует
             try:
-                new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, create_date=datetime.now())
+                new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, create_date=timezone.now())
                 ans = new_client.save()
             except BaseException as e:
                 ans = str(e)
