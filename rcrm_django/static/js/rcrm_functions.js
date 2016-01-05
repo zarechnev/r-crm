@@ -127,14 +127,13 @@ function obj_switch_status( obj, id, status )
         var url = "";
         var url_user = "/users/user_switch_status";
         var url_client = "/clients/client_switch_status";
+        var url_task = "/crm/task_switch_status";
 
-        if ( obj == "user" ) {
-                url = url_user;
-        }
+        if ( obj == "user" ) { url = url_user; }
 
-        if ( obj == "client" ) {
-                url = url_client;
-        }
+        if ( obj == "client" ) { url = url_client; }
+
+        if ( obj == "task" ) { url = url_task; }
 
     	jQuery.post( url , {'id':id, 'status':status},
     	                           function( data ) {

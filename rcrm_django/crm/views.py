@@ -6,6 +6,8 @@ from django.contrib import auth
 import simplejson
 from crm.models import Task
 from clients.models import Client
+import datetime
+import time
 
 
 @login_required(login_url='/auth/login')
@@ -28,6 +30,7 @@ def add_task(request):
         try:
             finded_client = Client.objects.get(inn=request_inn)
             new_task = Task(create_user=current_user, client=finded_client, create_date=timezone.now(), create_comment=comment)
+            new_task.set_status("NEW")
             ans = new_task.save()
         except BaseException as e:
             ans = str(e)
@@ -61,3 +64,31 @@ def auto_complite_inn(request):
                     return HttpResponse( simplejson.dumps( tags ) )
                 i = i + 1
     return HttpResponse( simplejson.dumps( tags ) )
+
+@login_required( login_url='/auth/login' )
+def task_switch_status( request ):
+    ans = "Нет данных в запросе"
+    if request.method == 'POST':
+        id_task = request.POST['id']
+        task_status = request.POST['status']
+        task_to_change = Task.objects.get( id = id_task )
+
+        delta_sec = timezone.now() - task_to_change.change_status_datetime
+        delta_sec = int( delta_sec.total_seconds() )
+
+        if ( delta_sec <= 10 ):
+            return HttpResponse( "После прошлого изменения статуса прошло менее 5 секунд: %s секунд(ы)!" % ( delta_sec ) )
+
+        try:
+            task_to_change.set_status( task_status )
+            if ( task_status == "PRG" ):
+                task_to_change.solves_user = auth.get_user(request)
+            if ( task_status == "SLD" ):
+                task_to_change.user_solved = auth.get_user(request)
+
+            task_to_change.change_status_datetime = timezone.now()
+
+            ans = task_to_change.save()
+        except BaseException as e:
+            ans = str(e)
+    return HttpResponse(ans)

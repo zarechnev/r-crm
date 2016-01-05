@@ -5,7 +5,9 @@
           <th>Статус</th>
           <th>Клиент</th>
           <th>Коментарий</th>
-          <th>Автор заявки</th>
+          <th>Автор</th>
+          <th>Решает</th>
+          <th>Решил</th>
           <th>Опции</th>
       </tr>
     </thead>
@@ -15,14 +17,18 @@
             <td>{{ task.create_date }}</td>
             <td>
                 <div class="cl_radio_btns">
-                    <input type="radio" id="radio1_{{ client.id }}" onchange='obj_switch_status( "client", {{ client.id }}, 1 )' name="radio_{{ client.id }}" {% if client.is_active %} checked {% endif %}>
-                        <label for="radio1_{{ client.id }}">Вкл.</label>
-                    <input type="radio" id="radio0_{{ client.id }}" onchange='obj_switch_status( "client", {{ client.id }}, 0 )' name="radio_{{ client.id }}" {% if not client.is_active %} checked {% endif %}>
-                        <label for="radio0_{{ client.id }}">Выкл.</label>
+                    <input type="radio" id="radio0_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "NEW" )' name="radio_{{ task.id }}" {% if task.status = "NEW" %} checked {% endif %}>
+                        <label for="radio0_{{ task.id }}">Новая</label>
+                    <input type="radio" id="radio1_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "PRG" )' name="radio_{{ task.id }}" {% if task.status = "PRG" %} checked {% endif %}>
+                        <label for="radio1_{{ task.id }}">В процессе</label>
+                    <input type="radio" id="radio2_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "SLD" )' name="radio_{{ task.id }}" {% if task.status = "SLD" %} checked {% endif %}>
+                        <label for="radio2_{{ task.id }}">Закрыта</label>
                 </div>
             <td>{{ task.client.sname }}</td>
             <td>{{ task.create_comment }}</td>
             <td>{{ task.create_user.username }}</td>
+            <td>{{ task.solves_user.username }}</td>
+            <td>{{ task.user_solved.username }}</td>
             <td>
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
                     <li title="Удалить заявку" onclick="rem_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
