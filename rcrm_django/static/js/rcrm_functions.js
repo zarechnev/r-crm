@@ -31,6 +31,7 @@ function show_crm()
                         }
                     );
                 });
+                $(function() {$( ".cl_radio_btns" ).buttonset();});
             }
         });
     }

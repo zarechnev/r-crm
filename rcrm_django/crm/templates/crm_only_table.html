@@ -13,7 +13,13 @@
     {% if not task.is_removed %}
         <tr>
             <td>{{ task.create_date }}</td>
-            <td>{{ task.status }}</td>
+            <td>
+                <div class="cl_radio_btns">
+                    <input type="radio" id="radio1_{{ client.id }}" onchange='obj_switch_status( "client", {{ client.id }}, 1 )' name="radio_{{ client.id }}" {% if client.is_active %} checked {% endif %}>
+                        <label for="radio1_{{ client.id }}">Вкл.</label>
+                    <input type="radio" id="radio0_{{ client.id }}" onchange='obj_switch_status( "client", {{ client.id }}, 0 )' name="radio_{{ client.id }}" {% if not client.is_active %} checked {% endif %}>
+                        <label for="radio0_{{ client.id }}">Выкл.</label>
+                </div>
             <td>{{ task.client.sname }}</td>
             <td>{{ task.create_comment }}</td>
             <td>{{ task.create_user.username }}</td>
