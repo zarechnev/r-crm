@@ -67,6 +67,7 @@ def auto_complite_inn(request):
 
 @login_required( login_url='/auth/login' )
 def task_switch_status( request ):
+    MIN_INTERVAL_CHANGE_STATUS = 10
     ans = "Нет данных в запросе"
     if request.method == 'POST':
         id_task = request.POST['id']
@@ -76,8 +77,8 @@ def task_switch_status( request ):
         delta_sec = timezone.now() - task_to_change.change_status_datetime
         delta_sec = int( delta_sec.total_seconds() )
 
-        if ( delta_sec <= 10 ):
-            return HttpResponse( "После прошлого изменения статуса прошло менее 5 секунд: %s секунд(ы)!" % ( delta_sec ) )
+        if ( delta_sec <= MIN_INTERVAL_CHANGE_STATUS ):
+            return HttpResponse( "После прошлого изменения статуса прошло менее %s секунд: %s секунд(ы)!" % ( MIN_INTERVAL_CHANGE_STATUS, delta_sec ) )
 
         try:
             task_to_change.set_status( task_status )
