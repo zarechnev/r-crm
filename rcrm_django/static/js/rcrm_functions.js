@@ -12,11 +12,11 @@ function success_notify(message)
         Lobibox.notify( 'success', { size: 'mini', sound: false,  msg: "Запрос выполнен успешно.", delay: 2000 });
     }
 
-function show_crm()
+function show_crm(url)
     {
         var data = {"only_table":"true"};
 
-        $.ajax({url: "/crm/",
+        $.ajax({url: url,
             type: "POST",
             data: data,
             cache: false,

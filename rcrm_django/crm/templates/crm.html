@@ -7,7 +7,7 @@
     </div>
 <p>
     <script>
-        $(document).ready(function(){setInterval("show_crm()",TimeInt_for_CRM);});
+        $(document).ready(function(){setInterval('show_crm("/crm/?page={{ tasks.number }}")',TimeInt_for_CRM);});
 
         $(document).ready(function () {
             $("#id_inn").autocomplete({
@@ -23,4 +23,15 @@
     <p><label for="id_comment">Комментарий</label>     <input id="id_comment" maxlength="50" name="comment" type="text" /></p>
     <input type="button" class="button tiny" value="Создать" onclick="add_task();"/>
 
+<div class="small-3 large-centered columns">
+<ul class="pagination">
+  {% if tasks.has_previous %}
+    <li class="arrow"><a href="?page={{ tasks.previous_page_number }}">&laquo;</a></li>
+  {% endif %}
+  <li>Страница {{ tasks.number }} из {{ tasks.paginator.num_pages }}</li>
+  {% if tasks.has_next %}
+    <li class="arrow"><a href="?page={{ tasks.next_page_number }}">&raquo;</a></li>
+  {% endif %}
+</ul>
+</div>
 {% endblock %}

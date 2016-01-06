@@ -26,6 +26,7 @@ def hello(request):
     args['clients'] = clients
     if "only_table" in request.POST and request.POST['only_table'] == "true":
         return render_to_response('clients_only_table.html', args)
+
     args['username'] = auth.get_user(request).username
     return render_to_response('clients.html', args)
 

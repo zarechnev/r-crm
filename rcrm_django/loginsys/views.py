@@ -12,7 +12,8 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if (user is not None) and user.is_active:
             auth.login(request, user)
-            return redirect('/')
+            #TODO: Реализовать перенаправление на запрашиваемую страницу
+            return redirect( '/' )
         else:
             args['login_error'] = "Проверьте правильность введённых данных."
             return render_to_response('login.html', args)

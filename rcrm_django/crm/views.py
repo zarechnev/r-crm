@@ -1,18 +1,31 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import auth
 import simplejson
+import datetime
 from crm.models import Task
 from clients.models import Client
-import datetime
 
 
 @login_required(login_url='/auth/login')
 def hello(request):
     args = {}
-    args['tasks'] = Task.objects.all().order_by('id').reverse()
+    tasks_list = Task.objects.all().order_by( '-id' )
+    objects_on_list = 10
+    paginator = Paginator(tasks_list, objects_on_list)
+    page = request.GET.get('page')
+    try:
+        tasks = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        tasks = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        tasks = paginator.page(paginator.num_pages)
+    args['tasks'] = tasks
     if "only_table" in request.POST and request.POST['only_table'] == "true":
         return render_to_response('crm_only_table.html', args)
 

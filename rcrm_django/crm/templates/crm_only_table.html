@@ -12,10 +12,10 @@
       </tr>
     </thead>
 {% for task in tasks %}
-    {% if not task.is_removed %}
-        <tr>
-            <td>{{ task.create_date }}</td>
-            <td>
+    <tr>
+        <td>{{ task.create_date }}</td>
+        <td>
+            {% if not task.is_removed %}
                 <div class="cl_radio_btns">
                     <input type="radio" id="radio0_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "NEW" )' name="radio_{{ task.id }}" {% if task.status = "NEW" %} checked {% endif %}>
                         <label for="radio0_{{ task.id }}">Новая</label>
@@ -24,18 +24,22 @@
                     <input type="radio" id="radio2_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "SLD" )' name="radio_{{ task.id }}" {% if task.status = "SLD" %} checked {% endif %}>
                         <label for="radio2_{{ task.id }}">Закрыта</label>
                 </div>
-            <td>{{ task.client.sname }}</td>
-            <td>{{ task.create_comment }}</td>
-            <td>{{ task.create_user.username }}</td>
-            <td>{{ task.solves_user.username }}</td>
-            <td>{{ task.user_solved.username }}</td>
-            <td>
-                <ul id="icons" class="ui-widget ui-helper-clearfix">
+            {% else %}
+                Удалена
+            {% endif %}
+        <td>{{ task.client.sname }}</td>
+        <td>{{ task.create_comment }}</td>
+        <td>{{ task.create_user.username }}</td>
+        <td>{{ task.solves_user.username }}</td>
+        <td>{{ task.user_solved.username }}</td>
+        <td>
+            <ul id="icons" class="ui-widget ui-helper-clearfix">
+                {% if not task.is_removed %}
                     <li title="Удалить заявку" onclick="rem_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
-                    <li title="Править заявку" onclick="edit_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
-                </ul>
-            </td>
-        </tr>
-    {% endif %}
+                {% endif %}
+                <li title="Править заявку" onclick="edit_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+            </ul>
+        </td>
+    </tr>
 {% endfor %}
 </table>

@@ -10,7 +10,7 @@ import logging
 def list_users(request):
     args = {}
     users_list = auth.models.User.objects.all().order_by('-is_active', 'id')
-    objects_on_list = 20
+    objects_on_list = 30
     paginator = Paginator(users_list, objects_on_list)
     page = request.GET.get('page')
     try:
