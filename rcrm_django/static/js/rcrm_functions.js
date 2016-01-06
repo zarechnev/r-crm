@@ -1,5 +1,6 @@
-var TimeInt = 200;
-var TimeInt_for_Chat = 9000;
+var TimeInt = 1000;
+var TimeInt_for_Chat = TimeInt * 5;
+var TimeInt_for_CRM = TimeInt * 2;
 
 function error_notify(data)
     {

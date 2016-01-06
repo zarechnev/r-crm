@@ -7,7 +7,6 @@ import simplejson
 from crm.models import Task
 from clients.models import Client
 import datetime
-import time
 
 
 @login_required(login_url='/auth/login')
@@ -68,12 +67,15 @@ def auto_complite_inn(request):
 @login_required( login_url='/auth/login' )
 def task_switch_status( request ):
     #Интервал задержки смены статуса
-    min_interval = 3
+    min_interval = 5
     ans = "Нет данных в запросе"
     if request.method == 'POST':
         id_task = request.POST['id']
         task_status = request.POST['status']
         task_to_change = Task.objects.get( id = id_task )
+
+        if task_to_change.status == task_status:
+                    return HttpResponse( "Статус уже %s!" % task_to_change.status_to_template() )
 
         if task_to_change.change_status_datetime:
             delta_sec = timezone.now() - task_to_change.change_status_datetime
@@ -84,7 +86,6 @@ def task_switch_status( request ):
                 return HttpResponse( msg )
 
         try:
-            task_to_change.set_status( task_status )
             if task_status == "NEW":
                 task_to_change.solves_user = None
                 task_to_change.user_solved = None
@@ -96,6 +97,7 @@ def task_switch_status( request ):
                 if not task_to_change.solves_user:
                     task_to_change.solves_user = auth.get_user( request )
 
+            task_to_change.set_status( task_status )
             task_to_change.change_status_datetime = timezone.now()
 
             ans = task_to_change.save()
