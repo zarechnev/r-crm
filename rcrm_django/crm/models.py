@@ -28,12 +28,14 @@ class Task(models.Model):
     closed_date = models.DateTimeField( null=True, blank=False, verbose_name="Дата закрытия заявки" )
     date_of_removal = models.DateTimeField( null=True, blank=False, verbose_name="Дата удаления заявки" )
 
-    def set_status(this, stat):
-        if stat in this.STATUS_OF_TASK:
-            this.status = stat
-
-    def status_to_template(this):
-        if this.status in this.STATUS_TO_TEMLATE:
-            return this.STATUS_TO_TEMLATE[ this.status ]
+    def set_status(self, stat):
+        if stat in self.STATUS_OF_TASK:
+            self.status = stat
         else:
-            return ("Bad status!")
+            return "Bad status!"
+
+    def status_to_template(self):
+        if self.status in self.STATUS_TO_TEMLATE:
+            return self.STATUS_TO_TEMLATE[ self.status ]
+        else:
+            return "Bad status!"
