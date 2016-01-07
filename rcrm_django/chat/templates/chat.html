@@ -1,8 +1,8 @@
 {% for message in messages %}
     <font size="-1" class="subheader">
-    {{ message.create_post_user.first_name }}
     {{ message.create_post_user.last_name }}
-    ({{ message.post_date }})
+    {{ message.create_post_user.first_name }}
+    ({{ message.post_date|date:'d M H:i' }})
     </font>
     <h6>{{ message.post_text }}</h6>
 {% endfor %}

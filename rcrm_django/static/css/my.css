@@ -1,7 +1,7 @@
 .row {
     margin: 0 auto;
     max-width: 100rem;
-    width: 80%; }
+    width: 90%; }
 
 body {
     background-color: RGB(255, 255, 255);
@@ -18,3 +18,20 @@ body {
 .main_background {
     background-color: RGB(255, 255, 255);
     }
+
+.with_popup {
+    display: inline-block; /* Строчно-блочный элемент */
+    position: relative; /* Относительное позиционирование */
+   }
+
+.with_popup:hover::after {
+    content: attr(data-title); /* Выводим текст */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 20%; top: 30%; /* Положение подсказки */
+    z-index: 1; /* Отображаем подсказку поверх других элементов */
+    background: rgba(255,255,230,0.9); /* Полупрозрачный цвет фона */
+    font-family: Arial, sans-serif; /* Гарнитура шрифта */
+    font-size: 13px; /* Размер текста подсказки */
+    padding: 5px 10px; /* Поля */
+    border: 0px solid #333; /* Параметры рамки */
+   }

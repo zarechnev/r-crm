@@ -1,11 +1,10 @@
 <table>
     <thead>
       <tr>
-          <th>Дата создания заявки</th>
+          <th>Дата заявки</th>
           <th>Статус</th>
           <th>Клиент</th>
           <th>Коментарий</th>
-          <th>Автор</th>
           <th>Решает</th>
           <th>Решил</th>
           <th>Опции</th>
@@ -13,7 +12,12 @@
     </thead>
 {% for task in tasks %}
     <tr>
-        <td>{{ task.create_date }}</td>
+        <td>
+            <div class="with_popup" data-title="Автор: {{ task.create_user.last_name }} {{ task.create_user.first_name }}">
+                {{ task.create_date|date:'d M H:i' }} <br>
+                <h9><i>(номер {{ task.id }})</i></h9>
+            </div>
+        </td>
         <td>
             {% if not task.is_removed %}
                 <div class="cl_radio_btns">
@@ -27,9 +31,12 @@
             {% else %}
                 Удалена
             {% endif %}
-        <td>{{ task.client.sname }}</td>
+        <td>
+            <div class="with_popup" data-title="Контакт: {{ task.client.phone }}">
+                {{ task.client.sname }}
+            </div>
+        </td>
         <td>{{ task.create_comment }}</td>
-        <td>{{ task.create_user.username }}</td>
         <td>{{ task.solves_user.username }}</td>
         <td>{{ task.user_solved.username }}</td>
         <td>
