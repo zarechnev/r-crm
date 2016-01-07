@@ -37,8 +37,16 @@
             </div>
         </td>
         <td>{{ task.create_comment }}</td>
-        <td>{{ task.solves_user.username }}</td>
-        <td>{{ task.user_solved.username }}</td>
+        <td>
+            <div class="with_popup" data-title="{{ task.solves_user.last_name }} {{ task.solves_user.first_name }}">
+                {{ task.solves_user.username }}
+            </div>
+        </td>
+        <td>
+            <div class="with_popup" data-title="{{ task.user_solved.last_name }} {{ task.user_solved.first_name }}">
+                {{ task.user_solved.username }}
+            </div>
+        </td>
         <td>
             <ul id="icons" class="ui-widget ui-helper-clearfix">
                 {% if not task.is_removed %}
