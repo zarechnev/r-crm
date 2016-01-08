@@ -13,7 +13,7 @@ def login(request):
         if (user is not None) and user.is_active:
             auth.login(request, user)
             #TODO: Реализовать перенаправление на запрашиваемую страницу
-            return redirect( '/' )
+            return redirect( '/crm' )
         else:
             args['login_error'] = "Проверьте правильность введённых данных."
             return render_to_response('login.html', args)

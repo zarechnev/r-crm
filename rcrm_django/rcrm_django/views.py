@@ -7,4 +7,10 @@ from django.contrib import auth
 def index(request):
     args = {}
     args['username'] = auth.get_user(request).username
-    return render_to_response('main-page.html', args)
+    return render_to_response('help-page.html', args)
+
+@login_required(login_url='/auth/login')
+def info(request):
+    args = {}
+    args['username'] = auth.get_user(request).username
+    return render_to_response('info-page.html', args)
