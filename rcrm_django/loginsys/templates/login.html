@@ -9,9 +9,13 @@
     <label for="password">Пароль</label>
     <input type="password" name="password" value="" id="password">
     <input type="submit" class="button tiny" value="Вход" />
-    {% if login_error %}
-      <label class="error">{{ login_error }}</label>
-    {% endif %}
   </form>
 </div>
+
+{% if login_error %}
+    <div class="small-3 large-centered columns" style="padding-top: 15px;">
+          <label class="error">{{ login_error }}</label>
+    </div>
+{% endif %}
+
 {% endblock %}

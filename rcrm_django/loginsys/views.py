@@ -4,6 +4,8 @@ from django.core.context_processors import csrf
 
 
 def login(request):
+    if request.user.is_authenticated():
+        return redirect('/crm')
     args = {}
     args.update(csrf(request))
     if request.POST:
@@ -22,4 +24,4 @@ def login(request):
 
 def logout(request):
     auth.logout(request)
-    return redirect('/')
+    return render_to_response( 'login.html' )
