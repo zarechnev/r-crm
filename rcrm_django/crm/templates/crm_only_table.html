@@ -20,7 +20,7 @@
         </td>
         <td>
             {% if not task.is_removed %}
-                <div class="cl_radio_btns">
+                <div class="crm_radio_btns">
                     <input type="radio" id="radio0_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "NEW" )' name="radio_{{ task.id }}" {% if task.status = "NEW" %} checked {% endif %}>
                         <label for="radio0_{{ task.id }}">Новая</label>
                     <input type="radio" id="radio1_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "PRG" )' name="radio_{{ task.id }}" {% if task.status = "PRG" %} checked {% endif %}>

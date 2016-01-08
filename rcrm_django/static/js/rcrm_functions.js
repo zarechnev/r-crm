@@ -32,7 +32,7 @@ function show_crm(url)
                         }
                     );
                 });
-                $(function() {$( ".cl_radio_btns" ).buttonsetv();});
+                $(function() {$( ".crm_radio_btns" ).buttonsetv();});
             }
         });
     }
@@ -47,7 +47,7 @@ function show_clients()
             cache: false,
             success:function(html){
                 $("#clients_content").html(html);
-                $(function() {$( ".cl_radio_btns" ).buttonsetv();});
+                $(function() {$( ".cl_radio_btns" ).buttonset();});
             }
         });
     }
@@ -62,7 +62,7 @@ function show_users()
             cache: false,
             success:function(html){
                 $("#users_content").html(html);
-                $(function() {$( ".cl_radio_btns" ).buttonsetv();});
+                $(function() {$( ".cl_radio_btns" ).buttonset();});
             }
         });
     }
