@@ -1,27 +1,24 @@
 {% extends 'main.html' %}
 {% block crm %}
 <center><h4>Задания</h4></center>
-<p>
-    <div id="crm_content">
-        {% include 'crm_only_table.html' %}
-    </div>
-<p>
-    <script>
-        $(document).ready(function(){setInterval('show_crm("/crm/?page={{ tasks.number }}")',TimeInt_for_CRM);});
 
-        $(document).ready(function () {
-            $("#id_inn").autocomplete({
-                    source: "/crm/auto_complite_inn",
-            });
+<div id="crm_content">
+    {% include 'crm_only_table.html' %}
+</div>
+
+<script>
+    $(document).ready(function(){setInterval('show_crm("/crm/?page={{ tasks.number }}")',TimeInt_for_CRM);});
+
+    $(document).ready(function () {
+        $("#id_inn").autocomplete({
+                source: "/crm/auto_complite_inn",
         });
-    </script>
-<p>
-<p>
-    Создать заявку
+    });
+</script>
 
-    <p><label for="id_inn">ИНН (Организация)</label>   <input id="id_inn" maxlength="20" name="inn" type="text" /></p>
-    <p><label for="id_comment">Комментарий</label>     <input id="id_comment" maxlength="50" name="comment" type="text" /></p>
-    <input type="button" class="button tiny" value="Создать" onclick="add_task();"/>
+<label for="id_inn">ИНН (Организация)</label>   <input id="id_inn" maxlength="20" name="inn" type="text" />
+<label for="id_comment">Комментарий</label>     <input id="id_comment" maxlength="50" name="comment" type="text" />
+<input type="button" class="button tiny" value="Создать" onclick="add_task();"/>
 
 <div class="small-3 large-centered columns">
 <ul class="pagination">

@@ -12,6 +12,10 @@ from clients.models import Client
 def hello(request):
     args = {}
     clients_list = Client.objects.all().order_by('-is_active', 'id')
+
+    count = Client.objects.all().count()
+    args['clients_count'] = count
+
     objects_on_list = 30
     paginator = Paginator(clients_list, objects_on_list)
     page = request.GET.get('page')
@@ -30,7 +34,8 @@ def hello(request):
     args['username'] = auth.get_user(request).username
     return render_to_response('clients.html', args)
 
-#TODO: Заменить эту порнографию на передачу json-объекта.
+
+# TODO: Заменить эту порнографию на передачу json-объекта.
 @login_required(login_url='/auth/login')
 def get_client_info(request, id):
     obj = Client.objects.get(id=id)
@@ -51,6 +56,7 @@ def get_client_info(request, id):
     elif field == "priority":
         ans = obj.priority
     return HttpResponse(ans)
+
 
 @login_required(login_url='/auth/login')
 def add_edit_client(request):
@@ -82,11 +88,13 @@ def add_edit_client(request):
         else:
             # Пользователь не существует
             try:
-                new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority, email=mail, create_date=timezone.now())
+                new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority,
+                                    email=mail, create_date=timezone.now())
                 ans = new_client.save()
             except BaseException as e:
                 ans = str(e)
     return HttpResponse(ans)
+
 
 @login_required(login_url='/auth/login')
 def rem_client(request):
@@ -101,6 +109,7 @@ def rem_client(request):
             ans = str(e)
     return HttpResponse(ans)
 
+
 @login_required(login_url='/auth/login')
 def client_switch_status(request):
     ans = "Нет данных в запросе"
@@ -108,15 +117,15 @@ def client_switch_status(request):
         try:
             client_id = request.POST['id']
             client_status = request.POST['status']
-            client_to_switch_status = Client.objects.get( id = client_id )
+            client_to_switch_status = Client.objects.get(id=client_id)
             if client_status == "1":
                 client_to_switch_status.is_active = 1
             elif client_status == "0":
                 client_to_switch_status.is_active = 0
             else:
                 ans = "Статус не определён"
-                return HttpResponse( ans )
+                return HttpResponse(ans)
             ans = client_to_switch_status.save()
         except  BaseException as e:
-            ans = str( e )
-    return HttpResponse( ans )
+            ans = str(e)
+    return HttpResponse(ans)

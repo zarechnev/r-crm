@@ -10,6 +10,10 @@ import logging
 def list_users(request):
     args = {}
     users_list = auth.models.User.objects.all().order_by('-is_active', 'id')
+
+    count = auth.models.User.objects.all().count()
+    args['users_count'] = count
+
     objects_on_list = 30
     paginator = Paginator(users_list, objects_on_list)
     page = request.GET.get('page')
@@ -26,6 +30,7 @@ def list_users(request):
         return render_to_response('users_only_table.html', args)
     args['username'] = auth.get_user(request).username
     return render_to_response('users.html', args)
+
 
 @login_required(login_url='/auth/login')
 def edit_user(request):
@@ -48,6 +53,7 @@ def edit_user(request):
             ans = str(e)
     return HttpResponse(ans)
 
+
 @login_required(login_url='/auth/login')
 def add_user(request):
     ans = "Нет данных в запросе"
@@ -58,12 +64,14 @@ def add_user(request):
         mail = request.POST['mail']
         passwd = request.POST['pass']
         try:
-            new_user = auth.models.User.objects.create_user(username=login, email=mail, first_name=fname, last_name=lname)
+            new_user = auth.models.User.objects.create_user(username=login, email=mail, first_name=fname,
+                                                            last_name=lname)
             new_user.set_password(passwd)
             ans = str(new_user.save())
         except BaseException as e:
             ans = str(e)
     return HttpResponse(ans)
+
 
 @login_required(login_url='/auth/login')
 def check_login(request):
@@ -78,6 +86,7 @@ def check_login(request):
             return HttpResponse("Имя занято!!!")
     return HttpResponse("Имя свободно")
 
+
 @login_required(login_url='/auth/login')
 def user_switch_status(request):
     ans = "Нет данных в запросе"
@@ -85,15 +94,15 @@ def user_switch_status(request):
         try:
             user_id = request.POST['id']
             user_status = request.POST['status']
-            user_to_switch_status = auth.models.User.objects.get( id = user_id )
+            user_to_switch_status = auth.models.User.objects.get(id=user_id)
             if user_status == '1':
                 user_to_switch_status.is_active = 1
             elif user_status == '0':
                 user_to_switch_status.is_active = 0
             else:
                 ans = "Статус не определён"
-                return HttpResponse( ans )
+                return HttpResponse(ans)
             ans = user_to_switch_status.save()
         except  BaseException as e:
-            ans = str( e )
-    return HttpResponse( ans )
+            ans = str(e)
+    return HttpResponse(ans)
