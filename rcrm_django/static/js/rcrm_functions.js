@@ -1,4 +1,4 @@
-var TimeInt = 2000;
+var TimeInt = 1000;
 var TimeInt_for_Chat = TimeInt * 5;
 var TimeInt_for_CRM = TimeInt * 2;
 
@@ -32,7 +32,7 @@ function show_crm(url)
                         }
                     );
                 });
-                $(function() {$( ".crm_radio_btns" ).buttonsetv();});
+                $(function() {$( ".crm_radio_btns" ).buttonset();});
             }
         });
     }

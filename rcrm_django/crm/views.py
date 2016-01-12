@@ -27,7 +27,7 @@ def hello(request):
     else:
         args['hide_deleted_tasks'] = False
 
-    objects_on_list = 10
+    objects_on_list = 7
     paginator = Paginator(tasks_list, objects_on_list)
     page = request.GET.get('page')
     try:
