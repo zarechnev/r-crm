@@ -1,18 +1,32 @@
 {% extends 'main.html' %}
 {% block crm %}
+<style type="text/css">
+div.inline { float:left; }
+.clearBoth { clear:both; }
+.margin-left-right   { margin-left: 10%; margin-right: 2%; }
+</style>
 <script>
-      $(function() $( "#invisible_close_rbtns" ).buttonset() )
+      $(function() $( ".invisible_close_rbtns" ).buttonset() )
 </script>
 <center><h4>Задания</h4></center>
 
-<p>
-    <div id="invisible_close_rbtns">
-        <input type="radio" id="show_closed_rb0" name="show_closed_rb" onchange="set_session_hide_deleted_tasks( 0 )" {% if not hide_deleted_tasks %} checked {% endif %}>
+    <div class="inline margin-left-right">Отображать только открытые</div>
+    <div class="invisible_close_rbtns inline">
+        <input type="radio" id="show_closed_rb0" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 0 )" {% if not hide_deleted_tasks %} checked {% endif %}>
             <label for="show_closed_rb0">все</label>
-        <input type="radio" id="show_closed_rb1" name="show_closed_rb" onchange="set_session_hide_deleted_tasks( 1 )" {% if hide_deleted_tasks %} checked {% endif %}>
+        <input type="radio" id="show_closed_rb1" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 1 )" {% if hide_deleted_tasks %} checked {% endif %}>
             <label for="show_closed_rb1">открытые</label>
     </div>
-</p>
+
+    <div class="inline margin-left-right">Отображать только мои</div>
+    <div class="invisible_close_rbtns">
+        <input type="radio" id="show_my_rb0" name="show_my_rb" onchange="set_cookie_my_tasks( 0 )" {% if not only_my_tasks %} checked {% endif %}>
+            <label for="show_my_rb0">все</label>
+        <input type="radio" id="show_my_rb1" name="show_my_rb" onchange="set_cookie_my_tasks( 1 )" {% if only_my_tasks %} checked {% endif %}>
+            <label for="show_my_rb1">мои</label>
+    </div>
+
+<br>
 
 <div id="crm_content">
     {% include 'crm_only_table.html' %}

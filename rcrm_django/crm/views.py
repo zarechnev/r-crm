@@ -11,12 +11,21 @@ from clients.models import Client
 
 @login_required(login_url='/auth/login')
 def hello(request):
-    if "hide_deleted_tasks" in request.COOKIES and request.COOKIES['hide_deleted_tasks'] == str(1):
-        tasks_list = Task.objects.all().exclude(is_removed='True').order_by('-id')
-        args = {'hide_deleted_tasks': True}
+    args = {}
+    tasks_list = Task.objects.all().order_by('-id')
+
+    if "only_my_tasks" in request.COOKIES and request.COOKIES['only_my_tasks'] == str(1):
+        current_user = auth.get_user(request)
+        tasks_list = tasks_list.filter(solves_user=current_user)
+        args['only_my_tasks'] = True
     else:
-        args = {'hide_deleted_tasks': False}
-        tasks_list = Task.objects.all().order_by('-id')
+        args['only_my_tasks'] = False
+
+    if "hide_deleted_tasks" in request.COOKIES and request.COOKIES['hide_deleted_tasks'] == str(1):
+        tasks_list = tasks_list.exclude(is_removed='True').exclude(status='SLD')
+        args['hide_deleted_tasks'] = True
+    else:
+        args['hide_deleted_tasks'] = False
 
     objects_on_list = 10
     paginator = Paginator(tasks_list, objects_on_list)
@@ -130,10 +139,20 @@ def task_switch_status(request):
 
 
 @login_required(login_url='/auth/login')
-def closed_invisible(request):
-    response = HttpResponse(request.POST['set'])
-    if "set" in request.POST:
-        response.set_cookie("hide_deleted_tasks", request.POST['set'])
+def hide_closed_tasks(request):
+    response = HttpResponse(request.POST['hide_closed_tasks'])
+    if "hide_closed_tasks" in request.POST:
+        response.set_cookie("hide_deleted_tasks", request.POST['hide_closed_tasks'])
     else:
         response.set_cookie("hide_deleted_tasks", 0)
+    return response
+
+
+@login_required(login_url='/auth/login')
+def only_my_tasks(request):
+    response = HttpResponse(request.POST['only_my_tasks'])
+    if "only_my_tasks" in request.POST:
+        response.set_cookie("only_my_tasks", request.POST['only_my_tasks'])
+    else:
+        response.set_cookie("only_my_tasks", 0)
     return response

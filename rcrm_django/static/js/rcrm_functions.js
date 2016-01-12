@@ -1,4 +1,4 @@
-var TimeInt = 500;
+var TimeInt = 2000;
 var TimeInt_for_Chat = TimeInt * 5;
 var TimeInt_for_CRM = TimeInt * 2;
 
@@ -355,8 +355,14 @@ function add_message()
     };
 })( jQuery );
 
-function set_session_hide_deleted_tasks(set)
+function set_cookie_hide_deleted_tasks(set)
     {
-        jQuery.post('/crm/closed_invisible',{ 'set':set });
+        jQuery.post('/crm/hide_closed_tasks',{ 'hide_closed_tasks':set });
+        setTimeout("show_crm()",TimeInt);
+    }
+
+function set_cookie_my_tasks(set)
+    {
+        jQuery.post('/crm/only_my_tasks',{ 'only_my_tasks':set });
         setTimeout("show_crm()",TimeInt);
     }
