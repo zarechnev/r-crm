@@ -1,6 +1,18 @@
 {% extends 'main.html' %}
 {% block crm %}
+<script>
+      $(function() $( "#invisible_close_rbtns" ).buttonset() )
+</script>
 <center><h4>Задания</h4></center>
+
+<p>
+    <div id="invisible_close_rbtns">
+        <input type="radio" id="show_closed_rb0" name="show_closed_rb" onchange="set_session_hide_deleted_tasks( 0 )" {% if not hide_deleted_tasks %} checked {% endif %}>
+            <label for="show_closed_rb0">все</label>
+        <input type="radio" id="show_closed_rb1" name="show_closed_rb" onchange="set_session_hide_deleted_tasks( 1 )" {% if hide_deleted_tasks %} checked {% endif %}>
+            <label for="show_closed_rb1">открытые</label>
+    </div>
+</p>
 
 <div id="crm_content">
     {% include 'crm_only_table.html' %}

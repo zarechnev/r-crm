@@ -6,5 +6,6 @@ urlpatterns = patterns('',
     url(r'^add_task$', 'crm.views.add_task'),
     url(r'^rem_task$', 'crm.views.rem_task'),
     url(r'^task_switch_status$', 'crm.views.task_switch_status'),
+    url(r'^closed_invisible$', 'crm.views.closed_invisible'),
     url(r'^$', 'crm.views.hello')
 )

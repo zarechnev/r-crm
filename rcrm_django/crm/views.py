@@ -5,15 +5,19 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import auth
 import simplejson
-import datetime
 from crm.models import Task
 from clients.models import Client
 
 
 @login_required(login_url='/auth/login')
 def hello(request):
-    args = {}
-    tasks_list = Task.objects.all().order_by('-id')
+    if "hide_deleted_tasks" in request.COOKIES and request.COOKIES['hide_deleted_tasks'] == str(1):
+        tasks_list = Task.objects.all().exclude(is_removed='True').order_by('-id')
+        args = {'hide_deleted_tasks': True}
+    else:
+        args = {'hide_deleted_tasks': False}
+        tasks_list = Task.objects.all().order_by('-id')
+
     objects_on_list = 10
     paginator = Paginator(tasks_list, objects_on_list)
     page = request.GET.get('page')
@@ -101,7 +105,7 @@ def task_switch_status(request):
 
             if delta_sec < min_interval:
                 msg = "После прошлого изменения статуса прошло менее %s секунд: %s секунд(ы)!" % (
-                min_interval, delta_sec)
+                    min_interval, delta_sec)
                 return HttpResponse(msg)
 
         try:
@@ -123,3 +127,13 @@ def task_switch_status(request):
         except BaseException as e:
             ans = str(e)
     return HttpResponse(ans)
+
+
+@login_required(login_url='/auth/login')
+def closed_invisible(request):
+    response = HttpResponse(request.POST['set'])
+    if "set" in request.POST:
+        response.set_cookie("hide_deleted_tasks", request.POST['set'])
+    else:
+        response.set_cookie("hide_deleted_tasks", 0)
+    return response

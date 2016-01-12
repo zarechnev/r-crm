@@ -1,4 +1,4 @@
-var TimeInt = 1000;
+var TimeInt = 500;
 var TimeInt_for_Chat = TimeInt * 5;
 var TimeInt_for_CRM = TimeInt * 2;
 
@@ -354,3 +354,9 @@ function add_message()
       })
     };
 })( jQuery );
+
+function set_session_hide_deleted_tasks(set)
+    {
+        jQuery.post('/crm/closed_invisible',{ 'set':set });
+        setTimeout("show_crm()",TimeInt);
+    }
