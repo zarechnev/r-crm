@@ -105,7 +105,7 @@ def rem_client(request):
             client_to_remove = Client.objects.get(id=client_id)
             client_to_remove.is_deleted = True
             ans = client_to_remove.save()
-        except  BaseException as e:
+        except BaseException as e:
             ans = str(e)
     return HttpResponse(ans)
 
@@ -126,6 +126,6 @@ def client_switch_status(request):
                 ans = "Статус не определён"
                 return HttpResponse(ans)
             ans = client_to_switch_status.save()
-        except  BaseException as e:
+        except BaseException as e:
             ans = str(e)
     return HttpResponse(ans)

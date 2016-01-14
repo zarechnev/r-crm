@@ -105,6 +105,9 @@ def task_switch_status(request):
         task_status = request.POST['status']
         task_to_change = Task.objects.get(id=id_task)
 
+        if task_to_change.is_removed:
+            return HttpResponse("Task already been removed.")
+
         if task_to_change.status == task_status:
             return HttpResponse("Статус уже %s!" % task_to_change.status_to_template())
 
