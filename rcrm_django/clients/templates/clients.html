@@ -2,6 +2,13 @@
 {% block clients %}
 <center><h4>Клиенты</h4></center>
 <p>
+<div class="row">
+    <div class="large-12 columns">
+        <input placeholder="Поиск клиента, введите часть названия" class="large-6" id="id_inn" maxlength="20" name="inn" type="text" />
+    </div>
+</div>
+<div id="find_client"></div>
+
 <div id="clients_content">
 {% include 'clients_only_table.html' %}
 </div>

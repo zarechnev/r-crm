@@ -41,9 +41,15 @@ div.inline { float:left; }
         });
     });
 </script>
-
-<label for="id_inn">ИНН (Организация)</label>   <input id="id_inn" maxlength="20" name="inn" type="text" />
-<label for="id_comment">Комментарий</label>     <input id="id_comment" maxlength="50" name="comment" type="text" />
-<input type="button" class="button tiny" value="Создать" onclick="add_task();"/>
-
+<div class="row">
+    <div class="large-3 columns">
+        <input placeholder="Введите ИНН" class="large-6" id="id_inn" maxlength="20" name="inn" type="text" />
+    </div>
+    <div class="large-7 columns">
+        <input placeholder="Введите комментарий" id="id_comment" maxlength="50" name="comment" type="text" />
+    </div>
+    <div class="large-2 columns">
+        <input type="button" class="button tiny" value="Создать" onclick="add_task();"/>
+    </div>
+</div>
 {% endblock %}

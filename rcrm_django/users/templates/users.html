@@ -2,6 +2,13 @@
 {% block users %}
 <center><h4>Пользователи</h4></center>
 <p>
+<div class="row">
+    <div class="large-12 columns">
+        <input placeholder="Поиск пользователи, введите имя" class="large-6" id="id_inn" maxlength="20" name="inn" type="text" />
+    </div>
+</div>
+<div id="find_user"></div>
+
 <div id="users_content">
     {% include 'users_only_table.html' %}
 </div>
