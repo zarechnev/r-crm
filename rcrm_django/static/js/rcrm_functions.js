@@ -366,3 +366,24 @@ function set_cookie_my_tasks(set)
         jQuery.post('/crm/only_my_tasks',{ 'only_my_tasks':set });
         setTimeout("show_crm()",TimeInt);
     }
+
+function find_user()
+    {
+         var data = {find_user_name: $("#find_user_input_id").val()}
+
+         if (data == ""){
+            // TODO: Удалять div, если строка поиска пуста.
+            $("#find_user_render").delete;
+            return;
+         }
+
+         $.ajax({
+            url: "/users/find_user",
+            type: "POST",
+            data: data,
+            success:function(html){
+                    $("#find_user_render").html(html);
+                    $(function() {$( ".cl_radio_btns" ).buttonset();});
+            }
+                 });
+    }

@@ -106,3 +106,14 @@ def user_switch_status(request):
         except  BaseException as e:
             ans = str(e)
     return HttpResponse(ans)
+
+
+@login_required(login_url='/auth/login')
+def find_user(request):
+    args = {}
+    if request.method == 'POST':
+        user_name = request.POST['find_user_name']
+        users_list = auth.models.User.objects.filter(first_name=user_name)
+        args['users'] = users_list
+        return render_to_response('find_users_only_table.html', args)
+    return HttpResponse()

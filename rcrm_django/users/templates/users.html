@@ -4,10 +4,10 @@
 <p>
 <div class="row">
     <div class="large-12 columns">
-        <input placeholder="Поиск пользователи, введите имя" class="large-6" id="id_inn" maxlength="20" name="inn" type="text" />
+        <input onkeyup="find_user()" placeholder="Поиск пользователя, введите имя" id="find_user_input_id" type="text" />
     </div>
 </div>
-<div id="find_user"></div>
+<div id="find_user_render"></div>
 
 <div id="users_content">
     {% include 'users_only_table.html' %}
