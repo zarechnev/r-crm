@@ -20,10 +20,10 @@
         <td>
             {% if user.id != 1 %}
                 <div class="cl_radio_btns">
-                    <input type="radio" id="radio1_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 1 )" name="radio_{{ user.id }}" {% if user.is_active %} checked {% endif %}>
-                        <label for="radio1_{{ user.id }}">Вкл.</label>
-                    <input type="radio" id="radio0_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 0 )" name="radio_{{ user.id }}" {% if not user.is_active %} checked {% endif %}>
-                        <label for="radio0_{{ user.id }}">Выкл.</label>
+                    <input type="radio" id="find_radio1_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 1 )" name="find_radio_{{ user.id }}" {% if user.is_active %} checked {% endif %}>
+                        <label for="find_radio1_{{ user.id }}">Вкл.</label>
+                    <input type="radio" id="find_radio0_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 0 )" name="find_radio_{{ user.id }}" {% if not user.is_active %} checked {% endif %}>
+                        <label for="find_radio0_{{ user.id }}">Выкл.</label>
                 </div>
             {% endif %}
         </td>

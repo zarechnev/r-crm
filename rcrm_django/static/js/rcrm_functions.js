@@ -371,9 +371,8 @@ function find_user()
     {
          var data = {find_user_name: $("#find_user_input_id").val()}
 
-         if (data == ""){
-            // TODO: Удалять div, если строка поиска пуста.
-            $("#find_user_render").delete;
+         if (data['find_user_name'] == ""){
+            $("#find_user_render").html("");
             return;
          }
 

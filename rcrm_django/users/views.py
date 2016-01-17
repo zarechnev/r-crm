@@ -114,6 +114,8 @@ def find_user(request):
     if request.method == 'POST':
         user_name = request.POST['find_user_name']
         users_list = auth.models.User.objects.filter(first_name=user_name)
+        if not users_list:
+            return HttpResponse()
         args['users'] = users_list
         return render_to_response('find_users_only_table.html', args)
     return HttpResponse()
