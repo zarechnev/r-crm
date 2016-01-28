@@ -9,10 +9,17 @@ class Task(models.Model):
         'PRG': 'Решается',
         'SLD': 'Решена'
     }
-
     STATUS_OF_TASK = STATUS_TO_TEMLATE.keys()
 
+    TASK_PRIO = {
+        'HIG': 'Высокий',
+        'STD': 'Обычный',
+        'LOW': 'Низкий'
+    }
+    PRIO_OF_TASK = TASK_PRIO.keys()
+
     status = models.CharField(blank=False, null=False, max_length=3, verbose_name="Статус заявки")
+    task_prio = models.CharField(blank=False, default='STD', null=False, max_length=3, verbose_name="Приоритет заявки")
     create_comment = models.CharField(blank=False, null=False, max_length=100, verbose_name="Комментарий")
     is_removed = models.BooleanField(default=False, blank=False, verbose_name="Удалённая заявка")
     change_status_datetime = models.DateTimeField(null=True, blank=False,
