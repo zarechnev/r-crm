@@ -39,6 +39,7 @@ def hello(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         tasks = paginator.page(paginator.num_pages)
     args['tasks'] = tasks
+    args['statuses'] = Task.PRIO_OF_TASK_TEMPATE
     if "only_table" in request.POST and request.POST['only_table'] == "true":
         return render_to_response('crm_only_table.html', args)
 

@@ -17,6 +17,7 @@ class Task(models.Model):
         'LOW': 'Низкий'
     }
     PRIO_OF_TASK = TASK_PRIO.keys()
+    PRIO_OF_TASK_TEMPATE = TASK_PRIO.values()
 
     status = models.CharField(blank=False, null=False, max_length=3, verbose_name="Статус заявки")
     task_prio = models.CharField(blank=False, default='STD', null=False, max_length=3, verbose_name="Приоритет заявки")
