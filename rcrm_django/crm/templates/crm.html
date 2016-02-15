@@ -44,13 +44,19 @@ div.inline { float:left; }
 <div style="border: 2px solid #aaa; padding: 10px;">
 <div class="row">
     <div class="large-3 columns">
-        <input placeholder="Введите ИНН" class="large-6" id="id_inn" maxlength="20" name="inn" type="text" />
+        <input placeholder="Введите ИНН" id="id_inn" maxlength="20" name="inn" type="text" />
     </div>
     <div class="large-9 columns">
         <input placeholder="Введите комментарий" id="id_comment" maxlength="50" name="comment" type="text" />
     </div>
 </div>
 <div class="row">
+    <div class="large-2 columns">
+        <input type="button" class="button tiny" value="Создать" onclick="add_task();"/>
+    </div>
+    <div class="large-1 columns">
+        Приоритет
+    </div>
     <div class="large-3 columns">
         <select>
                 {% for status in statuses %}
@@ -58,11 +64,10 @@ div.inline { float:left; }
                 {% endfor %}
         </select>
     </div>
-    <div class="large-9 columns">
-        Исполнитель
+    <div class="large-6 columns">
+        <input placeholder="Введите фамилию исполнителя" id="id_ingener" maxlength="20" name="ingener" type="text" />
     </div>
 </div>
-    <input type="button" class="button tiny" value="Создать" onclick="add_task();"/>
 </div>
 </div>
 {% endblock %}
