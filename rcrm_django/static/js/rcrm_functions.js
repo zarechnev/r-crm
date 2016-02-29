@@ -67,27 +67,26 @@ function show_users()
         });
     }
 
-function add_task()
+function add_task(form_id)
 	{
-		inn = jQuery('#id_inn').val().split(' ')[0];
-		comment = jQuery('#id_comment').val();
-		if (inn != "")
-			{
-				if (comment != "")
-					{
-						jQuery("#id_inn").val('');
-						jQuery("#id_comment").val('');
-						jQuery.post('/crm/add_task',{'inn':inn, 'comment':comment},
-                                  function( data ) {
-                                    if (data == "None")
-                                        success_notify("Заявка добавлена.");
-                                    else
-                                        error_notify(data);
-                                  }
-    	                           );
-						setTimeout("show_crm()",TimeInt);
-					}
-			}
+        jQuery.ajax({
+             url: '/crm/add_task',
+             type: "POST",
+             dataType: "html",
+             data: jQuery("#"+form_id).serialize(),
+             success:   function( data ) {
+                            if (data == "None")
+                                success_notify("Заявка добавлена.");
+                            else
+                                error_notify(data);
+                        }
+        });
+
+        $(':input',"#"+form_id)
+            .not(':button, :submit, :reset, :hidden')
+            .val('')
+            .removeAttr('checked')
+            .removeAttr('selected');
 	}
 
 function get_chat()

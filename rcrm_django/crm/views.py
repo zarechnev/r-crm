@@ -52,7 +52,7 @@ def add_task(request):
     ans = "Нет данных в запросе"
     if request.method == 'POST':
         current_user = auth.get_user(request)
-        request_inn = request.POST['inn']
+        request_inn = request.POST['inn'].split(" ")[0]
         comment = request.POST['comment']
         try:
             finded_client = Client.objects.get(inn=request_inn)
