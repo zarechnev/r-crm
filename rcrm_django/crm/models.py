@@ -2,6 +2,8 @@ from django.db import models
 from clients.models import Client
 from django.contrib import auth
 
+class Status(models.Model):
+    pass
 
 class Task(models.Model):
     STATUS_TO_TEMLATE = {
@@ -17,7 +19,7 @@ class Task(models.Model):
         'LOW': 'Низкий'
     }
     PRIO_OF_TASK = TASK_PRIO.keys()
-    PRIO_OF_TASK_TEMPATE = TASK_PRIO.values()
+    PRIO_OF_TASK_TEMPLATE = TASK_PRIO.values()
 
     status = models.CharField(blank=False, null=False, max_length=3, verbose_name="Статус заявки")
     task_prio = models.CharField(blank=False, default='STD', null=False, max_length=3, verbose_name="Приоритет заявки")
@@ -52,3 +54,9 @@ class Task(models.Model):
             return self.STATUS_TO_TEMLATE[self.status]
         else:
             return "Bad status!"
+
+    def set_prio(self, prio):
+        if prio in self.PRIO_OF_TASK_TEMPLATE:
+            return self.TASK_PRIO[prio]
+        else:
+            return "Bad prio!"

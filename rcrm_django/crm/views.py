@@ -39,7 +39,7 @@ def hello(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         tasks = paginator.page(paginator.num_pages)
     args['tasks'] = tasks
-    args['statuses'] = Task.PRIO_OF_TASK_TEMPATE
+    args['statuses'] = Task.PRIO_OF_TASK_TEMPLATE
     if "only_table" in request.POST and request.POST['only_table'] == "true":
         return render_to_response('crm_only_table.html', args)
 
@@ -54,11 +54,14 @@ def add_task(request):
         current_user = auth.get_user(request)
         request_inn = request.POST['inn'].split(" ")[0]
         comment = request.POST['comment']
+        solves_user = request.POST['ingener'] or None
+        prio = request.POST['priority'] or None
         try:
             finded_client = Client.objects.get(inn=request_inn)
             new_task = Task(create_user=current_user, client=finded_client, create_date=timezone.now(),
-                            create_comment=comment)
+                            create_comment=comment, solves_user=solves_user)
             new_task.set_status("NEW")
+            new_task.set_prio(prio)
             ans = new_task.save()
         except BaseException as e:
             ans = str(e)
