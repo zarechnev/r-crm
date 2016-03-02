@@ -84,6 +84,7 @@ function add_task(form_id)
 
         $(':input',"#"+form_id)
             .not(':button, :submit, :reset, :hidden')
+            .not('[name = priority]')
             .val('')
             .removeAttr('checked')
             .removeAttr('selected');

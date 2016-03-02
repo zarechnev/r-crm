@@ -1,0 +1,29 @@
+[
+  {
+    "model": "crm.Priority",
+    "pk": 0,
+    "fields": {
+      "priority_ru": "Стандарный",
+      "priority_en": "Standard",
+      "default"    : 1
+    }
+  },
+  {
+    "model": "crm.Priority",
+    "pk": 1,
+    "fields": {
+      "priority_ru": "Низкий",
+      "priority_en": "Low",
+      "default"    : 0
+    }
+  },
+  {
+    "model": "crm.Priority",
+    "pk": 2,
+    "fields": {
+      "priority_ru": "Высокий",
+      "priority_en": "High",
+      "default"    : 0
+    }
+  }
+]

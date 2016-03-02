@@ -8,6 +8,7 @@
           <th>Решает</th>
           <th>Решил</th>
           <th>Опции</th>
+          <th>Приоритет</th>
       </tr>
     </thead>
 {% for task in tasks %}
@@ -53,6 +54,9 @@
                 {% endif %}
                 <li title="Править заявку" onclick="edit_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
             </ul>
+        </td>
+        <td>
+            {{ task.task_prio.priority_ru }}
         </td>
     </tr>
 {% endfor %}
