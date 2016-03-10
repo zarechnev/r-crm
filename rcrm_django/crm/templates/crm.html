@@ -47,10 +47,10 @@ div.inline { float:left; }
 <div style="border: 2px solid #aaa; padding: 10px;">
     <form method="post" id="create_task">
         <div class="row">
-            <div class="large-3 columns">
+            <div class="large-2 columns">
                 <input placeholder="Введите ИНН" id="id_inn" maxlength="20" name="inn" type="text" />
             </div>
-            <div class="large-9 columns">
+            <div class="large-8 columns">
                 <input placeholder="Введите комментарий" id="id_comment" maxlength="50" name="comment" type="text" />
             </div>
         </div>
@@ -58,22 +58,28 @@ div.inline { float:left; }
             <div class="large-2 columns">
                 <input type="button" class="button tiny" value="Создать" onclick="add_task('create_task');"/>
             </div>
-            <div class="large-1 columns">
-                Приоритет
-            </div>
-            <div class="large-3 columns">
-                <select name="priority">
+
+            <div class="large-4 columns">
+              <div class="row collapse prefix-radius">
+                <div class="small-3 columns">
+                  <span class="prefix">Приоритет</span>
+                </div>
+                <div class="small-9 columns">
+                    <select name="priority">
                         {% for status in statuses %}
                             <option {% if status.default %} selected="selected" {% endif %}>{{ status.priority_ru }}</option>
                         {% endfor %}
-                </select>
+                    </select>
+                </div>
+              </div>
             </div>
-            <div class="large-6 columns">
+
+            <div class="large-4 columns">
                 <input placeholder="Введите фамилию исполнителя" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
             </div>
-        </div>
-    </form>
-</div>
 
+        </div>
+
+    </form>
 </div>
 {% endblock %}

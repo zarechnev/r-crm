@@ -13,4 +13,4 @@ def index(request):
 def info(request):
     args = {}
     args['username'] = auth.get_user(request).username
-    return render_to_response('info-page.html', args)
+    return render_to_response('help-page.html', args)
