@@ -60,7 +60,7 @@ div.inline { float:left; }
 
     <form method="post" id="create_task">
 
-        <div class="row" style="border: 2px solid #bbb; padding: 10px; margin: 5px;">
+        <div class="row panel" style="padding: 10px; margin: 5px;">
 
                 <!-- Top -->
                 <div class="row">
@@ -75,16 +75,16 @@ div.inline { float:left; }
 
                 <!-- Bottom -->
                 <div class="row">
-                    <div class="large-2 columns">
+                    <div class="large-3 columns">
                         <input type="button" class="button tiny" value="Создать" onclick="add_task('create_task');"/>
                     </div>
 
-                    <div class="large-5 columns">
+                    <div class="large-3 columns">
                       <div class="row collapse prefix-radius">
-                        <div class="small-4 columns">
+                        <div class="small-5 columns">
                           <span class="prefix">Приоритет</span>
                         </div>
-                        <div class="small-8 columns">
+                        <div class="small-7 columns">
                             <select name="priority">
                                 {% for status in statuses %}
                                     <option {% if status.default %} selected="selected" {% endif %}>{{ status.priority_ru }}</option>
@@ -94,7 +94,7 @@ div.inline { float:left; }
                       </div>
                     </div>
 
-                    <div class="large-5 columns">
+                    <div class="large-6 columns">
                         <input placeholder="Введите фамилию исполнителя" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
                     </div>
                 </div>
