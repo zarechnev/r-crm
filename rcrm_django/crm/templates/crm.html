@@ -10,23 +10,37 @@ div.inline { float:left; }
 </script>
 <center><h4>Задания</h4></center>
 
-    <div class="inline margin-left-right">Отображать только открытые</div>
-    <div class="invisible_close_rbtns inline">
-        <input type="radio" id="show_closed_rb0" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 0 )" {% if not hide_deleted_tasks %} checked {% endif %}>
-            <label for="show_closed_rb0">все</label>
-        <input type="radio" id="show_closed_rb1" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 1 )" {% if hide_deleted_tasks %} checked {% endif %}>
-            <label for="show_closed_rb1">открытые</label>
+
+<div class="row" style="padding: 10px; margin: 5px;">
+
+    <div class="large-2 columns">
+        <div class="invisible_close_rbtns inline">
+            <input type="radio" id="show_closed_rb0" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 0 )" {% if not hide_deleted_tasks %} checked {% endif %}>
+                <label for="show_closed_rb0">все</label>
+            <input type="radio" id="show_closed_rb1" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 1 )" {% if hide_deleted_tasks %} checked {% endif %}>
+                <label for="show_closed_rb1">открытые</label>
+        </div>
     </div>
 
-    <div class="inline margin-left-right">Отображать только мои</div>
-    <div class="invisible_close_rbtns">
-        <input type="radio" id="show_my_rb0" name="show_my_rb" onchange="set_cookie_my_tasks( 0 )" {% if not only_my_tasks %} checked {% endif %}>
-            <label for="show_my_rb0">все</label>
-        <input type="radio" id="show_my_rb1" name="show_my_rb" onchange="set_cookie_my_tasks( 1 )" {% if only_my_tasks %} checked {% endif %}>
-            <label for="show_my_rb1">мои</label>
+    <div class="large-2 columns">
+        <div class="invisible_close_rbtns">
+            <input type="radio" id="show_my_rb0" name="show_my_rb" onchange="set_cookie_my_tasks( 0 )" {% if not only_my_tasks %} checked {% endif %}>
+                <label for="show_my_rb0">все</label>
+            <input type="radio" id="show_my_rb1" name="show_my_rb" onchange="set_cookie_my_tasks( 1 )" {% if only_my_tasks %} checked {% endif %}>
+                <label for="show_my_rb1">мои</label>
+        </div>
     </div>
 
-<br>
+    <div class="large-3 columns">
+        <input placeholder="Поиск по ИНН" id="id_find" maxlength="100" name="find" type="text" />
+    </div>
+
+    <div class="large-5 columns">
+        <!--Другие фильтры-->
+    </div>
+
+</div>
+
 
 <div id="crm_content">
     {% include 'crm_only_table.html' %}
@@ -44,42 +58,49 @@ div.inline { float:left; }
     });
 </script>
 
-<div style="border: 2px solid #aaa; padding: 10px;">
     <form method="post" id="create_task">
-        <div class="row">
-            <div class="large-2 columns">
-                <input placeholder="Введите ИНН" id="id_inn" maxlength="20" name="inn" type="text" />
-            </div>
-            <div class="large-8 columns">
-                <input placeholder="Введите комментарий" id="id_comment" maxlength="50" name="comment" type="text" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="large-2 columns">
-                <input type="button" class="button tiny" value="Создать" onclick="add_task('create_task');"/>
-            </div>
 
-            <div class="large-4 columns">
-              <div class="row collapse prefix-radius">
-                <div class="small-3 columns">
-                  <span class="prefix">Приоритет</span>
+        <div class="row" style="border: 2px solid #bbb; padding: 10px; margin: 5px;">
+
+                <!-- Top -->
+                <div class="row">
+                    <div class="large-3 columns">
+                        <input placeholder="Введите ИНН" id="id_inn" maxlength="20" name="inn" type="text" />
+                    </div>
+
+                    <div class="large-9 columns">
+                        <input placeholder="Введите комментарий" id="id_comment" maxlength="200" name="comment" type="text" />
+                    </div>
                 </div>
-                <div class="small-9 columns">
-                    <select name="priority">
-                        {% for status in statuses %}
-                            <option {% if status.default %} selected="selected" {% endif %}>{{ status.priority_ru }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-              </div>
-            </div>
 
-            <div class="large-4 columns">
-                <input placeholder="Введите фамилию исполнителя" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
+                <!-- Bottom -->
+                <div class="row">
+                    <div class="large-2 columns">
+                        <input type="button" class="button tiny" value="Создать" onclick="add_task('create_task');"/>
+                    </div>
+
+                    <div class="large-5 columns">
+                      <div class="row collapse prefix-radius">
+                        <div class="small-4 columns">
+                          <span class="prefix">Приоритет</span>
+                        </div>
+                        <div class="small-8 columns">
+                            <select name="priority">
+                                {% for status in statuses %}
+                                    <option {% if status.default %} selected="selected" {% endif %}>{{ status.priority_ru }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="large-5 columns">
+                        <input placeholder="Введите фамилию исполнителя" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
+                    </div>
+                </div>
+
             </div>
 
         </div>
-
     </form>
-</div>
 {% endblock %}

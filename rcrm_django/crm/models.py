@@ -19,7 +19,7 @@ class Task(models.Model):
 
     status = models.CharField(blank=False, null=False, max_length=3, verbose_name="Статус заявки")
     task_prio = models.ForeignKey(Priority, blank=False, null=False, verbose_name="Приоритет заявки")
-    create_comment = models.CharField(blank=False, null=False, max_length=100, verbose_name="Комментарий")
+    create_comment = models.CharField(blank=False, null=False, max_length=200, verbose_name="Комментарий")
     is_removed = models.BooleanField(default=False, blank=False, verbose_name="Удалённая заявка")
     change_status_datetime = models.DateTimeField(null=True, blank=False,
                                                   verbose_name="Дата последнего изменения статуса")
