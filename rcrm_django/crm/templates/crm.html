@@ -1,19 +1,34 @@
 {% extends 'main.html' %}
 {% block crm %}
-<style type="text/css">
-div.inline { float:left; }
-.clearBoth { clear:both; }
-.margin-left-right   { margin-left: 10%; margin-right: 2%; }
-</style>
 <script>
-      $(function() $( ".invisible_close_rbtns" ).buttonset() )
+    $(function() $( ".invisible_close_rbtns" ).buttonset() )
+
+
+    $(document).ready(function(){
+        setInterval('show_crm("/crm/?page={{ tasks.number }}")',TimeInt_for_CRM);
+    });
+
+
+    $(document).ready(function () {
+        $("#id_inn").autocomplete({
+                source: "/crm/auto_complite_inn",
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#id_find_by_inn").autocomplete({
+                source: "/crm/auto_complite_inn",
+        });
+    });
 </script>
 <center><h4>Задания</h4></center>
 
-
+<!--Top menu-->
 <div class="row" style="padding: 10px; margin: 5px;">
 
-    <div class="large-2 columns">
+    <!--Closed task is view or not-->
+    <div class="large-3 columns">
         <div class="invisible_close_rbtns inline">
             <input type="radio" id="show_closed_rb0" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 0 )" {% if not hide_deleted_tasks %} checked {% endif %}>
                 <label for="show_closed_rb0">все</label>
@@ -22,6 +37,8 @@ div.inline { float:left; }
         </div>
     </div>
 
+
+    <!--My or all task-->
     <div class="large-2 columns">
         <div class="invisible_close_rbtns">
             <input type="radio" id="show_my_rb0" name="show_my_rb" onchange="set_cookie_my_tasks( 0 )" {% if not only_my_tasks %} checked {% endif %}>
@@ -31,14 +48,29 @@ div.inline { float:left; }
         </div>
     </div>
 
-    <div class="large-3 columns">
-        <input placeholder="Поиск по ИНН" id="id_find" maxlength="100" name="find" type="text" />
+
+    <!--Find by inn (5 last)-->
+    <div class="large-5 columns">
+        <div class="row collapse">
+            <div class="large-8 columns">
+                <input placeholder="Поиск по ИНН" id="id_find_by_inn" maxlength="100" name="find_by_inn" type="text" />
+            </div>
+            <div class="large-4 columns">
+                <input type="button" class="button postfix" value="Найти">
+            </div>
+        </div>
     </div>
 
-    <div class="large-5 columns">
+
+    <!--More filters-->
+    <div class="large-2 columns">
         <!--Другие фильтры-->
     </div>
 
+</div>
+
+
+<div id="crm_find_content">
 </div>
 
 
@@ -46,17 +78,6 @@ div.inline { float:left; }
     {% include 'crm_only_table.html' %}
 </div>
 
-<script>
-    $(document).ready(function(){
-        setInterval('show_crm("/crm/?page={{ tasks.number }}")',TimeInt_for_CRM);
-    });
-
-    $(document).ready(function () {
-        $("#id_inn").autocomplete({
-                source: "/crm/auto_complite_inn",
-        });
-    });
-</script>
 
     <form method="post" id="create_task">
 
@@ -73,28 +94,31 @@ div.inline { float:left; }
                     </div>
                 </div>
 
+
                 <!-- Bottom -->
                 <div class="row">
                     <div class="large-3 columns">
                         <input type="button" class="button tiny" value="Создать" onclick="add_task('create_task');"/>
                     </div>
 
-                    <div class="large-3 columns">
-                      <div class="row collapse prefix-radius">
-                        <div class="small-5 columns">
-                          <span class="prefix">Приоритет</span>
+
+                    <div class="large-4 columns">
+                        <div class="row collapse prefix-radius">
+                            <div class="small-5 columns">
+                                <span class="prefix">Приоритет</span>
+                            </div>
+                            <div class="small-7 columns">
+                                <select name="priority">
+                                    {% for status in statuses %}
+                                        <option {% if status.default %} selected="selected" {% endif %}>{{ status.priority_ru }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
-                        <div class="small-7 columns">
-                            <select name="priority">
-                                {% for status in statuses %}
-                                    <option {% if status.default %} selected="selected" {% endif %}>{{ status.priority_ru }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                      </div>
                     </div>
 
-                    <div class="large-6 columns">
+
+                    <div class="large-5 columns">
                         <input placeholder="Введите фамилию исполнителя" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
                     </div>
                 </div>
