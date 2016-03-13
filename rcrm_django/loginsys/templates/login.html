@@ -1,7 +1,7 @@
 {% extends "main.html" %}
 
 {% block login %}
-<div class="small-3 large-centered columns" style="border: 2px solid #aaa; padding-top: 15px;">
+<div class="panel small-3 large-centered columns" style="padding-top: 15px;">
   <form action='/auth/login/' method='post'>
     {% csrf_token %}
     <label for="username">Логин</label>
