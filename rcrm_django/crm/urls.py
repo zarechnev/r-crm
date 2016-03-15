@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^task_switch_status$', 'crm.views.task_switch_status'),
     url(r'^hide_closed_tasks$', 'crm.views.hide_closed_tasks'),
     url(r'^only_my_tasks$', 'crm.views.only_my_tasks'),
+    url(r'^find_by_inn$', 'crm.views.find_by_inn'),
     url(r'^$', 'crm.views.hello')
 )

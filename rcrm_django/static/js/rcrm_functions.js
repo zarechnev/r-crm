@@ -407,7 +407,34 @@ function find_user()
                  });
     }
 
+
 function find_task_by_inn()
     {
+        var data = { 'inn': $("#id_find_by_inn").val() };
 
+        if ( data['inn'] == "" )
+            {
+                $("#crm_find_content").html("");
+                return;
+            }
+
+        $.ajax({
+            url: "/crm/find_by_inn",
+            type: "POST",
+            data: data,
+            success:
+                function( html )
+                    {
+                        if ( html == "None" )
+                            error_notify("Записей не найдено!");
+                        else $("#crm_find_content").html(html);
+                    }
+        });
+    }
+
+
+function clear_find_by_inn()
+    {
+        $("#id_find_by_inn").val("");
+        $("#crm_find_content").html("");
     }

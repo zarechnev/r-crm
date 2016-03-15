@@ -163,3 +163,20 @@ def only_my_tasks(request):
     else:
         response.set_cookie("only_my_tasks", 0)
     return response
+
+
+@login_required(login_url='/auth/login')
+def find_by_inn(request):
+    ans = None
+    args = {}
+    if request.method == 'POST':
+        inn = request.POST['inn'].split(" ")[0]
+        f_client = Client.objects.get(inn=inn)
+        tasks = Task.objects.all().filter(client=f_client).order_by('-id')[:5]
+        if not list(tasks):
+            return HttpResponse(ans)
+        args['tasks'] = tasks
+        args['statuses'] = Priority.objects.all()
+
+        return render_to_response('crm_only_table.html', args)
+    return HttpResponse(ans)

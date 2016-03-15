@@ -52,10 +52,16 @@
     <!--Find by inn (5 last)-->
     <div class="large-5 columns">
         <div class="row collapse">
+            <!--Find text-->
             <div class="large-8 columns">
                 <input placeholder="Поиск по ИНН" id="id_find_by_inn" maxlength="100" name="find_by_inn" type="text" />
             </div>
-            <div class="large-4 columns">
+            <!--Clear button-->
+            <div class="large-1 columns">
+                <input type="button" class="button postfix secondary" onclick="clear_find_by_inn()" />
+            </div>
+            <!--Find button-->
+            <div class="large-3 columns">
                 <input type="button" class="button postfix" value="Найти" onclick="find_task_by_inn()" />
             </div>
         </div>
@@ -85,10 +91,13 @@
 
                 <!-- Top -->
                 <div class="row">
+
+                    <!--INN-->
                     <div class="large-3 columns">
                         <input placeholder="Введите ИНН" id="id_inn" maxlength="20" name="inn" type="text" />
                     </div>
 
+                    <!--Comment-->
                     <div class="large-9 columns">
                         <input placeholder="Введите комментарий" id="id_comment" maxlength="200" name="comment" type="text" />
                     </div>
@@ -97,11 +106,13 @@
 
                 <!-- Bottom -->
                 <div class="row">
+
+                    <!--Create button-->
                     <div class="large-3 columns">
                         <input type="button" class="button tiny" value="Создать" onclick="add_task('create_task');"/>
                     </div>
 
-
+                    <!--Priority list-->
                     <div class="large-4 columns">
                         <div class="row collapse prefix-radius">
                             <div class="small-5 columns">
@@ -117,7 +128,7 @@
                         </div>
                     </div>
 
-
+                    <!-- -->
                     <div class="large-5 columns">
                         <input placeholder="Введите фамилию исполнителя" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
                     </div>
