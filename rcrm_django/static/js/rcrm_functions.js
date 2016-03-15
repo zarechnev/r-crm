@@ -2,15 +2,18 @@ var TimeInt = 1000;
 var TimeInt_for_Chat = TimeInt * 5;
 var TimeInt_for_CRM = TimeInt * 2;
 
+
 function error_notify(data)
     {
         Lobibox.notify( 'error', { size: 'mini', sound: false,  msg: "Запрос завершился с ошибкой: '"+data+"'.", delay: 10000 });
     }
 
+
 function success_notify(message)
     {
         Lobibox.notify( 'success', { size: 'mini', sound: false,  msg: "Запрос выполнен успешно.", delay: 2000 });
     }
+
 
 function show_crm(url)
     {
@@ -37,6 +40,7 @@ function show_crm(url)
         });
     }
 
+
 function show_clients()
     {
         var data = {"only_table":"true"};
@@ -52,6 +56,7 @@ function show_clients()
         });
     }
 
+
 function show_users()
     {
         var data = {"only_table":"true"};
@@ -66,6 +71,7 @@ function show_users()
             }
         });
     }
+
 
 function add_task(form_id)
 	{
@@ -90,12 +96,14 @@ function add_task(form_id)
             .removeAttr('selected');
 	}
 
+
 function get_chat()
     {
         $.ajax({url: "/chat/show_chat",
                 cache: false,
                 success:function(html){$("#chat_content").html(html);}});
     }
+
 
 function rem_task(id)
 	{
@@ -110,6 +118,7 @@ function rem_task(id)
 	    setTimeout("show_crm()",TimeInt);
 	}
 
+
 function rem_client(id)
     {
     	jQuery.post('/clients/rem_client',{'id':id},
@@ -122,6 +131,7 @@ function rem_client(id)
                    );
         setTimeout("show_clients()",TimeInt);
     }
+
 
 function obj_switch_status( obj, id, status )
     {
@@ -145,6 +155,7 @@ function obj_switch_status( obj, id, status )
                                   }
                    );
     }
+
 
 function show_add_edit_user_dialog(id)
     {
@@ -175,6 +186,7 @@ function show_add_edit_user_dialog(id)
         $("#dialog_edit_users").dialog("open");
     }
 
+
 function check_unique_login()
     {
         var data = {login: $("#add_edit_user_login").val()}
@@ -185,6 +197,7 @@ function check_unique_login()
             data: data,
             success:function(html){$("#check_login_out").html(html);}});
     }
+
 
 function show_add_edit_client_dialog(id)
     {
@@ -218,6 +231,7 @@ function show_add_edit_client_dialog(id)
 
         $("#dialog_edit_client").dialog("open");
     }
+
 
 $(function()
     {
@@ -265,6 +279,7 @@ $(function()
                         }
                 });
     });
+
 
 $(function()
     {
@@ -330,12 +345,14 @@ $(function()
                 });
 });
 
+
 function add_message()
     {
         jQuery.post('/chat/add_post', {message: $("#id_message").val()})
         get_chat();
         $("#id_message").val("");
     }
+
 
 (function( $ ){
     //plugin buttonset vertical
@@ -355,17 +372,20 @@ function add_message()
     };
 })( jQuery );
 
+
 function set_cookie_hide_deleted_tasks(set)
     {
         jQuery.post('/crm/hide_closed_tasks',{ 'hide_closed_tasks':set });
         setTimeout("show_crm()",TimeInt);
     }
 
+
 function set_cookie_my_tasks(set)
     {
         jQuery.post('/crm/only_my_tasks',{ 'only_my_tasks':set });
         setTimeout("show_crm()",TimeInt);
     }
+
 
 function find_user()
     {
@@ -385,4 +405,9 @@ function find_user()
                     $(function() {$( ".cl_radio_btns" ).buttonset();});
             }
                  });
+    }
+
+function find_task_by_inn()
+    {
+
     }
