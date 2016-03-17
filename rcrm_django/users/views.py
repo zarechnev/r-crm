@@ -8,7 +8,7 @@ import logging
 
 @login_required(login_url='/auth/login')
 def list_users(request):
-    args = {}
+    args = {'type': "main"}
     users_list = auth.models.User.objects.all().order_by('-is_active', 'id')
 
     count = auth.models.User.objects.all().count()
@@ -110,12 +110,16 @@ def user_switch_status(request):
 
 @login_required(login_url='/auth/login')
 def find_user(request):
-    args = {}
+    args = {'type': "find"}
+    ans = "Нет данных в запросе"
+    users_list = []
     if request.method == 'POST':
         user_name = request.POST['find_user_name']
-        users_list = auth.models.User.objects.filter(first_name=user_name)
+        for user in auth.models.User.objects.all():
+            if user_name in user.last_name:
+                users_list.append(user)
         if not users_list:
-            return HttpResponse()
+            return HttpResponse("Пользователей не найдено")
         args['users'] = users_list
-        return render_to_response('find_users_only_table.html', args)
-    return HttpResponse()
+        return render_to_response('users_only_table.html', args)
+    return HttpResponse(ans)

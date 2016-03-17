@@ -20,10 +20,10 @@
         <td>
             {% if user.id != 1 %}
                 <div class="cl_radio_btns">
-                    <input type="radio" id="radio1_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 1 )" name="radio_{{ user.id }}" {% if user.is_active %} checked {% endif %}>
-                        <label for="radio1_{{ user.id }}">Вкл.</label>
-                    <input type="radio" id="radio0_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 0 )" name="radio_{{ user.id }}" {% if not user.is_active %} checked {% endif %}>
-                        <label for="radio0_{{ user.id }}">Выкл.</label>
+                    <input type="radio" id="{{ type }}_radio1_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 1 )" name="{{ type }}_radio_{{ user.id }}" {% if user.is_active %} checked {% endif %}>
+                        <label for="{{ type }}_radio1_{{ user.id }}">Вкл.</label>
+                    <input type="radio" id="{{ type }}_radio0_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 0 )" name="{{ type }}_radio_{{ user.id }}" {% if not user.is_active %} checked {% endif %}>
+                        <label for="{{ type }}_radio0_{{ user.id }}">Выкл.</label>
                 </div>
             {% endif %}
         </td>
@@ -35,4 +35,7 @@
     </tr>
 {% endfor %}
 </table>
+
+{% if type == "main" %}
 <small>Количество записей: {{ users_count }}</small>
+{% endif %}
