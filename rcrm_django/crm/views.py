@@ -11,7 +11,7 @@ from clients.models import Client
 
 @login_required(login_url='/auth/login')
 def hello(request):
-    args = {}
+    args = {'type': "main"}
     tasks_list = Task.objects.all().order_by('-id')
 
     if "only_my_tasks" in request.COOKIES and request.COOKIES['only_my_tasks'] == str(1):
@@ -103,6 +103,7 @@ def auto_complite_inn(request):
 def task_switch_status(request):
     # Интервал задержки смены статуса
     min_interval = 5
+
     ans = "Нет данных в запросе"
     if request.method == 'POST':
         id_task = request.POST['id']
@@ -167,12 +168,15 @@ def only_my_tasks(request):
 
 @login_required(login_url='/auth/login')
 def find_by_inn(request):
+    # Количество выводимых при поиске заявок
+    find_task_count = 5
+
     ans = None
-    args = {}
+    args = {'type': "find"}
     if request.method == 'POST':
         inn = request.POST['inn'].split(" ")[0]
         f_client = Client.objects.get(inn=inn)
-        tasks = Task.objects.all().filter(client=f_client).order_by('-id')[:5]
+        tasks = Task.objects.all().filter(client=f_client).order_by('-id')[:find_task_count]
         if not list(tasks):
             return HttpResponse(ans)
         args['tasks'] = tasks

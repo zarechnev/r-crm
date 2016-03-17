@@ -428,6 +428,7 @@ function find_task_by_inn()
                         if ( html == "None" )
                             error_notify("Записей не найдено!");
                         else $("#crm_find_content").html(html);
+                        $( ".crm_radio_btns" ).buttonset();
                     }
         });
     }
