@@ -10,7 +10,7 @@ from clients.models import Client
 
 @login_required(login_url='/auth/login')
 def hello(request):
-    args = {}
+    args = {'type': "main"}
     clients_list = Client.objects.all().order_by('-is_active', 'id')
 
     count = Client.objects.all().count()
@@ -128,4 +128,21 @@ def client_switch_status(request):
             ans = client_to_switch_status.save()
         except BaseException as e:
             ans = str(e)
+    return HttpResponse(ans)
+
+
+@login_required(login_url='/auth/login')
+def find_client(request):
+    args = {'type': "find"}
+    ans = "Нет данных в запросе"
+    client_list = []
+    if request.method == 'POST':
+        client_name = request.POST['find_client']
+        for client in Client.objects.all():
+            if client_name in client.name:
+                client_list.append(client)
+        if not client_list:
+            return HttpResponse("Клиентов не найдено")
+        args['clients'] = client_list
+        return render_to_response('clients_only_table.html', args)
     return HttpResponse(ans)

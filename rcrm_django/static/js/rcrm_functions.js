@@ -439,3 +439,24 @@ function clear_find_by_inn()
         $("#id_find_by_inn").val("");
         $("#crm_find_content").html("");
     }
+
+
+function find_client()
+    {
+         var data = {find_client: $("#find_client_input_id").val()}
+
+         if (data['find_client'] == ""){
+            $("#find_client_render").html("");
+            return;
+         }
+
+         $.ajax({
+            url: "/clients/find_client",
+            type: "POST",
+            data: data,
+            success:function(html){
+                    $("#find_client_render").html(html);
+                    $(function() {$( ".cl_radio_btns" ).buttonset();});
+            }
+                 });
+    }
