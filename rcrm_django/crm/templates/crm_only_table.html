@@ -23,7 +23,7 @@
                     <input type="radio" id="{{ type }}_radio0_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "NEW" )' name="{{ type }}_radio_{{ task.id }}" {% if task.status = "NEW" %} checked {% endif %}>
                         <label for="{{ type }}_radio0_{{ task.id }}">Новая</label>
                     <input type="radio" id="{{ type }}_radio1_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "PRG" )' name="{{ type }}_radio_{{ task.id }}" {% if task.status = "PRG" %} checked {% endif %}>
-                        <label for="{{ type }}_radio1_{{ task.id }}">В процессе</label>
+                        <label for="{{ type }}_radio1_{{ task.id }}">Работа</label>
                     <input type="radio" id="{{ type }}_radio2_{{ task.id }}" onchange='obj_switch_status( "task", {{ task.id }}, "SLD" )' name="{{ type }}_radio_{{ task.id }}" {% if task.status = "SLD" %} checked {% endif %}>
                         <label for="{{ type }}_radio2_{{ task.id }}">Закрыта</label>
                 </div>

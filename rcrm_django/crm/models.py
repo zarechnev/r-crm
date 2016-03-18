@@ -6,6 +6,7 @@ from django.contrib import auth
 class Priority(models.Model):
     priority_ru = models.CharField(max_length=50)
     priority_en = models.CharField(max_length=50)
+    weight = models.IntegerField(verbose_name="Вес", default=25)
     default = models.BooleanField()
 
 
