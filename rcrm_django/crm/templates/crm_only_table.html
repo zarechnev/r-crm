@@ -1,10 +1,9 @@
-<table>
+<table bordercolor="red" border="1" width="100%">
     <thead>
       <tr>
           <th>Дата заявки</th>
           <th>Статус</th>
           <th>Клиент</th>
-          <th>Коментарий</th>
           <th>Решает</th>
           <th>Решил</th>
           <th>Опции</th>
@@ -12,11 +11,14 @@
     </thead>
 {% for task in tasks %}
     <tr>
+        <!-- Дата заявки -->
         <td>
             <div class="with_popup" data-title="Номер: {{ task.id }}. Автор: {{ task.create_user.last_name }} {{ task.create_user.first_name }}">
                 {{ task.create_date|date:'d M H:i' }}
             </div>
         </td>
+
+        <!-- Статус -->
         <td>
             {% if not task.is_removed %}
                 <div class="crm_radio_btns">
@@ -30,22 +32,29 @@
             {% else %}
                 Удалена
             {% endif %}
+
+        <!-- Клиент -->
         <td>
             <div class="with_popup" data-title="Контакт: {{ task.client.phone }}">
                 {{ task.client.sname }}
             </div>
         </td>
-        <td>{{ task.create_comment }}</td>
+
+        <!-- Решает -->
         <td>
             <div class="with_popup" data-title="{{ task.solves_user.last_name }} {{ task.solves_user.first_name }}">
-                {{ task.solves_user.username }}
+                {{ task.solves_user.last_name }}
             </div>
         </td>
+
+        <!-- Решил -->
         <td>
             <div class="with_popup" data-title="{{ task.user_solved.last_name }} {{ task.user_solved.first_name }}">
-                {{ task.user_solved.username }}
+                {{ task.user_solved.last_name }}
             </div>
         </td>
+
+        <!-- Опции -->
         <td>
             <ul id="icons" class="ui-widget ui-helper-clearfix">
                 {% if not task.is_removed %}
@@ -54,6 +63,20 @@
                 <li title="Править заявку" onclick="edit_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
             </ul>
         </td>
+    </tr>
+
+    <!-- Строка с коментарием -->
+    <tr  style="padding-bottom:50px;">
+        <!-- Заголовок -->
+        <td>
+            Коментарий:
+        </td>
+
+        <!-- Коментарий -->
+        <td colspan="5">
+            {{ task.create_comment }}
+        </td>
+
     </tr>
 {% endfor %}
 </table>
