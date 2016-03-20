@@ -116,7 +116,7 @@ def find_user(request):
     if request.method == 'POST':
         user_name = request.POST['find_user_name']
         for user in auth.models.User.objects.all():
-            if user_name in user.last_name:
+            if user_name.upper() in user.last_name.upper():
                 users_list.append(user)
         if not users_list:
             return HttpResponse("Пользователей не найдено")

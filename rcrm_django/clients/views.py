@@ -139,7 +139,7 @@ def find_client(request):
     if request.method == 'POST':
         client_name = request.POST['find_client']
         for client in Client.objects.all():
-            if client_name in client.name:
+            if client_name.upper() in client.name.upper():
                 client_list.append(client)
         if not client_list:
             return HttpResponse("Клиентов не найдено")
