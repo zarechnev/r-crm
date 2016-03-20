@@ -8,4 +8,5 @@ urlpatterns = patterns('',
     url(r'^check_login$', 'users.views.check_login'),
     url(r'^user_switch_status$', 'users.views.user_switch_status'),
     url(r'^find_user$', 'users.views.find_user'),
+    url(r'^auto_complete_solves_user$', 'users.views.auto_complete_solves_user'),
 )

@@ -11,16 +11,24 @@
 
     $(document).ready(function () {
         $("#id_inn").autocomplete({
-                source: "/crm/auto_complite_inn",
+                source: "/crm/auto_complete_inn",
         });
     });
 
 
     $(document).ready(function () {
         $("#id_find_by_inn").autocomplete({
-                source: "/crm/auto_complite_inn",
+                source: "/crm/auto_complete_inn",
         });
     });
+
+
+    $(document).ready(function () {
+        $("#id_solves_user").autocomplete({
+                source: "/users/auto_complete_solves_user",
+        });
+    });
+
 </script>
 <center><h4>Задания</h4></center>
 
@@ -128,7 +136,7 @@
                         </div>
                     </div>
 
-                    <!-- -->
+                    <!--A user that will solve the problem-->
                     <div class="large-5 columns">
                         <input placeholder="Введите фамилию исполнителя" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
                     </div>

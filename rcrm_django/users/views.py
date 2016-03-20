@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.http import HttpResponse
 import logging
+import simplejson
 
 
 @login_required(login_url='/auth/login')
@@ -103,7 +104,7 @@ def user_switch_status(request):
                 ans = "Статус не определён"
                 return HttpResponse(ans)
             ans = user_to_switch_status.save()
-        except  BaseException as e:
+        except BaseException as e:
             ans = str(e)
     return HttpResponse(ans)
 
@@ -123,3 +124,18 @@ def find_user(request):
         args['users'] = users_list
         return render_to_response('users_only_table.html', args)
     return HttpResponse(ans)
+
+
+@login_required(login_url='/auth/login')
+def auto_complete_solves_user(request):
+    tags = []
+    i = 0
+    if 'term' in request.GET:
+        for user_i in auth.models.User.objects.all():
+            if request.GET['term'].upper() in user_i.last_name.upper():
+                addstring = "%s (%s %s)" % (user_i.username, user_i.last_name, user_i.first_name)
+                tags.append(addstring)
+                if i > 3:
+                    return HttpResponse(simplejson.dumps(tags))
+                i += 1
+    return HttpResponse(simplejson.dumps(tags))

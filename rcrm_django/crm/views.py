@@ -54,14 +54,19 @@ def add_task(request):
         current_user = auth.get_user(request)
         request_inn = request.POST['inn'].split(" ")[0]
         comment = request.POST['comment']
+        status = "NEW"
         solves_user = request.POST['solves_user'] or None
+        if solves_user:
+            solves_user = solves_user.split(" ")[0]
+            solves_user = auth.models.User.objects.get(username=solves_user)
+            status = "PRG"
         prio = request.POST['priority'] or None
         prio = Priority.objects.get(priority_ru=prio) or Priority.objects.get(priority_en=prio)
         try:
             finded_client = Client.objects.get(inn=request_inn)
             new_task = Task(create_user=current_user, client=finded_client, create_date=timezone.now(),
                             create_comment=comment, solves_user=solves_user, task_prio=prio)
-            new_task.set_status("NEW")
+            new_task.set_status(status)
             ans = new_task.save()
         except BaseException as e:
             ans = str(e)
@@ -85,7 +90,7 @@ def rem_task(request):
 
 
 @login_required(login_url='/auth/login')
-def auto_complite_inn(request):
+def auto_complete_inn(request):
     tags = []
     i = 0
     if 'term' in request.GET:
