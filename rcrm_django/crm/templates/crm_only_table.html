@@ -42,25 +42,33 @@
 
         <!-- Решает -->
         <td>
-            <div class="with_popup" data-title="{{ task.solves_user.last_name }} {{ task.solves_user.first_name }}">
-                {{ task.solves_user.last_name }}
-            </div>
+            {% if task.solves_user %}
+                <div class="with_popup" data-title="{{ task.solves_user.last_name }} {{ task.solves_user.first_name }}">
+                    {{ task.solves_user.last_name }} {{ task.solves_user.first_name|make_list|first }}.
+                </div>
+            {% endif %}
         </td>
 
         <!-- Решил -->
         <td>
-            <div class="with_popup" data-title="{{ task.user_solved.last_name }} {{ task.user_solved.first_name }}">
-                {{ task.user_solved.last_name }}
-            </div>
+            {% if task.user_solved %}
+                <div class="with_popup" data-title="{{ task.user_solved.last_name }} {{ task.user_solved.first_name }}">
+                    {{ task.user_solved.last_name }} {{ task.user_solved.first_name|make_list|first }}.
+                </div>
+            {% endif %}
         </td>
 
         <!-- Опции -->
         <td>
             <ul id="icons" class="ui-widget ui-helper-clearfix">
                 {% if not task.is_removed %}
-                    <li title="Удалить заявку" onclick="rem_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
+                    <li title="Удалить заявку" onclick="rem_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-trash"></span></li>
+                {% endif %}
+                {% if task.is_removed %}
+                    <li title="Восстановить заявку" onclick="rem_restore({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-plusthick"></span></li>
                 {% endif %}
                 <li title="Править заявку" onclick="edit_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+                <li title="Передать заявку" onclick="edit_task({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-arrowthick-1-e"></span></li>
             </ul>
         </td>
     </tr>
