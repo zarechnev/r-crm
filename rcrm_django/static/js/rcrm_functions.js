@@ -3,6 +3,138 @@ var TimeInt_for_Chat = TimeInt * 5;
 var TimeInt_for_CRM = TimeInt * 2;
 
 
+$(function()
+    {
+        $("#dialog_edit_client").dialog(
+                {
+                    autoOpen: false,
+                    resizable: true,
+                    height: "auto",
+                    width: 500,
+                    modal: true,
+                    buttons:
+                        {
+                            "Сохранить": function()
+                                    {
+                                        sname = $("#add_edit_client_sname").val();
+                                        fname = $("#add_edit_client_fname").val();
+                                        inn = $("#add_edit_client_inn").val();
+                                        phone = $("#add_edit_client_phone").val();
+                                        mail = $("#add_edit_client_mail").val();
+                                        address = $("#add_edit_client_address").val();
+                                        priority = $("#add_edit_client_priority").val();
+
+                                        jQuery.post('/clients/add_edit_client',{ 'sname':sname,
+                                                                        'fname':fname,
+                                                                        'inn':inn,
+                                                                        'phone':phone,
+                                                                        'priority':priority,
+                                                                        'address':address,
+                                                                        'mail':mail},
+                                                                        function( data ) {
+                                                                            if (data == "None")
+                                                                                success_notify("Клиент создан/исправлен.");
+                                                                            else
+                                                                                error_notify(data);
+                                                                        });
+
+                                        setTimeout("show_clients()",TimeInt);
+
+                                        $(this).dialog("close");
+                                    },
+                            "Отмена": function()
+                                    {
+                                        $(this).dialog("close");
+                                    }
+                        }
+                });
+    });
+
+
+$(function()
+    {
+        $("#dialog_edit_users").dialog(
+                {
+                    autoOpen: false,
+                    resizable: true,
+                    height: "auto",
+                    width: 450,
+                    modal: true,
+                    buttons:
+                        {
+                            "Сохранить": function()
+                                    {
+                                        login = $("#add_edit_user_login").val();
+                                        fname = $("#add_edit_user_fname").val();
+                                        lname = $("#add_edit_user_lname").val();
+                                        mail = $("#add_edit_user_mail").val();
+                                        pass = $("#add_edit_user_pass").val();
+                                        is_new = $("#is_new").val();
+
+                                        if (is_new == "yes"){
+                                            jQuery.post('/users/add_user',{ 'login':login,
+                                                                            'fname':fname,
+                                                                            'lname':lname,
+                                                                            'mail':mail,
+                                                                            'pass':pass },
+                                                                            function( data ) {
+                                                                                if (data == "None")
+                                                                                    success_notify("Пользователь создан.");
+                                                                                else
+                                                                                    error_notify(data);
+                                                                            });
+                                        }
+
+                                        if (is_new == "no"){
+                                            jQuery.post('/users/edit_user',{ 'login':login,
+                                                                            'fname':fname,
+                                                                            'lname':lname,
+                                                                            'mail':mail,
+                                                                            'pass':pass },
+                                                                            function( data ) {
+                                                                                if (data == "None")
+                                                                                    success_notify("Пользователь изменён.");
+                                                                                else
+                                                                                    error_notify(data);
+                                                                            });
+                                        }
+
+                                        setTimeout("show_users()",TimeInt);
+
+                                        $("#is_new").val("yes");
+
+                                        $(this).dialog("close");
+                                    },
+                            "Отмена": function()
+                                    {
+                                        $("#is_new").val("yes");
+
+                                        $(this).dialog("close");
+                                    }
+                        }
+                });
+});
+
+
+(function( $ ){
+    //plugin buttonset vertical
+    $.fn.buttonsetv = function() {
+      $(':radio, :checkbox', this).wrap('<div style="margin: 1px"/>');
+      $(this).buttonset();
+      $('label:first', this).removeClass('ui-corner-left').addClass('ui-corner-top');
+      $('label:last', this).removeClass('ui-corner-right').addClass('ui-corner-bottom');
+      mw = 0; // max witdh
+      $('label', this).each(function(index){
+         w = $(this).width();
+         if (w > mw) mw = w;
+      })
+      $('label', this).each(function(index){
+        $(this).width(mw);
+      })
+    };
+})( jQuery );
+
+
 function error_notify(data)
     {
         Lobibox.notify( 'error', { size: 'mini', sound: false,  msg: "Запрос завершился с ошибкой: '"+data+"'.", delay: 10000 });
@@ -73,50 +205,12 @@ function show_users()
     }
 
 
-function add_task(form_id)
-	{
-        jQuery.ajax({
-             url: '/crm/add_task',
-             type: "POST",
-             dataType: "html",
-             data: jQuery("#"+form_id).serialize(),
-             success:   function( data ) {
-                            if (data == "None")
-                                success_notify("Заявка добавлена.");
-                            else
-                                error_notify(data);
-                        }
-        });
-
-        $(':input',"#"+form_id)
-            .not(':button, :submit, :reset, :hidden')
-            .not('[name = priority]')
-            .val('')
-            .removeAttr('checked')
-            .removeAttr('selected');
-	}
-
-
 function get_chat()
     {
         $.ajax({url: "/chat/show_chat",
                 cache: false,
                 success:function(html){$("#chat_content").html(html);}});
     }
-
-
-function rem_task(id)
-	{
-	    jQuery.post('/crm/rem_task',{'id':id},
-                                  function( data ) {
-                                    if (data == "None")
-                                        success_notify("Задание удалено.");
-                                    else
-                                        error_notify(data);
-                                  }
-                   );
-	    setTimeout("show_crm()",TimeInt);
-	}
 
 
 function rem_client(id)
@@ -233,144 +327,12 @@ function show_add_edit_client_dialog(id)
     }
 
 
-$(function()
-    {
-        $("#dialog_edit_client").dialog(
-                {
-                    autoOpen: false,
-                    resizable: true,
-                    height: "auto",
-                    width: 500,
-                    modal: true,
-                    buttons:
-                        {
-                            "Сохранить": function()
-                                    {
-                                        sname = $("#add_edit_client_sname").val();
-                                        fname = $("#add_edit_client_fname").val();
-                                        inn = $("#add_edit_client_inn").val();
-                                        phone = $("#add_edit_client_phone").val();
-                                        mail = $("#add_edit_client_mail").val();
-                                        address = $("#add_edit_client_address").val();
-                                        priority = $("#add_edit_client_priority").val();
-
-                                        jQuery.post('/clients/add_edit_client',{ 'sname':sname,
-                                                                        'fname':fname,
-                                                                        'inn':inn,
-                                                                        'phone':phone,
-                                                                        'priority':priority,
-                                                                        'address':address,
-                                                                        'mail':mail},
-                                                                        function( data ) {
-                                                                            if (data == "None")
-                                                                                success_notify("Клиент создан/исправлен.");
-                                                                            else
-                                                                                error_notify(data);
-                                                                        });
-
-                                        setTimeout("show_clients()",TimeInt);
-
-                                        $(this).dialog("close");
-                                    },
-                            "Отмена": function()
-                                    {
-                                        $(this).dialog("close");
-                                    }
-                        }
-                });
-    });
-
-
-$(function()
-    {
-        $("#dialog_edit_users").dialog(
-                {
-                    autoOpen: false,
-                    resizable: true,
-                    height: "auto",
-                    width: 450,
-                    modal: true,
-                    buttons:
-                        {
-                            "Сохранить": function()
-                                    {
-                                        login = $("#add_edit_user_login").val();
-                                        fname = $("#add_edit_user_fname").val();
-                                        lname = $("#add_edit_user_lname").val();
-                                        mail = $("#add_edit_user_mail").val();
-                                        pass = $("#add_edit_user_pass").val();
-                                        is_new = $("#is_new").val();
-
-                                        if (is_new == "yes"){
-                                            jQuery.post('/users/add_user',{ 'login':login,
-                                                                            'fname':fname,
-                                                                            'lname':lname,
-                                                                            'mail':mail,
-                                                                            'pass':pass },
-                                                                            function( data ) {
-                                                                                if (data == "None")
-                                                                                    success_notify("Пользователь создан.");
-                                                                                else
-                                                                                    error_notify(data);
-                                                                            });
-                                        }
-
-                                        if (is_new == "no"){
-                                            jQuery.post('/users/edit_user',{ 'login':login,
-                                                                            'fname':fname,
-                                                                            'lname':lname,
-                                                                            'mail':mail,
-                                                                            'pass':pass },
-                                                                            function( data ) {
-                                                                                if (data == "None")
-                                                                                    success_notify("Пользователь изменён.");
-                                                                                else
-                                                                                    error_notify(data);
-                                                                            });
-                                        }
-
-                                        setTimeout("show_users()",TimeInt);
-
-                                        $("#is_new").val("yes");
-
-                                        $(this).dialog("close");
-                                    },
-                            "Отмена": function()
-                                    {
-                                        $("#is_new").val("yes");
-
-                                        $(this).dialog("close");
-                                    }
-                        }
-                });
-});
-
-
 function add_message()
     {
         jQuery.post('/chat/add_post', {message: $("#id_message").val()})
         get_chat();
         $("#id_message").val("");
     }
-
-
-(function( $ ){
-    //plugin buttonset vertical
-    $.fn.buttonsetv = function() {
-      $(':radio, :checkbox', this).wrap('<div style="margin: 1px"/>');
-      $(this).buttonset();
-      $('label:first', this).removeClass('ui-corner-left').addClass('ui-corner-top');
-      $('label:last', this).removeClass('ui-corner-right').addClass('ui-corner-bottom');
-      mw = 0; // max witdh
-      $('label', this).each(function(index){
-         w = $(this).width();
-         if (w > mw) mw = w;
-      })
-      $('label', this).each(function(index){
-        $(this).width(mw);
-      })
-    };
-})( jQuery );
 
 
 function set_cookie_hide_deleted_tasks(set)
@@ -408,32 +370,6 @@ function find_user()
     }
 
 
-function find_task_by_inn()
-    {
-        var data = { 'inn': $("#id_find_by_inn").val() };
-
-        if ( data['inn'] == "" )
-            {
-                $("#crm_find_content").html("");
-                return;
-            }
-
-        $.ajax({
-            url: "/crm/find_by_inn",
-            type: "POST",
-            data: data,
-            success:
-                function( html )
-                    {
-                        if ( html == "None" )
-                            error_notify("Записей не найдено!");
-                        else $("#crm_find_content").html(html);
-                        $( ".crm_radio_btns" ).buttonset();
-                    }
-        });
-    }
-
-
 function clear_find_by_inn()
     {
         $("#id_find_by_inn").val("");
@@ -460,3 +396,79 @@ function find_client()
             }
                  });
     }
+
+
+//Tasks namespace.
+var Tasks = {
+
+    add:    function(form_id)
+	{
+        jQuery.ajax({
+             url: '/crm/add_task',
+             type: "POST",
+             dataType: "html",
+             data: jQuery("#"+form_id).serialize(),
+             success:   function( data ) {
+                            if (data == "None")
+                                success_notify("Заявка добавлена.");
+                            else
+                                error_notify(data);
+                        }
+        });
+
+        $(':input',"#"+form_id)
+            .not(':button, :submit, :reset, :hidden')
+            .not('[name = priority]')
+            .val('')
+            .removeAttr('checked')
+            .removeAttr('selected');
+	},
+
+	remove: function(id)
+	{
+	    jQuery.post('/crm/rem_task',{'id':id},
+                                  function( data ) {
+                                    if (data == "None")
+                                        success_notify("Задание удалено.");
+                                    else
+                                        error_notify(data);
+                                  }
+                   );
+	    setTimeout("show_crm()",TimeInt);
+	},
+
+	restore:    function(id)
+	{},
+
+	edit:   function(id)
+	{},
+
+	transfer_to:    function()
+	{},
+
+	find_by_inn:    function()
+    {
+        var data = { 'inn': $("#id_find_by_inn").val() };
+
+        if ( data['inn'] == "" )
+            {
+                $("#crm_find_content").html("");
+                return;
+            }
+
+        $.ajax({
+            url: "/crm/find_by_inn",
+            type: "POST",
+            data: data,
+            success:
+                function( html )
+                    {
+                        if ( html == "None" )
+                            error_notify("Записей не найдено!");
+                        else $("#crm_find_content").html(html);
+                        $( ".crm_radio_btns" ).buttonset();
+                    }
+        });
+    }
+
+};
