@@ -472,3 +472,22 @@ var Tasks = {
     }
 
 };
+
+
+function set_en()
+    {
+         $.ajax({
+            url: "/i18n/setlang/",
+            type: "POST",
+            data: {language:"en"},
+            });
+    }
+
+function set_ru()
+    {
+         $.ajax({
+            url: "/i18n/setlang/",
+            type: "POST",
+            data: {language:"ru"},
+            });
+    }
