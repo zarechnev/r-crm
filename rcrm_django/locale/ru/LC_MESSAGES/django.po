@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 14:21+0700\n"
+"POT-Creation-Date: 2016-04-26 15:32+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,6 +44,85 @@ msgstr "Запрос завершился с ошибкой %s."
 msgid "No data in request."
 msgstr "Нет данных в запросе."
 
+#: clients/templates/clients.html:4 templates/main.html:105
+msgid "Clients"
+msgstr "Клиенты"
+
+#: clients/templates/clients.html:8
+msgid "Client find by name"
+msgstr "Поиск клиента по имени"
+
+#: clients/templates/clients.html:18
+msgid "Add client"
+msgstr "Добавить клиента"
+
+#: clients/templates/clients.html:20
+msgid "Add/edit client"
+msgstr "Добавить/править клиента"
+
+#: clients/templates/clients.html:21
+#: clients/templates/clients_only_table.html:5
+msgid "Shot name"
+msgstr "Краткое наименование"
+
+#: clients/templates/clients.html:22
+msgid "Full name"
+msgstr "Полное наименование"
+
+#: clients/templates/clients.html:23
+msgid "Address"
+msgstr "Адрес"
+
+#: clients/templates/clients.html:24
+#: clients/templates/clients_only_table.html:6
+msgid "Organization index"
+msgstr "Индекс организации"
+
+#: clients/templates/clients.html:25
+msgid "Support contact, phone"
+msgstr "Контакт поддержки, телефон"
+
+#: clients/templates/clients.html:27
+#: clients/templates/clients_only_table.html:8
+msgid "Priority"
+msgstr "Приоритет"
+
+#: clients/templates/clients.html:33
+msgid "first"
+msgstr "первая"
+
+#: clients/templates/clients.html:36
+msgid "Page"
+msgstr "Страница"
+
+#: clients/templates/clients.html:36
+msgid "in"
+msgstr "из"
+
+#: clients/templates/clients_only_table.html:9
+msgid "Enabled"
+msgstr "Активен"
+
+#: clients/templates/clients_only_table.html:10
+msgid "Options"
+msgstr "Опции"
+
+#: clients/templates/clients_only_table.html:23
+msgid "Yes"
+msgstr "Да"
+
+#: clients/templates/clients_only_table.html:25
+msgid "No"
+msgstr "Нет"
+
+#: clients/templates/clients_only_table.html:30
+msgid "Remove"
+msgstr "Удалить"
+
+#: clients/templates/clients_only_table.html:31
+msgid "Edit"
+msgstr "Править"
+
 #: rcrm_django/settings.py:45
 msgid "English"
 msgstr "Английский"
@@ -67,10 +146,6 @@ msgstr "Таски"
 #: templates/main.html:104
 msgid "Users"
 msgstr "Пользователи"
-
-#: templates/main.html:105
-msgid "Clients"
-msgstr "Клиенты"
 
 #: templates/main.html:117
 msgid "Group chat"

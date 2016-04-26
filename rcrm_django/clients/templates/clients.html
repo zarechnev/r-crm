@@ -1,10 +1,11 @@
 {% extends 'main.html' %}
+{% load i18n %}
 {% block clients %}
-<center><h4>Клиенты</h4></center>
+<center><h4>{% trans "Clients" %}</h4></center>
 <p>
 <div class="row">
     <div class="large-12 columns">
-        <input onkeyup="find_client()" placeholder="Поиск клиента но названию" id="find_client_input_id" maxlength="100" type="text" />
+        <input onkeyup="find_client()" placeholder="{% trans "Client find by name" %}" id="find_client_input_id" maxlength="100" type="text" />
     </div>
 </div>
 <div id="find_client_render"></div>
@@ -14,24 +15,25 @@
 </div>
 <p>
 <p>
-    <input type="button" class="button tiny" value="Добавить клиента" onclick="show_add_edit_client_dialog();"/>
+    <input type="button" class="button tiny" value="{% trans "Add client" %}" onclick="show_add_edit_client_dialog();"/>
 
-	<div id="dialog_edit_client" title="Добавить/редактировать клиента">
-                <p><label for="add_edit_client_sname">Краткое наименование</label>  <input id="add_edit_client_sname" maxlength="100" name="sname" type="text" />
-                <p><label for="add_edit_client_fname">Полное наименование</label>   <input id="add_edit_client_fname" maxlength="200" name="fname" type="text" /></p>
-                <p><label for="add_edit_client_address">Адрес</label>               <input id="add_edit_client_address" maxlength="100" name="fname" type="text" /></p>
-                <p><label for="add_edit_client_inn">ИНН</label>                     <input id="add_edit_client_inn" maxlength="30" name="inn" type="text" /></p>
-                <p><label for="add_edit_client_phone">Контактное лицо, телефон</label>               <input id="add_edit_client_phone" maxlength="30" name="phone" type="text" /></p>
-                <p><label for="add_edit_client_mail">E-mail</label>                 <input id="add_edit_client_mail" maxlength="30" name="mail" type="text" /></p>
-                <p><label for="add_edit_client_priority">Приоритет</label>          <input id="add_edit_client_priority" maxlength="30" name="mail" type="text" /></p>
+	<div id="dialog_edit_client" title="{% trans "Add/edit client" %}">
+                <p><label for="add_edit_client_sname">{% trans "Shot name" %}</label>               <input id="add_edit_client_sname" maxlength="100" name="sname" type="text" />
+                <p><label for="add_edit_client_fname">{% trans "Full name" %}</label>               <input id="add_edit_client_fname" maxlength="200" name="fname" type="text" /></p>
+                <p><label for="add_edit_client_address">{% trans "Address" %}</label>               <input id="add_edit_client_address" maxlength="100" name="fname" type="text" /></p>
+                <p><label for="add_edit_client_inn">{% trans "Organization index" %}</label>            <input id="add_edit_client_inn" maxlength="30" name="inn" type="text" /></p>
+                <p><label for="add_edit_client_phone">{% trans "Support contact, phone" %}</label>      <input id="add_edit_client_phone" maxlength="30" name="phone" type="text" /></p>
+                <p><label for="add_edit_client_mail">E-mail</label>                                 <input id="add_edit_client_mail" maxlength="30" name="mail" type="text" /></p>
+                <p><label for="add_edit_client_priority">{% trans "Priority" %}</label>             <input id="add_edit_client_priority" maxlength="30" name="mail" type="text" /></p>
 	</div>
 
 <div class="small-3 large-centered columns">
 <ul class="pagination">
   {% if clients.has_previous %}
+    <li class="arrow"><a href="?page=1">{% trans "first" %}</a></li>
     <li class="arrow"><a href="?page={{ clients.previous_page_number }}">&laquo;</a></li>
   {% endif %}
-  <li>Страница {{ clients.number }} из {{ clients.paginator.num_pages }}</li>
+  <li>{% trans "Page" %} {{ clients.number }} {% trans "in" %} {{ clients.paginator.num_pages }}</li>
   {% if clients.has_next %}
     <li class="arrow"><a href="?page={{ clients.next_page_number }}">&raquo;</a></li>
   {% endif %}

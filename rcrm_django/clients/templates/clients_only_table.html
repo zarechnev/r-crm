@@ -1,12 +1,13 @@
+{% load i18n %}
 <table bordercolor="red" border="1" width="100%">
     <thead>
       <tr>
-          <th>Краткое название</th>
-          <th>ИНН</th>
+          <th>{% trans "Shot name" %}</th>
+          <th>{% trans "Organization index" %}</th>
           <th>Номер телефона</th>
-          <th>Приоритет</th>
-          <th>Обслуживается</th>
-          <th>Опции</th>
+          <th>{% trans "Priority" %}</th>
+          <th>{% trans "Enabled" %}</th>
+          <th>{% trans "Options" %}</th>
       </tr>
     </thead>
 {% for client in clients %}
@@ -19,15 +20,15 @@
             <td>
                 <div class="cl_radio_btns">
                     <input type="radio" id="{{ type }}_radio1_{{ client.id }}" onchange='obj_switch_status( "client", {{ client.id }}, 1 )' name="{{ type }}_radio_{{ client.id }}" {% if client.is_active %} checked {% endif %}>
-                        <label for="{{ type }}_radio1_{{ client.id }}">Вкл.</label>
+                        <label for="{{ type }}_radio1_{{ client.id }}">{% trans "Yes" %}</label>
                     <input type="radio" id="{{ type }}_radio0_{{ client.id }}" onchange='obj_switch_status( "client", {{ client.id }}, 0 )' name="{{ type }}_radio_{{ client.id }}" {% if not client.is_active %} checked {% endif %}>
-                        <label for="{{ type }}_radio0_{{ client.id }}">Выкл.</label>
+                        <label for="{{ type }}_radio0_{{ client.id }}">{% trans "No" %}</label>
                 </div>
             </td>
             <td>
                 <ul id="icons" class="ui-widget ui-helper-clearfix">
-                    <li title="Удалить" onclick="rem_client({{ client.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
-                    <li title="Править" onclick="show_add_edit_client_dialog({{ client.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+                    <li title="{% trans "Remove" %}" onclick="rem_client({{ client.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-closethick"></span></li>
+                    <li title="{% trans "Edit" %}" onclick="show_add_edit_client_dialog({{ client.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
                 </ul>
             </td>
         </tr>
