@@ -480,7 +480,10 @@ function set_en()
             url: "/i18n/setlang/",
             type: "POST",
             data: {language:"en"},
+            function(data){ }
             });
+            //window.location.href = "/";
+
     }
 
 function set_ru()
@@ -489,5 +492,7 @@ function set_ru()
             url: "/i18n/setlang/",
             type: "POST",
             data: {language:"ru"},
+            function(data){ }
             });
+            //window.location.href = "/";
     }

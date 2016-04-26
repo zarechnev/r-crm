@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 15:32+0700\n"
+"POT-Creation-Date: 2016-04-26 23:13+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -62,7 +62,7 @@ msgstr "Добавить/править клиента"
 
 #: clients/templates/clients.html:21
 #: clients/templates/clients_only_table.html:5
-msgid "Shot name"
+msgid "Short name"
 msgstr "Краткое наименование"
 
 #: clients/templates/clients.html:22
@@ -122,6 +122,26 @@ msgstr "Удалить"
 #: clients/templates/clients_only_table.html:31
 msgid "Edit"
 msgstr "Править"
+
+#: loginsys/templates/login.html:8
+msgid "Name"
+msgstr "Логин"
+
+#: loginsys/templates/login.html:10
+msgid "Password"
+msgstr "Пароль"
+
+#: loginsys/templates/login.html:12
+msgid "Login"
+msgstr "Войти"
+
+#: loginsys/templates/login.html:13
+msgid "ru"
+msgstr "рус."
+
+#: loginsys/templates/login.html:14
+msgid "en"
+msgstr "англ."
 
 #: rcrm_django/settings.py:45
 msgid "English"

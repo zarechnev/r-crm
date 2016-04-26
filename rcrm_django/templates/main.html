@@ -121,14 +121,14 @@
                 </div>
       </div>
       <div class="large-9 columns main_background">
-        {% block main-page %}{% endblock %}
+        {% block help-page %}{% endblock %}
         {% block statistic %}{% endblock %}
         {% block clients %}{% endblock %}
         {% block users %}{% endblock %}
         {% block crm %}{% endblock %}
       </div>
     {% else %}
-    {% block login %}{% endblock %}
+        {% block login %}{% endblock %}
     {% endif %}
 </div>
 <div class="row">
