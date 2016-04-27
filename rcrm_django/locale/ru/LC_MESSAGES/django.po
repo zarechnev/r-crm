@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 23:13+0700\n"
+"POT-Creation-Date: 2016-04-27 16:18+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Author"
 msgstr "Автор"
 
-#: chat/models.py:9 templates/main.html:119
+#: chat/models.py:9 templates/main.html:124
 msgid "Message"
 msgstr "Сообщение"
 
@@ -44,7 +44,65 @@ msgstr "Запрос завершился с ошибкой %s."
 msgid "No data in request."
 msgstr "Нет данных в запросе."
 
-#: clients/templates/clients.html:4 templates/main.html:105
+#: clients/models.py:14
+#, fuzzy
+#| msgid "Organization index"
+msgid "Organization full name"
+msgstr "Индекс организации"
+
+#: clients/models.py:16
+#, fuzzy
+#| msgid "Organization index"
+msgid "Organization short name"
+msgstr "Индекс организации"
+
+#: clients/models.py:17
+#, fuzzy
+#| msgid "Organization index"
+msgid "Organization ID"
+msgstr "Индекс организации"
+
+#: clients/models.py:18
+#, fuzzy
+#| msgid "Organization index"
+msgid "Organization address"
+msgstr "Индекс организации"
+
+#: clients/models.py:19
+#, fuzzy
+#| msgid "Organization index"
+msgid "Organization phone number"
+msgstr "Индекс организации"
+
+#: clients/models.py:20
+#, fuzzy
+#| msgid "Organization index"
+msgid "Organization e-mail"
+msgstr "Индекс организации"
+
+#: clients/models.py:21
+#, fuzzy
+#| msgid "Organization index"
+msgid "Organization priority"
+msgstr "Индекс организации"
+
+#: clients/models.py:22
+#, fuzzy
+#| msgid "Organization index"
+msgid "Organization registration date"
+msgstr "Индекс организации"
+
+#: clients/models.py:23
+#, fuzzy
+#| msgid "Enabled"
+msgid "Is enabled"
+msgstr "Активен"
+
+#: clients/models.py:24
+msgid "Is deleted"
+msgstr "Удалена ли"
+
+#: clients/templates/clients.html:4 templates/main.html:110
 msgid "Clients"
 msgstr "Клиенты"
 
@@ -99,6 +157,10 @@ msgstr "Страница"
 msgid "in"
 msgstr "из"
 
+#: clients/templates/clients_only_table.html:7
+msgid "Phone number"
+msgstr "Номер телефона"
+
 #: clients/templates/clients_only_table.html:9
 msgid "Enabled"
 msgstr "Активен"
@@ -123,6 +185,34 @@ msgstr "Удалить"
 msgid "Edit"
 msgstr "Править"
 
+#: clients/templates/clients_only_table.html:40
+msgid "Record's count"
+msgstr "Количество записей"
+
+#: crm/templates/crm.html:34 templates/main.html:108
+msgid "Tasks"
+msgstr "Таски"
+
+#: crm/templates/crm.html:43 crm/templates/crm.html.py:54
+msgid "All"
+msgstr "Все"
+
+#: crm/templates/crm.html:45
+msgid "Opened"
+msgstr "Открытые"
+
+#: crm/templates/crm.html:56
+msgid "Only My"
+msgstr "Только мои"
+
+#: crm/templates/crm.html:66
+msgid "Find by Organization ID"
+msgstr "Найти по индексу организации"
+
+#: crm/templates/crm.html:74
+msgid "Find"
+msgstr "Найти"
+
 #: loginsys/templates/login.html:8
 msgid "Name"
 msgstr "Логин"
@@ -135,46 +225,34 @@ msgstr "Пароль"
 msgid "Login"
 msgstr "Войти"
 
-#: loginsys/templates/login.html:13
-msgid "ru"
-msgstr "рус."
-
-#: loginsys/templates/login.html:14
-msgid "en"
-msgstr "англ."
-
-#: rcrm_django/settings.py:45
+#: rcrm_django/settings.py:46
 msgid "English"
 msgstr "Английский"
 
-#: rcrm_django/settings.py:46
+#: rcrm_django/settings.py:47
 msgid "Russian"
 msgstr "Русский"
 
-#: templates/main.html:93
+#: templates/main.html:98
 msgid "Statistics"
 msgstr "Статистика"
 
-#: templates/main.html:95
+#: templates/main.html:100
 msgid "Logout"
 msgstr "Выйти"
 
-#: templates/main.html:103
-msgid "Tasks"
-msgstr "Таски"
-
-#: templates/main.html:104
+#: templates/main.html:109
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/main.html:117
+#: templates/main.html:122
 msgid "Group chat"
 msgstr "Групповой чат"
 
-#: templates/main.html:120
+#: templates/main.html:125
 msgid "Send message"
 msgstr "Отправить сообщение"
 
-#: templates/main.html:137
+#: templates/main.html:142
 msgid "Ruslan A. Zarechnev"
 msgstr "Заречнев Руслан"

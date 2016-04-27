@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load i18n %}
 {% block crm %}
 <script>
     $(function() $( ".invisible_close_rbtns" ).buttonset() )
@@ -30,7 +31,7 @@
     });
 
 </script>
-<center><h4>Задания</h4></center>
+<center><h4>{% trans "Tasks" %}</h4></center>
 
 <!--Top menu-->
 <div class="row" style="padding: 10px; margin: 5px;">
@@ -39,9 +40,9 @@
     <div class="large-3 columns">
         <div class="invisible_close_rbtns inline">
             <input type="radio" id="show_closed_rb0" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 0 )" {% if not hide_deleted_tasks %} checked {% endif %}>
-                <label for="show_closed_rb0">все</label>
+                <label for="show_closed_rb0">{% trans "All" %}</label>
             <input type="radio" id="show_closed_rb1" name="show_closed_rb" onchange="set_cookie_hide_deleted_tasks( 1 )" {% if hide_deleted_tasks %} checked {% endif %}>
-                <label for="show_closed_rb1">открытые</label>
+                <label for="show_closed_rb1">{% trans "Opened" %}</label>
         </div>
     </div>
 
@@ -50,35 +51,35 @@
     <div class="large-2 columns">
         <div class="invisible_close_rbtns">
             <input type="radio" id="show_my_rb0" name="show_my_rb" onchange="set_cookie_my_tasks( 0 )" {% if not only_my_tasks %} checked {% endif %}>
-                <label for="show_my_rb0">все</label>
+                <label for="show_my_rb0">{% trans "All" %}</label>
             <input type="radio" id="show_my_rb1" name="show_my_rb" onchange="set_cookie_my_tasks( 1 )" {% if only_my_tasks %} checked {% endif %}>
-                <label for="show_my_rb1">мои</label>
+                <label for="show_my_rb1">{% trans "Only My" %}</label>
         </div>
     </div>
 
 
-    <!--Find by inn (5 last)-->
+    <!-- Find by inn (5 last) -->
     <div class="large-5 columns">
         <div class="row collapse">
-            <!--Find text-->
+            <!-- Find text -->
             <div class="large-8 columns">
-                <input placeholder="Поиск по ИНН" id="id_find_by_inn" maxlength="100" name="find_by_inn" type="text" />
+                <input placeholder="{% trans "Find by Organization ID" %}" id="id_find_by_inn" maxlength="100" name="find_by_inn" type="text" />
             </div>
-            <!--Clear button-->
+            <!-- Clear button -->
             <div class="large-1 columns">
                 <input type="button" class="button postfix secondary" onclick="clear_find_by_inn()" />
             </div>
-            <!--Find button-->
+            <!-- Find button -->
             <div class="large-3 columns">
-                <input type="button" class="button postfix" value="Найти" onclick="Tasks.find_by_inn()" />
+                <input type="button" class="button postfix" value="{% trans "Find" %}" onclick="Tasks.find_by_inn()" />
             </div>
         </div>
     </div>
 
 
-    <!--More filters-->
+    <!-- More filters -->
     <div class="large-2 columns">
-        <!--Другие фильтры-->
+        <!-- Other filters -->
     </div>
 
 </div>
@@ -144,6 +145,5 @@
 
             </div>
 
-        </div>
     </form>
 {% endblock %}

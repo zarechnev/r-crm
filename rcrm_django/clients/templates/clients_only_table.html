@@ -4,7 +4,7 @@
       <tr>
           <th>{% trans "Short name" %}</th>
           <th>{% trans "Organization index" %}</th>
-          <th>Номер телефона</th>
+          <th>{% trans "Phone number" %}</th>
           <th>{% trans "Priority" %}</th>
           <th>{% trans "Enabled" %}</th>
           <th>{% trans "Options" %}</th>
@@ -37,5 +37,5 @@
 </table>
 
 {% if type == "main" %}
-<small>Количество записей: {{ clients_count }}</small>
+<small>{% trans "Record's count" %}: {{ clients_count }}</small>
 {% endif %}
