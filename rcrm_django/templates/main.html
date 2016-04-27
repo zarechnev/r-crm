@@ -90,6 +90,11 @@
   <section class="top-bar-section">
     <!-- Right Nav Section -->
     <ul class="right">
+       <li>
+           <form action='/i18n/setlang/' method='post'>
+               <input name="language" {% if language == "en" %} value="ru" {% else %} value="en" {% endif %} type="submit" class="button tiny round success" style="margin: 0" />
+           </form>
+       </li>
       <li><a href="/statistic">{% trans "Statistics" %}</a></li>
 	 {% if username %}
 	     <li class="active"><a href="/auth/logout/">{% trans "Logout" %} ({{ username }})</a></li>

@@ -1,3 +1,4 @@
+from django.utils.translation import get_language
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.utils import timezone
@@ -12,6 +13,8 @@ from clients.models import Client
 @login_required(login_url='/auth/login')
 def hello(request):
     args = {'type': "main"}
+    language = get_language()
+    args['language'] = language
     tasks_list = Task.objects.all().order_by('-id')
 
     if "only_my_tasks" in request.COOKIES and request.COOKIES['only_my_tasks'] == str(1):

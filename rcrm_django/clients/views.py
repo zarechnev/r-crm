@@ -1,9 +1,9 @@
+from django.utils.translation import get_language
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-from django.core import serializers
 from django.contrib import auth
 from clients.models import Client
 
@@ -11,6 +11,8 @@ from clients.models import Client
 @login_required(login_url='/auth/login')
 def hello(request):
     args = {'type': "main"}
+    language = get_language()
+    args['language'] = language
     clients_list = Client.objects.all().order_by('-is_active', 'id')
 
     count = Client.objects.all().count()

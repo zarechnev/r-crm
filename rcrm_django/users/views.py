@@ -1,15 +1,17 @@
+from django.utils.translation import get_language
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from django.http import HttpResponse
-import logging
 import simplejson
 
 
 @login_required(login_url='/auth/login')
 def list_users(request):
     args = {'type': "main"}
+    language = get_language()
+    args['language'] = language
     users_list = auth.models.User.objects.all().order_by('-is_active', 'id')
 
     count = auth.models.User.objects.all().count()

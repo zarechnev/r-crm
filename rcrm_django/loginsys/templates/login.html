@@ -9,23 +9,8 @@
         <input type="text" name="username" value="" id="username">
         <label for="password">{% trans "Password" %}</label>
         <input type="password" name="password" value="" id="password">
-
-    <div class="row">
-
-        <!-- Login and close form -->
-        <div class="large-4 columns">
-            <input type="submit" class="button tiny" value="{% trans "Login" %}" style="margin: 0" />
-            </form>
-        </div>
-
-        <!-- Change language -->
-        <div class="large-3 columns">
-            <form action='/i18n/setlang/' method='post'>
-                <input name="language" {% if language == 'ru' %} value="en" {% else %} value="ru" {% endif %} type="submit" class="button tiny round success" style="margin: 0" />
-            </form>
-        </div>
-    </div>
-
+        <input type="submit" class="button tiny" value="{% trans "Login" %}" style="margin: 0" />
+        </form>
 </div>
 
 {% if login_error %}
