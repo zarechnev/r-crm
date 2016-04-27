@@ -1,3 +1,4 @@
+from django.utils.translation import get_language
 from django.contrib import auth
 from django.shortcuts import render_to_response, redirect
 from django.core.context_processors import csrf
@@ -6,7 +7,8 @@ from django.core.context_processors import csrf
 def login(request):
     if request.user.is_authenticated():
         return redirect('/crm')
-    args = {}
+    language = get_language()
+    args = {'language': language}
     args.update(csrf(request))
     if request.POST:
         username = request.POST['username']

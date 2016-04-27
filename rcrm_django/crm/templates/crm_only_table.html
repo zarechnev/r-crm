@@ -11,14 +11,14 @@
     </thead>
 {% for task in tasks %}
     <tr>
-        <!-- Дата заявки -->
+        <!-- Task date -->
         <td>
             <div class="with_popup" data-title="Номер: {{ task.id }}. Автор: {{ task.create_user.last_name }} {{ task.create_user.first_name }}">
                 {{ task.create_date|date:'d M H:i' }}
             </div>
         </td>
 
-        <!-- Статус -->
+        <!-- Status -->
         <td>
             {% if not task.is_removed %}
                 <div class="crm_radio_btns">
@@ -33,7 +33,7 @@
                 Удалена
             {% endif %}
 
-        <!-- Клиент -->
+        <!-- Client -->
         <td>
             <div class="with_popup" data-title="Контакт: {{ task.client.phone }}">
                 {{ task.client.sname }}
@@ -58,7 +58,7 @@
             {% endif %}
         </td>
 
-        <!-- Опции -->
+        <!-- Options -->
         <td>
             <ul id="icons" class="ui-widget ui-helper-clearfix">
                 {% if not task.is_removed %}
