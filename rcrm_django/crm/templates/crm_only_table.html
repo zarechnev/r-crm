@@ -1,19 +1,22 @@
+{% load i18n %}
+{% load verbose_names %}
+
 <table bordercolor="red" border="1" width="100%">
     <thead>
       <tr>
-          <th>Дата заявки</th>
-          <th>Статус</th>
-          <th>Клиент</th>
-          <th>Решает</th>
-          <th>Решил</th>
-          <th>Опции</th>
+          <th>{% get_verbose_field_name task_obj "create_date" %}</th>
+          <th>{% get_verbose_field_name task_obj "status" %}</th>
+          <th>{% get_verbose_field_name task_obj "client" %}</th>
+          <th>{% get_verbose_field_name task_obj "solves_user" %}</th>
+          <th>{% get_verbose_field_name task_obj "user_solved" %}</th>
+          <th>{% trans "Options" %}</th>
       </tr>
     </thead>
 {% for task in tasks %}
     <tr>
         <!-- Task date -->
         <td>
-            <div class="with_popup" data-title="Номер: {{ task.id }}. Автор: {{ task.create_user.last_name }} {{ task.create_user.first_name }}">
+            <div class="with_popup" data-title="{% trans "Number" %}: {{ task.id }}. {% trans "author" %}: {{ task.create_user.last_name }} {{ task.create_user.first_name }}">
                 {{ task.create_date|date:'d M H:i' }}
             </div>
         </td>
@@ -40,7 +43,7 @@
             </div>
         </td>
 
-        <!-- Решает -->
+        <!-- Who solving -->
         <td>
             {% if task.solves_user %}
                 <div class="with_popup" data-title="{{ task.solves_user.last_name }} {{ task.solves_user.first_name }}">
@@ -49,7 +52,7 @@
             {% endif %}
         </td>
 
-        <!-- Решил -->
+        <!-- Who solving -->
         <td>
             {% if task.user_solved %}
                 <div class="with_popup" data-title="{{ task.user_solved.last_name }} {{ task.user_solved.first_name }}">
@@ -73,14 +76,14 @@
         </td>
     </tr>
 
-    <!-- Строка с коментарием -->
+    <!-- Comment string -->
     <tr  style="padding-bottom:50px;">
-        <!-- Заголовок -->
+        <!-- Title of comment -->
         <td>
             Коментарий:
         </td>
 
-        <!-- Коментарий -->
+        <!-- Comment -->
         <td colspan="5">
             {{ task.create_comment }}
         </td>

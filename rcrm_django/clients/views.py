@@ -10,7 +10,7 @@ from clients.models import Client
 
 @login_required(login_url='/auth/login')
 def hello(request):
-    args = {'type': "main"}
+    args = {'type': "main", 'client_obj': Client}
     language = get_language()
     args['language'] = language
     clients_list = Client.objects.all().order_by('-is_active', 'id')
@@ -37,7 +37,7 @@ def hello(request):
     return render_to_response('clients.html', args)
 
 
-# TODO: Заменить эту порнографию на передачу json-объекта.
+# TODO: Replace with json-object sending
 @login_required(login_url='/auth/login')
 def get_client_info(request, id):
     obj = Client.objects.get(id=id)

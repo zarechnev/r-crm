@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-27 16:18+0700\n"
+"POT-Creation-Date: 2016-04-29 10:57+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,56 +45,38 @@ msgid "No data in request."
 msgstr "Нет данных в запросе."
 
 #: clients/models.py:14
-#, fuzzy
-#| msgid "Organization index"
 msgid "Organization full name"
-msgstr "Индекс организации"
+msgstr "Полное название организации"
 
 #: clients/models.py:16
-#, fuzzy
-#| msgid "Organization index"
 msgid "Organization short name"
-msgstr "Индекс организации"
+msgstr "Краткое название организации"
 
 #: clients/models.py:17
-#, fuzzy
-#| msgid "Organization index"
 msgid "Organization ID"
 msgstr "Индекс организации"
 
 #: clients/models.py:18
-#, fuzzy
-#| msgid "Organization index"
 msgid "Organization address"
-msgstr "Индекс организации"
+msgstr "Адресс организации"
 
 #: clients/models.py:19
-#, fuzzy
-#| msgid "Organization index"
 msgid "Organization phone number"
-msgstr "Индекс организации"
+msgstr "Телефон организации"
 
 #: clients/models.py:20
-#, fuzzy
-#| msgid "Organization index"
 msgid "Organization e-mail"
-msgstr "Индекс организации"
+msgstr "E-mail организации"
 
 #: clients/models.py:21
-#, fuzzy
-#| msgid "Organization index"
 msgid "Organization priority"
-msgstr "Индекс организации"
+msgstr "Приоритет организации"
 
 #: clients/models.py:22
-#, fuzzy
-#| msgid "Organization index"
 msgid "Organization registration date"
-msgstr "Индекс организации"
+msgstr "Дата регистрации организации"
 
 #: clients/models.py:23
-#, fuzzy
-#| msgid "Enabled"
 msgid "Is enabled"
 msgstr "Активен"
 
@@ -119,7 +101,6 @@ msgid "Add/edit client"
 msgstr "Добавить/править клиента"
 
 #: clients/templates/clients.html:21
-#: clients/templates/clients_only_table.html:5
 msgid "Short name"
 msgstr "Краткое наименование"
 
@@ -132,7 +113,7 @@ msgid "Address"
 msgstr "Адрес"
 
 #: clients/templates/clients.html:24
-#: clients/templates/clients_only_table.html:6
+#: clients/templates/clients_only_table.html:8
 msgid "Organization index"
 msgstr "Индекс организации"
 
@@ -141,7 +122,7 @@ msgid "Support contact, phone"
 msgstr "Контакт поддержки, телефон"
 
 #: clients/templates/clients.html:27
-#: clients/templates/clients_only_table.html:8
+#: clients/templates/clients_only_table.html:10
 msgid "Priority"
 msgstr "Приоритет"
 
@@ -157,35 +138,35 @@ msgstr "Страница"
 msgid "in"
 msgstr "из"
 
-#: clients/templates/clients_only_table.html:7
+#: clients/templates/clients_only_table.html:9
 msgid "Phone number"
 msgstr "Номер телефона"
 
-#: clients/templates/clients_only_table.html:9
+#: clients/templates/clients_only_table.html:11
 msgid "Enabled"
 msgstr "Активен"
 
-#: clients/templates/clients_only_table.html:10
+#: clients/templates/clients_only_table.html:12
 msgid "Options"
 msgstr "Опции"
 
-#: clients/templates/clients_only_table.html:23
+#: clients/templates/clients_only_table.html:25
 msgid "Yes"
 msgstr "Да"
 
-#: clients/templates/clients_only_table.html:25
+#: clients/templates/clients_only_table.html:27
 msgid "No"
 msgstr "Нет"
 
-#: clients/templates/clients_only_table.html:30
+#: clients/templates/clients_only_table.html:32
 msgid "Remove"
 msgstr "Удалить"
 
-#: clients/templates/clients_only_table.html:31
+#: clients/templates/clients_only_table.html:33
 msgid "Edit"
 msgstr "Править"
 
-#: clients/templates/clients_only_table.html:40
+#: clients/templates/clients_only_table.html:42
 msgid "Record's count"
 msgstr "Количество записей"
 
@@ -225,11 +206,11 @@ msgstr "Пароль"
 msgid "Login"
 msgstr "Войти"
 
-#: rcrm_django/settings.py:46
+#: rcrm_django/settings.py:47
 msgid "English"
 msgstr "Английский"
 
-#: rcrm_django/settings.py:47
+#: rcrm_django/settings.py:48
 msgid "Russian"
 msgstr "Русский"
 

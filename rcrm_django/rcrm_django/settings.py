@@ -17,12 +17,13 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'rcrm_django.sqlite3'),
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2',
+        #  'mysql', 'sqlite3' or 'oracle'.
         # 'NAME': 'rcrm_django', # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         # 'USER': 'rcrm_django',
         # 'PASSWORD': 'rcrm_django',
-        # 'HOST': '192.168.0.103',          # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        # 'HOST': '192.168.0.103',# Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         # 'PORT': '5432',                      # Set to empty string for default.
     }
 }
@@ -96,7 +97,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    # 'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -132,6 +133,7 @@ INSTALLED_APPS = (
     'statistic',
     'chat',
     'users',
+    'lib',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

@@ -1,12 +1,14 @@
 {% load i18n %}
+{% load verbose_names %}
+
 <table bordercolor="red" border="1" width="100%">
     <thead>
       <tr>
-          <th>{% trans "Short name" %}</th>
-          <th>{% trans "Organization index" %}</th>
-          <th>{% trans "Phone number" %}</th>
-          <th>{% trans "Priority" %}</th>
-          <th>{% trans "Enabled" %}</th>
+          <th>{% get_verbose_field_name client_obj "sname" %}</th>
+          <th>{% get_verbose_field_name client_obj "inn" %}</th>
+          <th>{% get_verbose_field_name client_obj "phone" %}</th>
+          <th>{% get_verbose_field_name client_obj "priority" %}</th>
+          <th>{% get_verbose_field_name client_obj "is_active" %}</th>
           <th>{% trans "Options" %}</th>
       </tr>
     </thead>

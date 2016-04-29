@@ -12,7 +12,7 @@ from clients.models import Client
 
 @login_required(login_url='/auth/login')
 def hello(request):
-    args = {'type': "main"}
+    args = {'type': "main", 'task_obj': Task}
     language = get_language()
     args['language'] = language
     tasks_list = Task.objects.all().order_by('-id')

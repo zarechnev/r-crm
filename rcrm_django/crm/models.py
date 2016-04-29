@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from django.db import models
 from clients.models import Client
 from django.contrib import auth
@@ -6,7 +7,7 @@ from django.contrib import auth
 class Priority(models.Model):
     priority_ru = models.CharField(max_length=50)
     priority_en = models.CharField(max_length=50)
-    weight = models.IntegerField(verbose_name="Вес", default=25)
+    weight = models.IntegerField(verbose_name=_("Weight"), default=25)
     default = models.BooleanField()
 
 
@@ -18,12 +19,12 @@ class Task(models.Model):
     }
     STATUS_OF_TASK = STATUS_TO_TEMLATE.keys()
 
-    status = models.CharField(blank=False, null=False, max_length=3, verbose_name="Статус заявки")
-    task_prio = models.ForeignKey(Priority, blank=False, null=False, verbose_name="Приоритет заявки")
-    create_comment = models.CharField(blank=False, null=False, max_length=200, verbose_name="Комментарий")
-    is_removed = models.BooleanField(default=False, blank=False, verbose_name="Удалённая заявка")
+    status = models.CharField(blank=False, null=False, max_length=3, verbose_name=_("Task status"))
+    task_prio = models.ForeignKey(Priority, blank=False, null=False, verbose_name=_("Task priority"))
+    create_comment = models.CharField(blank=False, null=False, max_length=200, verbose_name=_("Comment"))
+    is_removed = models.BooleanField(default=False, blank=False, verbose_name=_("Deleted task"))
     change_status_datetime = models.DateTimeField(null=True, blank=False,
-                                                  verbose_name="Дата последнего изменения статуса")
+                                                  verbose_name=_("Last modify date"))
 
     create_user = models.ForeignKey(auth.models.User, null=False, blank=False, related_name='create_user',
                                     verbose_name="Автор заявки")

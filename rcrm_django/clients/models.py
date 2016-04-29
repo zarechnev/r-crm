@@ -1,8 +1,9 @@
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
+
 class Client(models.Model):
-    #TODO: Реализовать методы и свойства по аналогии с разделом задач
+    # TODO: Реализовать методы и свойства по аналогии с разделом задач
     PRIORITY_VALUES = (
         ('100', 'Наивысший'),
         ('200', 'Высокий'),
