@@ -88,6 +88,14 @@
     </li>
   </ul>
   <section class="top-bar-section">
+      <!-- Right Nav Section -->
+        <ul class="right">
+           <li>
+               <form action='/i18n/setlang/' method='post'>
+                   <input name="language" {% if language == "en" %} value="ru" {% else %} value="en" {% endif %} type="submit" class="button tiny round success" style="margin: 0" />
+               </form>
+           </li>
+        </ul>
   </section>
 </nav>
 <div class="row" style="margin-top:20px">
