@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-29 10:57+0700\n"
+"POT-Creation-Date: 2016-05-04 21:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,43 +44,43 @@ msgstr "Запрос завершился с ошибкой %s."
 msgid "No data in request."
 msgstr "Нет данных в запросе."
 
-#: clients/models.py:14
+#: clients/models.py:15
 msgid "Organization full name"
 msgstr "Полное название организации"
 
-#: clients/models.py:16
+#: clients/models.py:17
 msgid "Organization short name"
 msgstr "Краткое название организации"
 
-#: clients/models.py:17
+#: clients/models.py:18
 msgid "Organization ID"
 msgstr "Индекс организации"
 
-#: clients/models.py:18
+#: clients/models.py:19
 msgid "Organization address"
 msgstr "Адресс организации"
 
-#: clients/models.py:19
+#: clients/models.py:20
 msgid "Organization phone number"
 msgstr "Телефон организации"
 
-#: clients/models.py:20
+#: clients/models.py:21
 msgid "Organization e-mail"
 msgstr "E-mail организации"
 
-#: clients/models.py:21
+#: clients/models.py:22
 msgid "Organization priority"
 msgstr "Приоритет организации"
 
-#: clients/models.py:22
+#: clients/models.py:23
 msgid "Organization registration date"
 msgstr "Дата регистрации организации"
 
-#: clients/models.py:23
+#: clients/models.py:24
 msgid "Is enabled"
 msgstr "Активен"
 
-#: clients/models.py:24
+#: clients/models.py:25
 msgid "Is deleted"
 msgstr "Удалена ли"
 
@@ -113,7 +113,6 @@ msgid "Address"
 msgstr "Адрес"
 
 #: clients/templates/clients.html:24
-#: clients/templates/clients_only_table.html:8
 msgid "Organization index"
 msgstr "Индекс организации"
 
@@ -122,7 +121,6 @@ msgid "Support contact, phone"
 msgstr "Контакт поддержки, телефон"
 
 #: clients/templates/clients.html:27
-#: clients/templates/clients_only_table.html:10
 msgid "Priority"
 msgstr "Приоритет"
 
@@ -130,31 +128,27 @@ msgstr "Приоритет"
 msgid "first"
 msgstr "первая"
 
-#: clients/templates/clients.html:36
+#: clients/templates/clients.html:36 crm/templates/crm_only_table.html:101
 msgid "Page"
 msgstr "Страница"
 
-#: clients/templates/clients.html:36
+#: clients/templates/clients.html:36 crm/templates/crm_only_table.html:101
 msgid "in"
 msgstr "из"
 
-#: clients/templates/clients_only_table.html:9
-msgid "Phone number"
-msgstr "Номер телефона"
-
-#: clients/templates/clients_only_table.html:11
-msgid "Enabled"
-msgstr "Активен"
-
 #: clients/templates/clients_only_table.html:12
+#: crm/templates/crm_only_table.html:12
+#: users/templates/users_only_table.html:11
 msgid "Options"
 msgstr "Опции"
 
 #: clients/templates/clients_only_table.html:25
+#: users/templates/users_only_table.html:25
 msgid "Yes"
 msgstr "Да"
 
 #: clients/templates/clients_only_table.html:27
+#: users/templates/users_only_table.html:27
 msgid "No"
 msgstr "Нет"
 
@@ -169,6 +163,62 @@ msgstr "Править"
 #: clients/templates/clients_only_table.html:42
 msgid "Record's count"
 msgstr "Количество записей"
+
+#: crm/models.py:10
+msgid "Weight"
+msgstr "Вес"
+
+#: crm/models.py:22
+msgid "Task status"
+msgstr "Статус тикета"
+
+#: crm/models.py:23
+msgid "Task priority"
+msgstr "Приоритет тикета"
+
+#: crm/models.py:24 crm/templates/crm_only_table.html:83
+msgid "Comment"
+msgstr "Комментарий"
+
+#: crm/models.py:25
+msgid "Deleted task"
+msgstr "Удален ли тикет"
+
+#: crm/models.py:27
+msgid "Last modify date"
+msgstr "Дата последнего изменения"
+
+#: crm/models.py:30
+msgid "Task author"
+msgstr "Автор заявки"
+
+#: crm/models.py:32
+msgid "Solves user"
+msgstr "Кто решает"
+
+#: crm/models.py:34
+msgid "Solved user"
+msgstr "Кто решил"
+
+#: crm/models.py:36
+msgid "Who was remove the task"
+msgstr "Удалил тикет"
+
+#: crm/models.py:38
+msgid "Client"
+msgstr "Клиент"
+
+#: crm/models.py:40
+msgid "Create task date"
+msgstr "Дата регистрации тикета"
+
+#: crm/models.py:41
+msgid "Close task date"
+msgstr "Дата закрытия тикета"
+
+#: crm/models.py:42
+msgid "Remove task date"
+msgstr "Дата удаления тикета"
 
 #: crm/templates/crm.html:34 templates/main.html:108
 msgid "Tasks"
@@ -194,16 +244,48 @@ msgstr "Найти по индексу организации"
 msgid "Find"
 msgstr "Найти"
 
-#: loginsys/templates/login.html:8
+#: crm/templates/crm_only_table.html:19
+msgid "Number"
+msgstr "Номер"
+
+#: crm/templates/crm_only_table.html:19
+msgid "author"
+msgstr "Автор"
+
+#: crm/templates/crm_only_table.html:36
+msgid "Was deleted"
+msgstr "Удалена ли"
+
+#: crm/templates/crm_only_table.html:41
+msgid "Contact"
+msgstr "Контакт"
+
+#: crm/templates/crm_only_table.html:68
+msgid "Remove task"
+msgstr "Удалить тикет"
+
+#: crm/templates/crm_only_table.html:71
+msgid "Restore task"
+msgstr "Восстановить тикет"
+
+#: crm/templates/crm_only_table.html:73
+msgid "Edit task"
+msgstr "Править тикет"
+
+#: crm/templates/crm_only_table.html:74
+msgid "Transfer task"
+msgstr "Передать тикет"
+
+#: loginsys/templates/login.html:8 users/templates/users_only_table.html:6
 msgid "Name"
-msgstr "Логин"
+msgstr "Имя"
 
 #: loginsys/templates/login.html:10
 msgid "Password"
 msgstr "Пароль"
 
 #: loginsys/templates/login.html:12
-msgid "Login"
+msgid "Enter"
 msgstr "Войти"
 
 #: rcrm_django/settings.py:47
@@ -213,6 +295,10 @@ msgstr "Английский"
 #: rcrm_django/settings.py:48
 msgid "Russian"
 msgstr "Русский"
+
+#: templates/main-login.html:109 templates/main.html:142
+msgid "Ruslan A. Zarechnev"
+msgstr "Заречнев Руслан"
 
 #: templates/main.html:98
 msgid "Statistics"
@@ -234,6 +320,29 @@ msgstr "Групповой чат"
 msgid "Send message"
 msgstr "Отправить сообщение"
 
-#: templates/main.html:142
-msgid "Ruslan A. Zarechnev"
-msgstr "Заречнев Руслан"
+#: users/templates/users_only_table.html:5
+msgid "Login"
+msgstr "Логин"
+
+#: users/templates/users_only_table.html:7
+msgid "Second name"
+msgstr "Фамилия"
+
+#: users/templates/users_only_table.html:9
+msgid "Last activity date"
+msgstr "Время последней активности"
+
+#: users/templates/users_only_table.html:10
+msgid "Enabled"
+msgstr "Активен"
+
+#: users/templates/users_only_table.html:33
+msgid "Edit user"
+msgstr "Править пользователя"
+
+#: users/templates/users_only_table.html:41
+msgid "Record count"
+msgstr "Количество записей"
+
+#~ msgid "Phone number"
+#~ msgstr "Номер телефона"

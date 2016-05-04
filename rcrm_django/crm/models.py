@@ -27,19 +27,19 @@ class Task(models.Model):
                                                   verbose_name=_("Last modify date"))
 
     create_user = models.ForeignKey(auth.models.User, null=False, blank=False, related_name='create_user',
-                                    verbose_name="Автор заявки")
+                                    verbose_name=_("Task author"))
     solves_user = models.ForeignKey(auth.models.User, null=True, blank=False, default=0, related_name='solves_user',
-                                    verbose_name="Решает заявку")
+                                    verbose_name=_("Solves user"))
     user_solved = models.ForeignKey(auth.models.User, null=True, blank=False, default=0, related_name='user_solved',
-                                    verbose_name="Закрыл заявку")
+                                    verbose_name=_("Solved user"))
     remove_user = models.ForeignKey(auth.models.User, null=True, blank=False, default=0, related_name='remove_user',
-                                    verbose_name="Удалил заявку")
+                                    verbose_name=_("Who was remove the task"))
 
-    client = models.ForeignKey(Client, null=False, blank=False, verbose_name="Клиент")
+    client = models.ForeignKey(Client, null=False, blank=False, verbose_name=_("Client"))
 
-    create_date = models.DateTimeField(null=True, blank=False, verbose_name="Дата регистрации заявки")
-    closed_date = models.DateTimeField(null=True, blank=False, verbose_name="Дата закрытия заявки")
-    date_of_removal = models.DateTimeField(null=True, blank=False, verbose_name="Дата удаления заявки")
+    create_date = models.DateTimeField(null=True, blank=False, verbose_name=_("Create task date"))
+    closed_date = models.DateTimeField(null=True, blank=False, verbose_name=_("Close task date"))
+    date_of_removal = models.DateTimeField(null=True, blank=False, verbose_name=_("Remove task date"))
 
     def set_status(self, stat):
         if stat in self.STATUS_OF_TASK:

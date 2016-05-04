@@ -1,13 +1,14 @@
+{% load i18n %}
 <table bordercolor="red" border="1" width="100%">
     <thead>
       <tr>
-          <th>Логин</th>
-          <th>Имя</th>
-          <th>Фамилия</th>
+          <th>{% trans "Login" %}</th>
+          <th>{% trans "Name" %}</th>
+          <th>{% trans "Second name" %}</th>
           <th>E-mail</th>
-          <th>Дата последней активности</th>
-          <th>Активен</th>
-          <th>Опции</th>
+          <th>{% trans "Last activity date" %}</th>
+          <th>{% trans "Enabled" %}</th>
+          <th>{% trans "Options" %}</th>
       </tr>
     </thead>
 {% for user in users %}
@@ -21,15 +22,15 @@
             {% if user.id != 1 %}
                 <div class="cl_radio_btns">
                     <input type="radio" id="{{ type }}_radio1_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 1 )" name="{{ type }}_radio_{{ user.id }}" {% if user.is_active %} checked {% endif %}>
-                        <label for="{{ type }}_radio1_{{ user.id }}">Вкл.</label>
+                        <label for="{{ type }}_radio1_{{ user.id }}">{% trans "Yes" %}</label>
                     <input type="radio" id="{{ type }}_radio0_{{ user.id }}" onchange="obj_switch_status( 'user', {{ user.id }}, 0 )" name="{{ type }}_radio_{{ user.id }}" {% if not user.is_active %} checked {% endif %}>
-                        <label for="{{ type }}_radio0_{{ user.id }}">Выкл.</label>
+                        <label for="{{ type }}_radio0_{{ user.id }}">{% trans "No" %}</label>
                 </div>
             {% endif %}
         </td>
         <td>
             <ul id="icons" class="ui-widget ui-helper-clearfix">
-                <li title="Редактировать пользователя" onclick="show_add_edit_user_dialog({{ user.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+                <li title="{% trans "Edit user" %}" onclick="show_add_edit_user_dialog({{ user.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
             </ul>
         </td>
     </tr>
@@ -37,5 +38,5 @@
 </table>
 
 {% if type == "main" %}
-<small>Количество записей: {{ users_count }}</small>
+<small>{% trans "Record count" %}: {{ users_count }}</small>
 {% endif %}

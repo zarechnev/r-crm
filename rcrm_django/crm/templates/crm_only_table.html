@@ -33,12 +33,12 @@
                         <label for="{{ type }}_radio2_{{ task.id }}">Закрыта</label>
                 </div>
             {% else %}
-                Удалена
+                {% trans "Was deleted" %}
             {% endif %}
 
         <!-- Client -->
         <td>
-            <div class="with_popup" data-title="Контакт: {{ task.client.phone }}">
+            <div class="with_popup" data-title="{% trans "Contact"%}: {{ task.client.phone }}">
                 {{ task.client.sname }}
             </div>
         </td>
@@ -65,13 +65,13 @@
         <td>
             <ul id="icons" class="ui-widget ui-helper-clearfix">
                 {% if not task.is_removed %}
-                    <li title="Удалить заявку" onclick="Tasks.remove({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-trash"></span></li>
+                    <li title="{% trans "Remove task" %}" onclick="Tasks.remove({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-trash"></span></li>
                 {% endif %}
                 {% if task.is_removed %}
-                    <li title="Восстановить заявку" onclick="Tasks.restore({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-plusthick"></span></li>
+                    <li title="{% trans "Restore task" %}" onclick="Tasks.restore({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-plusthick"></span></li>
                 {% endif %}
-                <li title="Править заявку" onclick="Tasks.edit({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
-                <li title="Передать заявку" onclick="Tasks.({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-arrowthick-1-e"></span></li>
+                <li title="{% trans "Edit task" %}" onclick="Tasks.edit({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-wrench"></span></li>
+                <li title="{% trans "Transfer task" %}" onclick="Tasks.({{ task.id }})" class="ui-state-default ui-corner-all"><span class="ui-icon ui-icon-arrowthick-1-e"></span></li>
             </ul>
         </td>
     </tr>
@@ -80,7 +80,7 @@
     <tr  style="padding-bottom:50px;">
         <!-- Title of comment -->
         <td>
-            Коментарий:
+            {% trans "Comment" %}:
         </td>
 
         <!-- Comment -->
@@ -98,7 +98,7 @@
       {% if tasks.has_previous %}
         <li class="arrow"><a href="?page={{ tasks.previous_page_number }}">&laquo;</a></li>
       {% endif %}
-      <li>Страница {{ tasks.number }} из {{ tasks.paginator.num_pages }}</li>
+      <li>{% trans "Page" %} {{ tasks.number }} {% trans "in" %} {{ tasks.paginator.num_pages }}</li>
       {% if tasks.has_next %}
         <li class="arrow"><a href="?page={{ tasks.next_page_number }}">&raquo;</a></li>
       {% endif %}
