@@ -1,5 +1,6 @@
 {% extends 'main.html' %}
 {% load i18n %}
+{% load statuses_localization %}
 {% block crm %}
 <script>
     $(function() $( ".invisible_close_rbtns" ).buttonset() )
@@ -130,7 +131,7 @@
                             <div class="small-7 columns">
                                 <select name="priority">
                                     {% for status in statuses %}
-                                        <option {% if status.default %} selected="selected" {% endif %}>{{ status.priority_ru }}</option>
+                                        <option {% if status.default %} selected="selected" {% endif %}>{% get_status_title status.id %}</option>
                                     {% endfor %}
                                 </select>
                             </div>
