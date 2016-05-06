@@ -1,4 +1,5 @@
 {% extends 'main.html' %}
+{% load i18n %}
 {% block users %}
 <center><h4>Пользователи</h4></center>
 <p>
@@ -32,7 +33,7 @@
   {% if users.has_previous %}
     <li class="arrow"><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
   {% endif %}
-  <li>Страница {{ users.number }} из {{ users.paginator.num_pages }}</li>
+  <li>{% trans "Page" %} {{ users.number }} {% trans "in" %} {{ users.paginator.num_pages }}</li>
   {% if users.has_next %}
     <li class="arrow"><a href="?page={{ users.next_page_number }}">&raquo;</a></li>
   {% endif %}
