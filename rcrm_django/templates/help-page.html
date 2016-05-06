@@ -49,8 +49,9 @@
 
 
 <p><strong>Зависимости</strong><br></p>
+    <p>
             R-CRM использует интерпритатор python версии 3 и Django версии 1.8.4.
-
+    </p>
 
 <p><strong>Инструкция по развёртыванию</strong><br></p>
     <ol>
@@ -81,6 +82,41 @@
         </li>
     </ol>
 
+<p><strong>Краткая справка по командам Django</strong><br></p>
+    <p>
+        <lu>
+            <li>
+                <b>python3 manage.py startproject &lt;progect_name&gt;</b> - создать новый проект с именем &lt;progect_name&gt;.
+            </li>
+            <li>
+                <b>python3 manage.py startapp &lt;app_name&gt;</b> - создать новое приложение с именем &lt;app_name&gt;в проекте.
+            </li>
+            <li>
+                <b>python3 manage.py createsuperuser</b> - создать суперюзера для проекта.
+            </li>
+            <li>
+                <b>python3 manage.py shell</b> - запустить интерпретатор <i>python</i> в контексте проекта.
+            </li>
+            <li>
+                <b>python3 manage.py runserver 8000</b> - запустить тестовый сервер на порту 8000.
+            </li>
+            <li>
+                <b>python3 manage.py makemessages -l ru</b> - сгенерировать файл локализации для русского языка.
+            </li>
+            <li>
+                <b>python3 manage.py compilemessages</b> - скомпилировать файл локализации.
+            </li>
+            <li>
+                <b>python3 manage.py makemigrations</b> - сгенерировать миграции, вслучае добавления или изменения моделей.
+            </li>
+            <li>
+                <b>python3 manage.py migrate</b> - выполнить миграции.
+            </li>
+            <li>
+                <b>python3 manage.py loaddata</b> - загрузить подготовленные начальные данные в базу.
+            </li>
+        </lu>
+    </p>
 
 <p><strong>Справка</strong></p>
 <p align="justify" style="text-indent: 25px;">

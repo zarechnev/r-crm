@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-04 21:37+0700\n"
+"POT-Creation-Date: 2016-05-06 10:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,7 +120,7 @@ msgstr "Индекс организации"
 msgid "Support contact, phone"
 msgstr "Контакт поддержки, телефон"
 
-#: clients/templates/clients.html:27
+#: clients/templates/clients.html:27 crm/templates/crm.html:128
 msgid "Priority"
 msgstr "Приоритет"
 
@@ -243,6 +243,22 @@ msgstr "Найти по индексу организации"
 #: crm/templates/crm.html:74
 msgid "Find"
 msgstr "Найти"
+
+#: crm/templates/crm.html:106
+msgid "Enter ID"
+msgstr "Введите ИД"
+
+#: crm/templates/crm.html:111
+msgid "Enter comment"
+msgstr "Введите комментарий"
+
+#: crm/templates/crm.html:121
+msgid "Create"
+msgstr "Создать"
+
+#: crm/templates/crm.html:142
+msgid "Enter solver surname"
+msgstr "Введите фамилию решающего"
 
 #: crm/templates/crm_only_table.html:19
 msgid "Number"

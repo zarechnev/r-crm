@@ -103,12 +103,12 @@
 
                     <!--INN-->
                     <div class="large-3 columns">
-                        <input placeholder="Введите ИНН" id="id_inn" maxlength="20" name="inn" type="text" />
+                        <input placeholder="{% trans "Enter ID" %}" id="id_inn" maxlength="20" name="inn" type="text" />
                     </div>
 
                     <!--Comment-->
                     <div class="large-9 columns">
-                        <input placeholder="Введите комментарий" id="id_comment" maxlength="200" name="comment" type="text" />
+                        <input placeholder="{% trans "Enter comment" %}" id="id_comment" maxlength="200" name="comment" type="text" />
                     </div>
                 </div>
 
@@ -118,14 +118,14 @@
 
                     <!--Create button-->
                     <div class="large-3 columns">
-                        <input type="button" class="button tiny" value="Создать" onclick="Tasks.add('create_task');"/>
+                        <input type="button" class="button tiny" value="{% trans "Create" %}" onclick="Tasks.add('create_task');"/>
                     </div>
 
                     <!--Priority list-->
                     <div class="large-4 columns">
                         <div class="row collapse prefix-radius">
                             <div class="small-5 columns">
-                                <span class="prefix">Приоритет</span>
+                                <span class="prefix">{% trans "Priority" %}</span>
                             </div>
                             <div class="small-7 columns">
                                 <select name="priority">
@@ -139,7 +139,7 @@
 
                     <!--A user that will solve the problem-->
                     <div class="large-5 columns">
-                        <input placeholder="Введите фамилию исполнителя" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
+                        <input placeholder="{% trans "Enter solver surname" %}" id="id_solves_user" maxlength="20" name="solves_user" type="text" />
                     </div>
                 </div>
 
