@@ -19,7 +19,7 @@ def login(request):
             auth.login(request, user)
             return redirect('/crm')
         else:
-            args['login_error'] = _("Cheek login and password")
+            args['login_error'] = _("Check login and password")
             return render_to_response('login.html', args)
     else:
         return render_to_response('login.html', args)

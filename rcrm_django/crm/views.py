@@ -16,7 +16,7 @@ def hello(request):
     args = {'type': "main", 'task_obj': Task}
     language = get_language()
     args['language'] = language
-    tasks_list = Task.objects.all().order_by('-id')
+    tasks_list = Task.objects.all().exclude(is_removed='True').order_by('-id')
 
     if "only_my_tasks" in request.COOKIES and request.COOKIES['only_my_tasks'] == str(1):
         current_user = auth.get_user(request)
@@ -26,7 +26,7 @@ def hello(request):
         args['only_my_tasks'] = False
 
     if "hide_deleted_tasks" in request.COOKIES and request.COOKIES['hide_deleted_tasks'] == str(1):
-        tasks_list = tasks_list.exclude(is_removed='True').exclude(status='SLD')
+        tasks_list = tasks_list.exclude(status='SLD')
         args['hide_deleted_tasks'] = True
     else:
         args['hide_deleted_tasks'] = False

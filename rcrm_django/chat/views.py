@@ -9,7 +9,7 @@ from chat.models import Chat
 
 @login_required()
 def show_chat(request):
-    args = {'messages': Chat.objects.all().order_by('id').reverse()[:5]}
+    args = {'messages': Chat.objects.all().order_by('id').reverse()[:10]}
     return render_to_response('chat.html', args)
 
 

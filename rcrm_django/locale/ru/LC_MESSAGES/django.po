@@ -259,8 +259,8 @@ msgid "Find"
 msgstr "Найти"
 
 #: crm/templates/crm.html:107
-msgid "Enter ID"
-msgstr "Введите ИД"
+msgid "Enter client ID"
+msgstr "Введите ИД клиента"
 
 #: crm/templates/crm.html:112
 msgid "Enter comment"
@@ -329,7 +329,7 @@ msgid "Enter"
 msgstr "Войти"
 
 #: loginsys/views.py:22
-msgid "Cheek login and password"
+msgid "Check login and password"
 msgstr "Проверьте введённые данные"
 
 #: rcrm_django/settings.py:47
