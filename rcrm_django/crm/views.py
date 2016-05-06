@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext as _
 from django.utils.translation import get_language
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
@@ -52,7 +53,7 @@ def hello(request):
 
 @login_required(login_url='/auth/login')
 def add_task(request):
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         current_user = auth.get_user(request)
         request_inn = request.POST['inn'].split(" ")[0]
@@ -78,7 +79,7 @@ def add_task(request):
 
 @login_required(login_url='/auth/login')
 def rem_task(request):
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         id_task = request.POST['id']
         task_to_rem = Task.objects.get(id=id_task)
@@ -109,10 +110,10 @@ def auto_complete_inn(request):
 
 @login_required(login_url='/auth/login')
 def task_switch_status(request):
-    # Интервал задержки смены статуса
+    # Change status delay
     min_interval = 5
 
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         id_task = request.POST['id']
         task_status = request.POST['status']
@@ -122,15 +123,14 @@ def task_switch_status(request):
             return HttpResponse("Task already been removed.")
 
         if task_to_change.status == task_status:
-            return HttpResponse("Статус уже %s!" % task_to_change.status_to_template())
+            return HttpResponse(_("Status already %s") % task_to_change.status_to_template())
 
         if task_to_change.change_status_datetime:
             delta_sec = timezone.now() - task_to_change.change_status_datetime
             delta_sec = int(delta_sec.total_seconds())
 
             if delta_sec < min_interval:
-                msg = "После прошлого изменения статуса прошло менее %s секунд: %s секунд(ы)!" % (
-                    min_interval, delta_sec)
+                msg = _("It took %s seconds after the last change") % delta_sec
                 return HttpResponse(msg)
 
         try:
@@ -176,7 +176,7 @@ def only_my_tasks(request):
 
 @login_required(login_url='/auth/login')
 def find_by_inn(request):
-    # Количество выводимых при поиске заявок
+    # Task record count
     find_task_count = 5
 
     ans = None

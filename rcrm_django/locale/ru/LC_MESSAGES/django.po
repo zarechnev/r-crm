@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 10:41+0700\n"
+"POT-Creation-Date: 2016-05-06 13:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -89,8 +89,8 @@ msgid "Clients"
 msgstr "Клиенты"
 
 #: clients/templates/clients.html:8
-msgid "Client find by name"
-msgstr "Поиск клиента по имени"
+msgid "Client find by full name"
+msgstr "Поиск клиента по полному имени"
 
 #: clients/templates/clients.html:18
 msgid "Add client"
@@ -120,7 +120,7 @@ msgstr "Индекс организации"
 msgid "Support contact, phone"
 msgstr "Контакт поддержки, телефон"
 
-#: clients/templates/clients.html:27 crm/templates/crm.html:128
+#: clients/templates/clients.html:27 crm/templates/crm.html:129
 msgid "Priority"
 msgstr "Приоритет"
 
@@ -163,6 +163,20 @@ msgstr "Править"
 #: clients/templates/clients_only_table.html:42
 msgid "Record's count"
 msgstr "Количество записей"
+
+#: clients/views.py:66 clients/views.py:104 clients/views.py:118
+#: clients/views.py:140 crm/views.py:56 crm/views.py:82 crm/views.py:116
+#: users/views.py:41 users/views.py:63 users/views.py:96 users/views.py:118
+msgid "No data in request"
+msgstr "Нет данных в запросе"
+
+#: clients/views.py:129 users/views.py:107
+msgid "Status is undefined"
+msgstr "Статус неопределён"
+
+#: clients/views.py:148
+msgid "No client was found"
+msgstr "Клиентов не найдено"
 
 #: crm/models.py:10
 msgid "Weight"
@@ -220,43 +234,43 @@ msgstr "Дата закрытия тикета"
 msgid "Remove task date"
 msgstr "Дата удаления тикета"
 
-#: crm/templates/crm.html:34 templates/main.html:108
+#: crm/templates/crm.html:35 templates/main.html:108
 msgid "Tasks"
 msgstr "Таски"
 
-#: crm/templates/crm.html:43 crm/templates/crm.html.py:54
+#: crm/templates/crm.html:44 crm/templates/crm.html.py:55
 msgid "All"
 msgstr "Все"
 
-#: crm/templates/crm.html:45
+#: crm/templates/crm.html:46
 msgid "Opened"
 msgstr "Открытые"
 
-#: crm/templates/crm.html:56
+#: crm/templates/crm.html:57
 msgid "Only My"
 msgstr "Только мои"
 
-#: crm/templates/crm.html:66
+#: crm/templates/crm.html:67
 msgid "Find by Organization ID"
 msgstr "Найти по индексу организации"
 
-#: crm/templates/crm.html:74
+#: crm/templates/crm.html:75
 msgid "Find"
 msgstr "Найти"
 
-#: crm/templates/crm.html:106
+#: crm/templates/crm.html:107
 msgid "Enter ID"
 msgstr "Введите ИД"
 
-#: crm/templates/crm.html:111
+#: crm/templates/crm.html:112
 msgid "Enter comment"
 msgstr "Введите комментарий"
 
-#: crm/templates/crm.html:121
+#: crm/templates/crm.html:122
 msgid "Create"
 msgstr "Создать"
 
-#: crm/templates/crm.html:142
+#: crm/templates/crm.html:143
 msgid "Enter solver surname"
 msgstr "Введите фамилию решающего"
 
@@ -292,6 +306,16 @@ msgstr "Править тикет"
 msgid "Transfer task"
 msgstr "Передать тикет"
 
+#: crm/views.py:126
+#, python-format
+msgid "Status already %s"
+msgstr "Статус уже %s"
+
+#: crm/views.py:133
+#, python-format
+msgid "It took %s seconds after the last change"
+msgstr "После последнего изменения прошло %s секунд(ы)"
+
 #: loginsys/templates/login.html:8 users/templates/users_only_table.html:6
 msgid "Name"
 msgstr "Имя"
@@ -303,6 +327,10 @@ msgstr "Пароль"
 #: loginsys/templates/login.html:12
 msgid "Enter"
 msgstr "Войти"
+
+#: loginsys/views.py:22
+msgid "Cheek login and password"
+msgstr "Проверьте введённые данные"
 
 #: rcrm_django/settings.py:47
 msgid "English"
@@ -359,6 +387,18 @@ msgstr "Править пользователя"
 #: users/templates/users_only_table.html:41
 msgid "Record count"
 msgstr "Количество записей"
+
+#: users/views.py:90
+msgid "Login currently in use"
+msgstr "Логин занят"
+
+#: users/views.py:91
+msgid "Login is free"
+msgstr "Логин свободен"
+
+#: users/views.py:126
+msgid "No users found"
+msgstr "Пользователей не найдено"
 
 #~ msgid "Phone number"
 #~ msgstr "Номер телефона"

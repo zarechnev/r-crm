@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext as _
 from django.utils.translation import get_language
 from django.contrib import auth
 from django.shortcuts import render_to_response, redirect
@@ -16,10 +17,9 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if (user is not None) and user.is_active:
             auth.login(request, user)
-            # TODO: Реализовать перенаправление на запрашиваемую страницу
             return redirect('/crm')
         else:
-            args['login_error'] = "Проверьте правильность введённых данных."
+            args['login_error'] = _("Cheek login and password")
             return render_to_response('login.html', args)
     else:
         return render_to_response('login.html', args)

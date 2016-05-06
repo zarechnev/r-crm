@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext as _
 from django.utils.translation import get_language
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
@@ -62,7 +63,7 @@ def get_client_info(request, id):
 
 @login_required(login_url='/auth/login')
 def add_edit_client(request):
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         sname = request.POST['sname']
         fname = request.POST['fname']
@@ -76,7 +77,7 @@ def add_edit_client(request):
         except:
             existing_client = 0
         if existing_client:
-            # Пользователь существует
+            # User is exist
             try:
                 existing_client.name = fname
                 existing_client.inn = inn
@@ -88,7 +89,7 @@ def add_edit_client(request):
             except BaseException as e:
                 ans = str(e)
         else:
-            # Пользователь не существует
+            # User does not exist
             try:
                 new_client = Client(sname=sname, name=fname, inn=inn, phone=phone, address=address, priority=priority,
                                     email=mail, create_date=timezone.now())
@@ -100,7 +101,7 @@ def add_edit_client(request):
 
 @login_required(login_url='/auth/login')
 def rem_client(request):
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         try:
             client_id = request.POST['id']
@@ -114,7 +115,7 @@ def rem_client(request):
 
 @login_required(login_url='/auth/login')
 def client_switch_status(request):
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         try:
             client_id = request.POST['id']
@@ -125,7 +126,7 @@ def client_switch_status(request):
             elif client_status == "0":
                 client_to_switch_status.is_active = 0
             else:
-                ans = "Статус не определён"
+                ans = _("Status is undefined")
                 return HttpResponse(ans)
             ans = client_to_switch_status.save()
         except BaseException as e:
@@ -135,8 +136,8 @@ def client_switch_status(request):
 
 @login_required(login_url='/auth/login')
 def find_client(request):
-    args = {'type': "find"}
-    ans = "Нет данных в запросе"
+    args = {'type': "find", 'client_obj': Client}
+    ans = _("No data in request")
     client_list = []
     if request.method == 'POST':
         client_name = request.POST['find_client']
@@ -144,7 +145,7 @@ def find_client(request):
             if client_name.upper() in client.name.upper():
                 client_list.append(client)
         if not client_list:
-            return HttpResponse("Клиентов не найдено")
+            return HttpResponse(_("No client was found"))
         args['clients'] = client_list
         return render_to_response('clients_only_table.html', args)
     return HttpResponse(ans)

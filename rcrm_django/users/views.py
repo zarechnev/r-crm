@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext as _
 from django.utils.translation import get_language
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
@@ -37,7 +38,7 @@ def list_users(request):
 
 @login_required(login_url='/auth/login')
 def edit_user(request):
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         login = request.POST['login']
         fname = request.POST['fname']
@@ -59,7 +60,7 @@ def edit_user(request):
 
 @login_required(login_url='/auth/login')
 def add_user(request):
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         login = request.POST['login']
         fname = request.POST['fname']
@@ -86,13 +87,13 @@ def check_login(request):
         except:
             pass
         if user:
-            return HttpResponse("Имя занято!!!")
-    return HttpResponse("Имя свободно")
+            return HttpResponse(_("Login currently in use"))
+    return HttpResponse(_("Login is free"))
 
 
 @login_required(login_url='/auth/login')
 def user_switch_status(request):
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     if request.method == 'POST':
         try:
             user_id = request.POST['id']
@@ -103,7 +104,7 @@ def user_switch_status(request):
             elif user_status == '0':
                 user_to_switch_status.is_active = 0
             else:
-                ans = "Статус не определён"
+                ans = _("Status is undefined")
                 return HttpResponse(ans)
             ans = user_to_switch_status.save()
         except BaseException as e:
@@ -114,7 +115,7 @@ def user_switch_status(request):
 @login_required(login_url='/auth/login')
 def find_user(request):
     args = {'type': "find"}
-    ans = "Нет данных в запросе"
+    ans = _("No data in request")
     users_list = []
     if request.method == 'POST':
         user_name = request.POST['find_user_name']
@@ -122,7 +123,7 @@ def find_user(request):
             if user_name.upper() in user.last_name.upper():
                 users_list.append(user)
         if not users_list:
-            return HttpResponse("Пользователей не найдено")
+            return HttpResponse(_("No users found"))
         args['users'] = users_list
         return render_to_response('users_only_table.html', args)
     return HttpResponse(ans)
