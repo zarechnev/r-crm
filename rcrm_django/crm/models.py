@@ -37,9 +37,9 @@ class Task(models.Model):
 
     client = models.ForeignKey(Client, null=False, blank=False, verbose_name=_("Client"))
 
-    pick_date = models.DateTimeField(null=True, blank=False, verbose_name=_("Pic by engineer date"))
+    pick_date = models.DateTimeField(null=True, blank=False, verbose_name=_("Date of receipt"))
     create_date = models.DateTimeField(null=True, blank=False, verbose_name=_("Create task date"))
-    closed_date = models.DateTimeField(null=True, blank=False, verbose_name=_("Close task date"))
+    closed_date = models.DateTimeField(null=True, blank=False, verbose_name=_("Close date"))
     date_of_removal = models.DateTimeField(null=True, blank=False, verbose_name=_("Remove task date"))
 
     def set_status(self, stat):

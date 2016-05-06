@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-06 13:39+0700\n"
+"POT-Creation-Date: 2016-05-06 22:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -124,20 +124,18 @@ msgstr "Контакт поддержки, телефон"
 msgid "Priority"
 msgstr "Приоритет"
 
-#: clients/templates/clients.html:33
-msgid "first"
-msgstr "первая"
-
-#: clients/templates/clients.html:36 crm/templates/crm_only_table.html:101
+#: clients/templates/clients.html:36 crm/templates/crm_only_table.html:125
+#: crm/templates/crm_only_table_old.html:192 users/templates/users.html:37
 msgid "Page"
 msgstr "Страница"
 
-#: clients/templates/clients.html:36 crm/templates/crm_only_table.html:101
+#: clients/templates/clients.html:36 crm/templates/crm_only_table.html:125
+#: crm/templates/crm_only_table_old.html:192 users/templates/users.html:37
 msgid "in"
 msgstr "из"
 
 #: clients/templates/clients_only_table.html:12
-#: crm/templates/crm_only_table.html:12
+#: crm/templates/crm_only_table_old.html:12
 #: users/templates/users_only_table.html:11
 msgid "Options"
 msgstr "Опции"
@@ -190,7 +188,7 @@ msgstr "Статус тикета"
 msgid "Task priority"
 msgstr "Приоритет тикета"
 
-#: crm/models.py:24 crm/templates/crm_only_table.html:83
+#: crm/models.py:24 crm/templates/crm_only_table_old.html:83
 msgid "Comment"
 msgstr "Комментарий"
 
@@ -223,14 +221,18 @@ msgid "Client"
 msgstr "Клиент"
 
 #: crm/models.py:40
+msgid "Date of receipt"
+msgstr "Дата получения"
+
+#: crm/models.py:41
 msgid "Create task date"
 msgstr "Дата регистрации тикета"
 
-#: crm/models.py:41
-msgid "Close task date"
+#: crm/models.py:42
+msgid "Close date"
 msgstr "Дата закрытия тикета"
 
-#: crm/models.py:42
+#: crm/models.py:43
 msgid "Remove task date"
 msgstr "Дата удаления тикета"
 
@@ -259,8 +261,8 @@ msgid "Find"
 msgstr "Найти"
 
 #: crm/templates/crm.html:107
-msgid "Enter client ID"
-msgstr "Введите ИД клиента"
+msgid "Enter ID"
+msgstr "Введите идентификатор"
 
 #: crm/templates/crm.html:112
 msgid "Enter comment"
@@ -274,37 +276,47 @@ msgstr "Создать"
 msgid "Enter solver surname"
 msgstr "Введите фамилию решающего"
 
-#: crm/templates/crm_only_table.html:19
-msgid "Number"
-msgstr "Номер"
-
-#: crm/templates/crm_only_table.html:19
+#: crm/templates/crm_only_table.html:25
+#: crm/templates/crm_only_table_old.html:19
 msgid "author"
 msgstr "Автор"
 
-#: crm/templates/crm_only_table.html:36
-msgid "Was deleted"
-msgstr "Удалена ли"
-
-#: crm/templates/crm_only_table.html:41
-msgid "Contact"
-msgstr "Контакт"
-
-#: crm/templates/crm_only_table.html:68
+#: crm/templates/crm_only_table.html:32
+#: crm/templates/crm_only_table_old.html:68
 msgid "Remove task"
 msgstr "Удалить тикет"
 
-#: crm/templates/crm_only_table.html:71
+#: crm/templates/crm_only_table.html:35
+#: crm/templates/crm_only_table_old.html:71
 msgid "Restore task"
 msgstr "Восстановить тикет"
 
-#: crm/templates/crm_only_table.html:73
+#: crm/templates/crm_only_table.html:37
+#: crm/templates/crm_only_table_old.html:73
 msgid "Edit task"
 msgstr "Править тикет"
 
-#: crm/templates/crm_only_table.html:74
+#: crm/templates/crm_only_table.html:38
+#: crm/templates/crm_only_table_old.html:74
 msgid "Transfer task"
 msgstr "Передать тикет"
+
+#: crm/templates/crm_only_table.html:39
+msgid "Change priority"
+msgstr "Изменить приоритет"
+
+#: crm/templates/crm_only_table.html:55
+#: crm/templates/crm_only_table_old.html:41
+msgid "Contact"
+msgstr "Контакт"
+
+#: crm/templates/crm_only_table_old.html:19
+msgid "Number"
+msgstr "Номер"
+
+#: crm/templates/crm_only_table_old.html:36
+msgid "Was deleted"
+msgstr "Удалена ли"
 
 #: crm/views.py:126
 #, python-format
@@ -399,6 +411,9 @@ msgstr "Логин свободен"
 #: users/views.py:126
 msgid "No users found"
 msgstr "Пользователей не найдено"
+
+#~ msgid "Enter client ID"
+#~ msgstr "Введите ИД клиента"
 
 #~ msgid "Phone number"
 #~ msgstr "Номер телефона"

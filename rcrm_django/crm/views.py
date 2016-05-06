@@ -13,6 +13,7 @@ from clients.models import Client
 
 @login_required(login_url='/auth/login')
 def hello(request):
+    objects_on_list = 5
     args = {'type': "main", 'task_obj': Task}
     language = get_language()
     args['language'] = language
@@ -31,7 +32,6 @@ def hello(request):
     else:
         args['hide_deleted_tasks'] = False
 
-    objects_on_list = 7
     paginator = Paginator(tasks_list, objects_on_list)
     page = request.GET.get('page')
     try:
@@ -137,13 +137,20 @@ def task_switch_status(request):
             if task_status == "NEW":
                 task_to_change.solves_user = None
                 task_to_change.user_solved = None
+                task_to_change.closed_date = None
+                task_to_change.pick_date = None
             if task_status == "PRG":
                 task_to_change.solves_user = auth.get_user(request)
                 task_to_change.user_solved = None
+                task_to_change.closed_date = None
+                task_to_change.pick_date = timezone.now()
             if task_status == "SLD":
                 task_to_change.user_solved = auth.get_user(request)
+                task_to_change.closed_date = timezone.now()
                 if not task_to_change.solves_user:
                     task_to_change.solves_user = auth.get_user(request)
+                if not task_to_change.pick_date:
+                    task_to_change.pick_date = timezone.now()
 
             task_to_change.set_status(task_status)
             task_to_change.change_status_datetime = timezone.now()

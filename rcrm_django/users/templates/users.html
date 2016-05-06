@@ -31,6 +31,7 @@
 <div class="small-3 large-centered columns">
 <ul class="pagination">
   {% if users.has_previous %}
+    <li class="arrow"><a href="?page=1">1</a></li>
     <li class="arrow"><a href="?page={{ users.previous_page_number }}">&laquo;</a></li>
   {% endif %}
   <li>{% trans "Page" %} {{ users.number }} {% trans "in" %} {{ users.paginator.num_pages }}</li>

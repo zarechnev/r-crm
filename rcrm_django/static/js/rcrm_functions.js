@@ -446,6 +446,9 @@ var Tasks = {
 	transfer_to:    function()
 	{},
 
+	sw_prio:    function()
+	{},
+
 	find_by_inn:    function()
     {
         var data = { 'inn': $("#id_find_by_inn").val() };
