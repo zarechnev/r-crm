@@ -5,24 +5,24 @@
 
 {% for task in tasks %}
 <p>
-           <div class="row panel" style="padding: 10px; margin: 5px; background: #eeeeee">
+           <div class="row panel" style="padding: 10px; margin: 5px; background: #cccccc; border: 1px solid #888888;">
 
                 <!-- 1 line -->
                     <div class="row">
 
                             <!--N-->
-                            <div class="large-1 columns" style="background: {% gen_task_background_color task.id %}">
+                            <div class="large-1 columns" style="background: {% gen_task_background_color task.id %}; border: 2px solid #888888;">
                                 #: {{ task.id }}
                             </div>
 
                             <!--date-->
-                            <div class="large-3 columns">
-                                {{ task.create_date }}
+                            <div class="large-4 columns">
+                                {% get_verbose_field_name task_obj "create_date" %}: {{ task.create_date }}
                             </div>
 
                             <!--author-->
-                            <div class="large-6 columns">
-                                {% trans "author" %}: {{ task.create_user.last_name }} {{ task.create_user.first_name }}
+                            <div class="large-5 columns">
+                                {% get_verbose_field_name task_obj "create_user" %}: {{ task.create_user.last_name }} {{ task.create_user.first_name }}
                             </div>
 
                             <!--Options-->
@@ -45,36 +45,6 @@
                 <!-- 2 line -->
                     <div class="row">
 
-                            <!--Client-->
-                            <div class="large-6 columns">
-                                {{ task.client.sname }}
-                            </div>
-
-                            <!--Client contact, phone-->
-                            <div class="large-6 columns">
-                                {% trans "Contact" %}: {{ task.client.phone }}
-                            </div>
-
-                    </div>
-
-                <!-- 3 line -->
-                    <div class="row">
-
-                            <!--Comment title-->
-                            <div class="large-3 columns">
-                                Comment title
-                            </div>
-
-                            <!--Comment-->
-                            <div class="large-9 columns">
-                                Comment: {{ task.create_comment }}
-                            </div>
-
-                    </div>
-
-                <!-- 4 line -->
-                    <div class="row">
-
                             <!--Status-->
                             <div class="large-3 columns">
 
@@ -89,26 +59,68 @@
 
                             </div>
 
-                            <!--Engineer -->
-                            <div class="large-3 columns">
-                                Engineer:
-                                {% if task.solves_user %}
-                                        {{ task.solves_user.last_name }} {{ task.solves_user.first_name }}
-                                {% endif %}
+                            <!--Client-->
+                            <div class="large-4 columns">
+                                {% get_verbose_field_name task_obj "client" %}: {{ task.client.sname }}
                             </div>
 
-                            <!--Pick date -->
-                            <div class="large-3 columns">
-                                {% get_verbose_field_name task_obj "pick_date" %}: {{ task.pick_date }}
-                            </div>
-
-                            <!--Solve date -->
-                            <div class="large-3 columns">
-                                {% get_verbose_field_name task_obj "closed_date" %}: {{ task.closed_date }}
+                            <!--Client contact, phone-->
+                            <div class="large-5 columns">
+                                {% trans "Contact" %}: {{ task.client.phone }}
                             </div>
 
                     </div>
 
+
+                <!-- 3 line -->
+                    <div class="row">
+
+                            <!--Engineer -->
+                            <div class="large-4 columns">
+                                {% get_verbose_field_name task_obj "solves_user" %}:
+                                {% if task.solves_user %}
+                                        {{ task.solves_user.last_name }} {{ task.solves_user.first_name }}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </div>
+
+                            <!--Pick date -->
+                            <div class="large-4 columns">
+                                {% get_verbose_field_name task_obj "pick_date" %}:
+                                {% if task.pick_date %}
+                                     {{ task.pick_date }}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </div>
+
+                            <!--Solve date -->
+                            <div class="large-4 columns">
+                                {% get_verbose_field_name task_obj "closed_date" %}:
+                                {% if task.pick_date %}
+                                    {{ task.closed_date }}
+                                {% else %}
+                                    ---
+                                {% endif %}
+                            </div>
+
+                    </div>
+
+                <!-- 4 line -->
+                    <div class="row">
+
+                            <!--Comment title-->
+                            <div class="large-3 columns">
+                                Comment title
+                            </div>
+
+                            <!--Comment-->
+                            <div class="large-9 columns">
+                                Comment: {{ task.create_comment }}
+                            </div>
+
+                    </div>
 
             </div>
 </p>
