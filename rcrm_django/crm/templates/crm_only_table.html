@@ -22,7 +22,7 @@
 
                             <!--author-->
                             <div class="large-5 columns">
-                                {% get_verbose_field_name task_obj "create_user" %}: {{ task.create_user.last_name }} {{ task.create_user.first_name }}
+                                {% get_verbose_field_name task_obj "create_user" %}: <b>{{ task.create_user.last_name }} {{ task.create_user.first_name }}</b>
                             </div>
 
                             <!--Options-->
@@ -61,12 +61,12 @@
 
                             <!--Client-->
                             <div class="large-4 columns">
-                                {% get_verbose_field_name task_obj "client" %}: {{ task.client.sname }}
+                                {% get_verbose_field_name task_obj "client" %}: <b>{{ task.client.sname }}</b>
                             </div>
 
                             <!--Client contact, phone-->
                             <div class="large-5 columns">
-                                {% trans "Contact" %}: {{ task.client.phone }}
+                                {% trans "Contact" %}: <b>{{ task.client.phone }}</b>
                             </div>
 
                     </div>
