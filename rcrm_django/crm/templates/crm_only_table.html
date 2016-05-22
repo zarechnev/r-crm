@@ -16,13 +16,17 @@
                             </div>
 
                             <!--date-->
-                            <div class="large-4 columns">
-                                {% get_verbose_field_name task_obj "create_date" %}: {{ task.create_date }}
+                            <div class="large-5 columns">
+                                <div class="with_popup" data-title="{{ task.create_date }}">
+                                    {% get_verbose_field_name task_obj "create_date" %}: <b>{{ task.create_date|date:'d M H:i' }}</b>
+                                </div>
                             </div>
 
                             <!--author-->
-                            <div class="large-5 columns">
-                                {% get_verbose_field_name task_obj "create_user" %}: <b>{{ task.create_user.last_name }} {{ task.create_user.first_name }}</b>
+                            <div class="large-4 columns">
+                                <div class="with_popup" data-title="{{ task.create_user.last_name }} {{ task.create_user.first_name }}">
+                                    {% get_verbose_field_name task_obj "create_user" %}: <b>{{ task.create_user.last_name }} {{ task.create_user.first_name|make_list|first }}.</b>
+                                </div>
                             </div>
 
                             <!--Options-->
