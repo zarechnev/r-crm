@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import auth
 import simplejson
-from crm.models import Task, Priority
+from crm.models import Task, Priority, SubTask
 from clients.models import Client
 
 
@@ -43,6 +43,11 @@ def hello(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         tasks = paginator.page(paginator.num_pages)
     args['tasks'] = tasks
+
+    #
+    for i in args['tasks']:
+        i.stlist = SubTask.objects.filter(parent=args['tasks'][i])
+
     args['statuses'] = Priority.objects.all()
     if "only_table" in request.POST and request.POST['only_table'] == "true":
         return render_to_response('crm_only_table.html', args)

@@ -53,3 +53,7 @@ class Task(models.Model):
             return self.STATUS_TO_TEMLATE[self.status]
         else:
             return "Bad status!"
+
+
+class SubTask(Task):
+    parent = models.ForeignKey(Task, blank=False, null=False, verbose_name=_("Parent task"), related_name='parent_task')
