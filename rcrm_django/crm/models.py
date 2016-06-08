@@ -42,6 +42,13 @@ class Task(models.Model):
     closed_date = models.DateTimeField(null=True, blank=False, verbose_name=_("Close date"))
     date_of_removal = models.DateTimeField(null=True, blank=False, verbose_name=_("Remove task date"))
 
+    is_subtask = models.BooleanField(default=False, blank=False, verbose_name=_("Is SubTask"))
+
+    def get_subtasks(self):
+        if SubTask.objects.all().filter(parent=self):
+            return SubTask.objects.all().filter(parent=self).order_by('-id')
+        return
+
     def set_status(self, stat):
         if stat in self.STATUS_OF_TASK:
             self.status = stat

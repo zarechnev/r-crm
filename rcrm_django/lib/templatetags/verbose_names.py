@@ -24,4 +24,4 @@ def get_verbose_field_name(instance, field_name):
     title = instance._meta.get_field(field_name).verbose_name.title()
     title = uncapstring(title)
 
-    return (title)
+    return title
