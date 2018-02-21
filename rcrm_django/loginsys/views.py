@@ -2,7 +2,7 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import get_language
 from django.contrib import auth
 from django.shortcuts import render_to_response, redirect
-from django.core.context_processors import csrf
+from django.template.context_processors import csrf
 
 
 def login(request):

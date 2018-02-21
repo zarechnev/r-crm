@@ -1,8 +1,8 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import url
+from . import views
 
-
-urlpatterns = patterns('',
-    url(r'^logout/', 'loginsys.views.logout'),
-    url(r'^login/$', 'loginsys.views.login'),
-    url(r'^$', 'loginsys.views.login')
-    )
+urlpatterns = [
+    url(r'^logout/', views.logout),
+    url(r'^login/$', views.login),
+    url(r'^$', views.login),
+]

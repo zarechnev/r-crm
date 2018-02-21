@@ -1,11 +1,11 @@
-from django.conf.urls import patterns, include, url
-from rcrm_django import views
+from django.conf.urls import include, url
+from . import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = [
     # Examples:
     # url(r'^$', 'rcrm_django.views.home', name='home'),
     # url(r'^rcrm_django/', include('rcrm_django.foo.urls')),
@@ -24,5 +24,5 @@ urlpatterns = patterns('',
     url(r'^statistic/', include('statistic.urls')),
     url(r'^auth/', include('loginsys.urls')),
     url(r'^chat/', include('chat.urls')),
-    url(r'^$', include('loginsys.urls')),
-)
+    url(r'^', include('loginsys.urls')),
+]

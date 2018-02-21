@@ -17,14 +17,6 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'rcrm_django.sqlite3'),
-        # 'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2',
-        #  'mysql', 'sqlite3' or 'oracle'.
-        # 'NAME': 'rcrm_django', # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        # 'USER': 'rcrm_django',
-        # 'PASSWORD': 'rcrm_django',
-        # 'HOST': '192.168.0.103',# Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        # 'PORT': '5432',                      # Set to empty string for default.
     }
 }
 

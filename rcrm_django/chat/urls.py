@@ -1,7 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
+from . import views
 
-
-urlpatterns = patterns('',
-    url(r'^show_chat$', 'chat.views.show_chat'),
-    url(r'^add_post$', 'chat.views.add_post')
-)
+urlpatterns = [
+    url(r'^show_chat$', views.show_chat),
+    url(r'^add_post$', views.add_post),
+]
